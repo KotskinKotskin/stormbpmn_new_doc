@@ -1,0 +1,15 @@
+- Главная: index.md
+- Начинающим пользователям:
+  - begginers/index.md
+- Аналитикам:
+  - analitics/index.md
+- Архитекторам:
+  - architects/index.md
+- Администраторам:
+  - admins/index.md
+- Согласующим:
+  - approvals/index.md
+  - Согласование процесса: approvals/approve/index.md
+- Всем:
+  - all/index.md
+  - Отправка процесса на согласование: all/approval_request/index.md
