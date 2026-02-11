@@ -1,15 +1,39 @@
-- Главная: index.md
-- Начинающим пользователям:
-  - begginers/index.md
-- Аналитикам:
-  - analitics/index.md
-- Архитекторам:
-  - architects/index.md
+- Главная: 
+  - index.md
+  - Быстрый старт:
+    - main/quick_start/index.md
+  - О документации:
+    - main/about_doc/index.md
+  - Доп. материалы и видеозаписи:
+    - main/extra_content/index.md
+  - Коммит в документацию:
+    - main/commitment/index.md
+- Начинающим пользователям: begginers/index.md
+- Аналитикам: analitics/index.md
+- Архитекторам: architects/index.md
 - Администраторам:
   - admins/index.md
+  - Управление командой:
+    - admins/team/index.md
+    - Добавление участников в команду: 
+      - mock/index.md
+    - Изменить прав участникам команды: 
+      - mock/index.md
+    - Создание и управление группами: 
+      - mock/index.md
+    - Настройки командной работы: 
+      - mock/index.md
+  - Работа с реестром бизнес-процессов:
+    - admins/registry/index.md
+    - Создание бизнес-процесса:
+      - mock/index.md
+    - Управление структурой хранения бизнес-процессов:
+      - mock/index.md
 - Согласующим:
   - approvals/index.md
-  - Согласование процесса: approvals/approve/index.md
+  - Согласование процесса: 
+    - approvals/approve/index.md
 - Всем:
   - all/index.md
-  - Отправка процесса на согласование: all/approval_request/index.md
+  - Отправка процесса на согласование: 
+    - all/approval_request/index.md
