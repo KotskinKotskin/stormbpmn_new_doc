@@ -1,0 +1,12 @@
+roles:
+  - team_mate: Участник
+  - team_admin: Администратор команды
+permissions:
+  - read: READ
+  - read_and_write: READ and WRITE
+  - admin: ADMIN
+plan:
+  - personal: Personal
+  - team: Team
+  - business: Business
+  - enterprise: Enterprise
