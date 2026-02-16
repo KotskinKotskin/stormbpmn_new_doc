@@ -2,4 +2,7 @@ title: My Custom Title
 role: Администратор
 plan: 
   - Business
-  - Enterprise
+permissions:
+    - ADMIN
+tags:
+  - С чего начать

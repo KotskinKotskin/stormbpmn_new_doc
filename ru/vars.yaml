@@ -1,0 +1,31 @@
+# ru/vars.yaml
+
+process_editor:
+  upper_toolbar:
+    buttons:
+      save_as_version: '<i class="pi pi-save"></i> **Сохранить как версию**'
+      show_all_versions: '<i class="pi pi-database"></i> **Посмотреть все версии**'
+  save_process_modal:
+    buttons:
+      plus: '<i class="pi pi-plus"></i>'
+      save: '**Сохранить как версию**'
+
+process_versions:
+  checkboxs:
+    show_autosave: '**Показать автосохранение**'
+  buttons:
+    view_version: '<i class="pi pi-eye"></i> **Посмотреть версию**'
+    view_version_diff: '<i class="pi pi-arrow-right-arrow-left"></i> **Сравнить версии**'
+
+view_process:
+  buttons:
+    cover_from_version: '<i class="pi pi-arrow-left"></i> **Восстановить версию**'
+
+section_team:
+  buttons:
+    team_swicher: '<i class="pi pi-users"></i> **Команда**'
+    show_more: '<i class="pi pi-ellipsis-v"></i>'
+    all_versions: '<i class="pi pi-sitemap"></i> **Все версии**'
+  layouts:
+    business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
+    all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
