@@ -5,17 +5,34 @@ process_editor:
     buttons:
       save_as_version: '<i class="pi pi-save"></i> **Сохранить как версию**'
       show_all_versions: '<i class="pi pi-database"></i> **Посмотреть все версии**'
+    sections:
+      messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
   save_process_modal:
     buttons:
       plus: '<i class="pi pi-plus"></i>'
       save: '**Сохранить как версию**'
+  right_toolbar:
+    buttons:
+      send_on_approve_open_menu:  '<i class="pi pi-thumbs-up"></i> **Согласования**'
+      send_on_approve: '**Отправить согласование**'
+      add_more_approvals: '<i class="pi pi-plus"></i>'
+      delete_approval_send: '<i class="pi pi-trash"></i>'
+  modals:
+    delete_approval_request: 
+      buttons:
+        delete: '**Удалить**'
 
 process_versions:
-  checkboxs:
+  checkboxes:
     show_autosave: '**Показать автосохранение**'
   buttons:
     view_version: '<i class="pi pi-eye"></i> **Посмотреть версию**'
     view_version_diff: '<i class="pi pi-arrow-right-arrow-left"></i> **Сравнить версии**'
+
+approval_editor:
+  buttons:
+    approve: '<span style = "color:#22c55e">**Согласовать**</span>'
+    deny:  '<span style = "color:#ef4444">**Отклонить**</span>'
 
 view_process:
   buttons:
@@ -23,9 +40,19 @@ view_process:
 
 section_team:
   buttons:
-    team_swicher: '<i class="pi pi-users"></i> **Команда**'
+    team_switcher: '<i class="pi pi-users"></i> **Команда**'
     show_more: '<i class="pi pi-ellipsis-v"></i>'
     all_versions: '<i class="pi pi-sitemap"></i> **Все версии**'
   layouts:
     business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
     all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
+
+left_main_menu:
+  personal:
+    section_name: '<i class="pi pi-user"></i> **Личное**'
+    approve:
+      section_name: '<i class="pi pi-check-circle"></i> **Согласования**'
+      inbox: '<i class="pi pi-arrow-right"></i> **Входящие**'
+
+universal:
+  plus: '<i class="pi pi-plus"></i>'

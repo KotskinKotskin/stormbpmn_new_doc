@@ -40,9 +40,9 @@
 #      - admins/admin_team_work/index.md
 - Согласующим:
   - approvals/index.md
-#  - Согласование процесса: 
-#    - approvals/approve/index.md
+  - Согласование процесса: 
+    - approvals/approve/index.md
 - Всем:
   - all/index.md
-#  - Отправка процесса на согласование: 
-#    - all/approval_request/index.md
+  - Отправка процесса на согласование: 
+    - all/approval_request/index.md
