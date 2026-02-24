@@ -1,10 +1,17 @@
 # ru/vars.yaml
 
 process_editor:
+  canvas:
+    elements: 
+      add_notice: '<i class="pi pi-plus"></i> **Написать комментарий**'
+  
   upper_toolbar:
     buttons:
       save_as_version: '<i class="pi pi-save"></i> **Сохранить как версию**'
       show_all_versions: '<i class="pi pi-database"></i> **Посмотреть все версии**'
+      choose_color: '<i class="pi pi-palette"></i> **Изменить цвет выделенного**'
+      share: '<i class="pi pi-share-alt"></i> **Поделиться**'
+      embded_iframe: '<i class="pi pi-copy"></i> **Встроить iframe**' 
     sections:
       messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
   save_process_modal:
@@ -17,6 +24,11 @@ process_editor:
       send_on_approve: '**Отправить согласование**'
       add_more_approvals: '<i class="pi pi-plus"></i>'
       delete_approval_send: '<i class="pi pi-trash"></i>'
+      notices: '<i class="pi pi-comments"></i> **Комментарии**'
+      notice_active: '<i class="pi pi-check-circle"></i>'
+      notice_inactive: '<span style = "color:#22c55e"><i class="pi pi-check-circle"></i></span>'
+      search: '<i class="pi pi-search"></i>'
+      extra: '<i class="pi pi-ellipsis-h"></i>'
   modals:
     delete_approval_request: 
       buttons:
@@ -43,9 +55,11 @@ section_team:
     team_switcher: '<i class="pi pi-users"></i> **Команда**'
     show_more: '<i class="pi pi-ellipsis-v"></i>'
     all_versions: '<i class="pi pi-sitemap"></i> **Все версии**'
+    move_diagram: '<i class="pi pi-arrows-alt"></i> **Переместить**'
   layouts:
     business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
     all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
+    folders: '<i class="pi pi-folder"></i> **Папки**'
 
 left_main_menu:
   personal:
@@ -56,3 +70,7 @@ left_main_menu:
 
 universal:
   plus: '<i class="pi pi-plus"></i>'
+  toggle: ':fontawesome-solid-toggle-on:{ .blue-toggle }'
+  folder: '<i class="pi pi-folder"></i>'
+  wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
+  youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
