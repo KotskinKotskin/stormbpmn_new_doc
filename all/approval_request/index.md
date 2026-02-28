@@ -17,7 +17,7 @@
 
     ![send_on_approve_click_button](./img/send_on_approve_click_button.png)
 
-- Если нужно отправить приглашение нескольким пользователям: введите адрес почты в поле ввода электронной почты и нажмите кнопку {{ process_editor.right_toolbar.buttons.add_more_approvels }}, затем введите другой адрес:
+- Если нужно отправить приглашение нескольким пользователям: введите адрес почты в поле ввода электронной почты и нажмите кнопку {{ process_editor.right_toolbar.buttons.add_more_approvals }}, затем введите другой адрес:
 
     ![add_more_approvals](./img/add_more_approvals.png)
 

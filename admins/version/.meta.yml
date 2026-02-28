@@ -7,11 +7,6 @@ tags:
   - Спецфичи редактора BPMN
 status: new
 version: 2
-plan:
-  - Team
-  - Business
-permissions: 
-  - ADMIN
-roles:
-  - Администратор команды
-
+plan: '- Team<br>- Business<br>'
+permissions: '- **ADMIN**'
+roles: Администратор команды
