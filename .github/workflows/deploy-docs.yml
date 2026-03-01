@@ -9,22 +9,15 @@ on:
 permissions:
   contents: write
   issues: write
-  pull-requests: read
+  pull-requests: write   # ← главное исправление
 
 jobs:
-  # ==================== PRODUCTION: push в main → deploy в корень gh-pages ====================
-  #  /home/runner/work/stormbpmn_new_doc/stormbpmn_new_doc/
-  #  ├── stormbpmn-docs/          ← сюда зачекаутили основную репу с контентом документации
-  #  ├── stormbpmn_mkdocs/        ← сюда зачекаутили MkDocs-конфиг + mkdocs.yml
-  #  ├── stormbpmn-docs-styles/   ← сюда зачекаутили кастомные CSS/JS
-  #  └── cmddac/                  ← сюда зачекаутили адаптер
-
+  # ==================== PRODUCTION ====================
   deploy-prod:
     if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout repos 
       - name: Checkout stormbpmn_new_doc (main)
         uses: actions/checkout@v4
         with:
@@ -42,20 +35,18 @@ jobs:
           repository: KotskinKotskin/stormbpmn_new_docs_css
           path: stormbpmn-docs-styles
 
-      - name: Checkout cmddac adapter
+      - name: Checkout cmddac
         uses: actions/checkout@v4
         with:
           repository: Pseudolukian/cmddac
           path: cmddac
 
-    # Install uv
       - name: Setup Python + uv
         uses: astral-sh/setup-uv@v3
         with:
           python-version: 3.12
           enable-cache: true
 
-    
       - name: Install MkDocs dependencies
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
@@ -76,7 +67,7 @@ jobs:
           publish_branch: gh-pages
           force_orphan: true
 
-  # ==================== DEV: команда /mkdocs build dev в PR → сборка + preview ====================
+  # ==================== DEV PREVIEW ====================
   build-dev:
     if: >
       github.event_name == 'issue_comment' &&
@@ -89,6 +80,7 @@ jobs:
 
     steps:
       - name: React 👀 on comment
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -99,7 +91,7 @@ jobs:
               content: 'eyes'
             })
 
-      - name: Checkout PR branch (stormbpmn_new_doc)
+      - name: Checkout PR branch (docs content)
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.issue.pull_request.head.repo.full_name }}
@@ -143,7 +135,8 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv run mkdocs build --strict
 
-      - name: Deploy preview (в папку preview/pr-XXX)
+      - name: Deploy preview (только если НЕ форк)
+        if: success() && !github.event.issue.pull_request.head.repo.fork
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -152,8 +145,8 @@ jobs:
           destination_dir: preview/pr-${{ github.event.issue.pull_request.number }}
           force_orphan: false
 
-      - name: Success reaction + comment with preview link
-        if: success()
+      - name: Success reaction + preview link (только если НЕ форк)
+        if: success() && !github.event.issue.pull_request.head.repo.fork
         uses: actions/github-script@v7
         with:
           script: |
@@ -169,5 +162,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `✅ **Документация успешно собрана!**\n\n**Preview:** ${previewUrl}\n(обновляется автоматически при каждом запуске команды)`
+              body: `✅ **Документация успешно собрана!**\n\n**Preview:** ${previewUrl}\n(обновляется автоматически)`
             })
