@@ -142,7 +142,7 @@ jobs:
             "mkdir -p $REMOTE_PATH"
 
           # 2. Копируем содержимое site/
-          scp -i ~/.ssh/id_rsa -r ./stormbpmn_mkdocs/site/* \
+          scp -i ~/.ssh/id_rsa -r ./stormbpmn_mkdocs/site/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
 
           # 3. Меняем владельца и права
