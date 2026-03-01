@@ -35,7 +35,7 @@ jobs:
           repository: KotskinKotskin/stormbpmn_new_docs_css
           path: stormbpmn-docs-styles
 
-      - name: Checkout cmddac
+      - name: Checkout cmddac adapter
         uses: actions/checkout@v4
         with:
           repository: Pseudolukian/cmddac
@@ -51,9 +51,21 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Install cmddac adapter  # ← ИСПРАВЛЕНО
+      - name: Debug adapter structure + Setup PYTHONPATH
         working-directory: ./stormbpmn_mkdocs
-        run: uv pip install -e ../cmddac/adapters/mkdocs
+        run: |
+          echo "=== Текущая директория ==="
+          pwd
+          echo ""
+          echo "=== Структура адаптера cmddac ==="
+          ls -laR ../cmddac 2>/dev/null || echo "Папка не найдена!"
+          echo ""
+          echo "=== mkdocs.yml (первые 60 строк) ==="
+          cat mkdocs.yml | head -60
+          echo ""
+          echo "=== PYTHONPATH для адаптера ==="
+          echo "PYTHONPATH=$PYTHONPATH:../cmddac/adapters/mkdocs" >> $GITHUB_ENV
+          echo "PYTHONPATH настроен на ../cmddac/adapters/mkdocs"
 
       - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
@@ -111,7 +123,7 @@ jobs:
           repository: KotskinKotskin/stormbpmn_new_docs_css
           path: stormbpmn-docs-styles
 
-      - name: Checkout cmddac
+      - name: Checkout cmddac adapter
         uses: actions/checkout@v4
         with:
           repository: Pseudolukian/cmddac
@@ -127,9 +139,21 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Install cmddac adapter  # ← ИСПРАВЛЕНО
+      - name: Debug adapter structure + Setup PYTHONPATH
         working-directory: ./stormbpmn_mkdocs
-        run: uv pip install -e ../cmddac/adapters/mkdocs
+        run: |
+          echo "=== Текущая директория ==="
+          pwd
+          echo ""
+          echo "=== Структура адаптера cmddac ==="
+          ls -laR ../cmddac 2>/dev/null || echo "Папка не найдена!"
+          echo ""
+          echo "=== mkdocs.yml (первые 60 строк) ==="
+          cat mkdocs.yml | head -60
+          echo ""
+          echo "=== PYTHONPATH для адаптера ==="
+          echo "PYTHONPATH=$PYTHONPATH:../cmddac/adapters/mkdocs" >> $GITHUB_ENV
+          echo "PYTHONPATH настроен на ../cmddac/adapters/mkdocs"
 
       - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
