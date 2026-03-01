@@ -32,9 +32,6 @@ jobs:
               content: 'eyes'
             })
 
-      # ────────────────────────────────────────────────
-      # Checkout всех нужных репозиториев (как раньше)
-      # ────────────────────────────────────────────────
       - name: Checkout PR branch (docs content)
         uses: actions/checkout@v4
         with:
@@ -71,9 +68,6 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      # ────────────────────────────────────────────────
-      # Запуск адаптера (отдельное venv + абсолютные пути)
-      # ────────────────────────────────────────────────
       - name: Run cmddac adapter
         working-directory: ./cmddac/adapters/mkdocs
         run: |
@@ -87,16 +81,11 @@ jobs:
 
           python main.py "$DOCS_DIR" "$MKDOCS_DIR" "$STYLES_DIR"
 
-      # ────────────────────────────────────────────────
-      # Сборка документации
-      # ────────────────────────────────────────────────
       - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
         run: uv run mkdocs build --strict --config-file out_conf.yaml
 
-      # ────────────────────────────────────────────────
-      # Генерация имени поддиректории
-      # ────────────────────────────────────────────────
+      # ==================== ГЕНЕРАЦИЯ ИМЕНИ ПАПКИ ====================
       - name: Generate preview folder name
         id: folder
         run: |
@@ -104,41 +93,34 @@ jobs:
           PR_NUMBER="${{ github.event.issue.number }}"
           HEAD_SHA="${{ github.event.issue.pull_request.head.sha }}"
           SHORT_SHA=$(echo "$HEAD_SHA" | cut -c1-7)
-
           NOW=$(date +"%d-%m-%H-%M")
           FOLDER_NAME="${NOW}-${PR_AUTHOR,,}-${PR_NUMBER}-${SHORT_SHA}"
-
           echo "folder_name=$FOLDER_NAME" >> $GITHUB_OUTPUT
           echo "preview_url=https://${{ secrets.SSH_SERVER_IP }}/$FOLDER_NAME/" >> $GITHUB_OUTPUT
 
-      # ────────────────────────────────────────────────
-      # Создание поддиректории на сервере + SCP копирование
-      # ────────────────────────────────────────────────
-      - name: Create remote folder and SCP deploy
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_SERVER_IP }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          source: "./stormbpmn_mkdocs/site/*"
-          target: "${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
-          strip_components: 0
-          rm: false
+      # ==================== SETUP SSH + DEPLOY ====================
+      - name: Setup SSH key and deploy via SCP (StrictHostKeyChecking=NO)
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
-      # Если хочешь очистить старую папку перед загрузкой — добавь отдельный ssh-шаг:
-      # - name: Clean remote folder (optional)
-      #   uses: appleboy/ssh-action@v1.0.3
-      #   with:
-      #     host: ${{ secrets.SSH_SERVER_IP }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.SSH_KEY }}
-      #     script: |
-      #       rm -rf "${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
+          # Отключаем проверку host key (решает твой кейс)
+          echo "StrictHostKeyChecking=no" >> ~/.ssh/config
+          echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 
-      # ────────────────────────────────────────────────
-      # Успешный комментарий + ссылка
-      # ────────────────────────────────────────────────
+          REMOTE_PATH="${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
+
+          # Создаём папку на сервере
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} \
+              "mkdir -p $REMOTE_PATH"
+
+          # Копируем собранную документацию
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+              -r ./stormbpmn_mkdocs/site/* \
+              ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
+
       - name: Success reaction + preview link
         if: success()
         uses: actions/github-script@v7
