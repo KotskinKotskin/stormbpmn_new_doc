@@ -51,9 +51,9 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Install cmddac adapter
+      - name: Install cmddac adapter  # ← ИСПРАВЛЕНО
         working-directory: ./stormbpmn_mkdocs
-        run: uv pip install -e ../cmddac
+        run: uv pip install -e ../cmddac/adapters/mkdocs
 
       - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
@@ -127,9 +127,9 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Install cmddac adapter
+      - name: Install cmddac adapter  # ← ИСПРАВЛЕНО
         working-directory: ./stormbpmn_mkdocs
-        run: uv pip install -e ../cmddac
+        run: uv pip install -e ../cmddac/adapters/mkdocs
 
       - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
