@@ -64,21 +64,28 @@ jobs:
           python-version: 3.12
           enable-cache: true
 
-      - name: Install MkDocs dependencies (из обновлённого pyproject.toml)
+      - name: Install MkDocs dependencies
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      # ==================== ОТДЕЛЬНЫЙ ШАГ АДАПТЕРА ====================
-      - name: Run cmddac adapter (отдельное venv + requirements.txt)
+      # ==================== ОТДЕЛЬНЫЙ ШАГ АДАПТЕРА (абсолютные пути) ====================
+      - name: Run cmddac adapter (отдельное venv + absolute paths)
         working-directory: ./cmddac/adapters/mkdocs
         run: |
           python -m venv venv
           . venv/bin/activate
           pip install -r requirements.txt
-          python main.py \
-            ../../../stormbpmn-docs \
-            ../../../stormbpmn_mkdocs \
-            ../../../stormbpmn-docs-styles
+          
+          DOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs"
+          MKDOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn_mkdocs"
+          STYLES_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs-styles"
+          
+          echo "→ Передаём абсолютные пути:"
+          echo "  docs_dir   = $DOCS_DIR"
+          echo "  mkdocs_dir = $MKDOCS_DIR"
+          echo "  styles_dir = $STYLES_DIR"
+          
+          python main.py "$DOCS_DIR" "$MKDOCS_DIR" "$STYLES_DIR"
 
       - name: Build MkDocs (используем out_conf.yaml)
         working-directory: ./stormbpmn_mkdocs
