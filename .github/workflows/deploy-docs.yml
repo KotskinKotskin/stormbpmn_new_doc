@@ -32,11 +32,12 @@ jobs:
               content: 'eyes'
             })
 
-      - name: Checkout PR branch (docs content)
+      - name: Checkout PR branch (docs content) — full fetch + switch to PR commit
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.issue.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.issue.pull_request.head.ref }}
+          ref: ${{ github.event.issue.pull_request.head.sha }}          # ← ключевой фикс: sha вместо ref
+          fetch-depth: 0                                                # полный fetch для истории
           token: ${{ secrets.GITHUB_TOKEN }}
           path: stormbpmn-docs
 
