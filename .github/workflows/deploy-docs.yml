@@ -99,28 +99,37 @@ jobs:
           echo "folder_name=$FOLDER_NAME" >> $GITHUB_OUTPUT
           echo "preview_url=https://${{ secrets.SSH_SERVER_IP }}/$FOLDER_NAME/" >> $GITHUB_OUTPUT
 
-      # ==================== SETUP SSH + DEPLOY ====================
-      - name: Setup SSH key and deploy via SCP (StrictHostKeyChecking=NO)
+      # ==================== SETUP SSH + DEPLOY + FIX OWNERSHIP ====================
+      - name: Setup SSH key and deploy via SCP + fix ownership for caddy
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          # Отключаем проверку host key (решает твой кейс)
           echo "StrictHostKeyChecking=no" >> ~/.ssh/config
           echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 
           REMOTE_PATH="${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
 
-          # Создаём папку на сервере
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-              ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} \
-              "mkdir -p $REMOTE_PATH"
+          echo "Deploying to: $REMOTE_PATH"
 
-          # Копируем собранную документацию
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-              -r ./stormbpmn_mkdocs/site/* \
-              ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
+          # 1. Создаём папку
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} \
+            "mkdir -p $REMOTE_PATH"
+
+          # 2. Копируем содержимое site/
+          scp -i ~/.ssh/id_rsa -r ./stormbpmn_mkdocs/site/* \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
+
+          # 3. Самое важное — меняем владельца и права сразу после копирования
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} "
+            chown -R caddy:caddy $REMOTE_PATH &&
+            chmod -R u+rwX,go+rX $REMOTE_PATH &&
+            find $REMOTE_PATH -type d -exec chmod 755 {} + &&
+            find $REMOTE_PATH -type f -exec chmod 644 {} +
+          "
+
+          echo "Ownership fixed to caddy:caddy, permissions set"
 
       - name: Success reaction + preview link
         if: success()
