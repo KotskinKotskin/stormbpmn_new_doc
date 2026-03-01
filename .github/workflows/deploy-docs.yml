@@ -2,7 +2,7 @@ name: StormBPMN Docs - Dev Preview via SCP
 
 on:
   issue_comment:
-    types: [ created ]
+    types: [created]
 
 permissions:
   contents: read
@@ -33,13 +33,11 @@ jobs:
             })
 
       # ────────────────────────────────────────────────
-      #  Checkout + merge PR head ← main (для preview "как после merge")
+      # Checkout PR merged с main (симуляция после merge)
+      # Работает для fork/non-fork автоматически
       # ────────────────────────────────────────────────
 
-      - name: Clean previous docs dir
-        run: rm -rf stormbpmn-docs || true
-
-      - name: Checkout base branch (main / default branch)
+      - name: Checkout PR merged with main
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
@@ -47,40 +45,24 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Add PR head as remote and fetch it
+      - name: Fetch and checkout PR/merge ref
+        working-directory: ./stormbpmn-docs
         run: |
-          cd stormbpmn-docs
-
-          # Добавляем remote форка / того же репо
-          git remote add pr-head \
-            https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.issue.pull_request.head.repo.full_name }}.git
-
-          # Fetch только нужный коммит (head.sha)
-          git fetch pr-head ${{ github.event.issue.pull_request.head.sha }} 
-
-          # Создаём ветку из PR head
-          git checkout -b pr-preview FETCH_HEAD
-
-          # Fetch base branch (на всякий случай, хотя уже есть)
-          git fetch origin ${{ github.event.repository.default_branch }}
-
-      - name: Merge base into PR preview (simulate merge result)
-        run: |
-          cd stormbpmn-docs
-
-          # Пытаемся слить main в preview-ветку
-          git merge --no-ff --no-edit origin/${{ github.event.repository.default_branch }} || {
-            echo "Merge conflict detected — preview cannot be built automatically."
+          # Fetch GitHub-generated merge commit (PR head + base merged)
+          git fetch origin "refs/pull/${{ github.event.issue.number }}/merge"
+          
+          # Checkout merge commit (если нет конфликтов)
+          if git checkout -qf FETCH_HEAD; then
+            echo "✅ Merged state ready. HEAD: $(git rev-parse HEAD)"
+            git log -5 --oneline --graph
+          else
+            echo "❌ Merge conflict detected — preview cannot be built automatically."
             echo "Please resolve conflicts in the PR first."
             exit 1
-          }
-
-          # Показываем, что получилось (debug, можно убрать позже)
-          git log -5 --oneline --graph
-          echo "Merged state ready for build. HEAD: $(git rev-parse HEAD)"
+          fi
 
       # ────────────────────────────────────────────────
-      #  Остальные шаги без изменений (используем stormbpmn-docs)
+      # Остальные шаги без изменений
       # ────────────────────────────────────────────────
 
       - name: Checkout stormbpmn_mkdocs
@@ -163,7 +145,7 @@ jobs:
           scp -i ~/.ssh/id_rsa -r ./stormbpmn_mkdocs/site/* \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
 
-          # 3. Самое важное — меняем владельца и права сразу после копирования
+          # 3. Меняем владельца и права
           ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} "
             chown -R caddy:caddy $REMOTE_PATH &&
             chmod -R u+rwX,go+rX $REMOTE_PATH &&
