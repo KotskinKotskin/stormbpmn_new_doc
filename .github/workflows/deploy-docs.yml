@@ -32,14 +32,56 @@ jobs:
               content: 'eyes'
             })
 
-      - name: Checkout PR branch (docs content) — full fetch + switch to PR commit
+      # ────────────────────────────────────────────────
+      #  Checkout + merge PR head ← main (для preview "как после merge")
+      # ────────────────────────────────────────────────
+
+      - name: Clean previous docs dir
+        run: rm -rf stormbpmn-docs || true
+
+      - name: Checkout base branch (main / default branch)
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.issue.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.issue.pull_request.head.sha }}          # ← ключевой фикс: sha вместо ref
-          fetch-depth: 0                                                # полный fetch для истории
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.repository.default_branch }}
           path: stormbpmn-docs
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add PR head as remote and fetch it
+        run: |
+          cd stormbpmn-docs
+
+          # Добавляем remote форка / того же репо
+          git remote add pr-head \
+            https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.issue.pull_request.head.repo.full_name }}.git
+
+          # Fetch только нужный коммит (head.sha)
+          git fetch pr-head ${{ github.event.issue.pull_request.head.sha }} 
+
+          # Создаём ветку из PR head
+          git checkout -b pr-preview FETCH_HEAD
+
+          # Fetch base branch (на всякий случай, хотя уже есть)
+          git fetch origin ${{ github.event.repository.default_branch }}
+
+      - name: Merge base into PR preview (simulate merge result)
+        run: |
+          cd stormbpmn-docs
+
+          # Пытаемся слить main в preview-ветку
+          git merge --no-ff --no-edit origin/${{ github.event.repository.default_branch }} || {
+            echo "Merge conflict detected — preview cannot be built automatically."
+            echo "Please resolve conflicts in the PR first."
+            exit 1
+          }
+
+          # Показываем, что получилось (debug, можно убрать позже)
+          git log -5 --oneline --graph
+          echo "Merged state ready for build. HEAD: $(git rev-parse HEAD)"
+
+      # ────────────────────────────────────────────────
+      #  Остальные шаги без изменений (используем stormbpmn-docs)
+      # ────────────────────────────────────────────────
 
       - name: Checkout stormbpmn_mkdocs
         uses: actions/checkout@v4
@@ -148,5 +190,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `✅ **Документация успешно собрана и загружена на сервер!**\n\n**Preview:** ${previewUrl}\n(доступно по ссылке выше)`
+              body: `✅ **Документация успешно собрана и загружена на сервер!**\n\n**Preview (PR + main merged):** ${previewUrl}\n(доступно по ссылке выше)`
             })
