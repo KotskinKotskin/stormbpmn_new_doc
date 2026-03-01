@@ -1,16 +1,16 @@
-name: StormBPMN Docs - Dev Build & Preview
+name: StormBPMN Docs - Dev Preview via SCP
 
 on:
   issue_comment:
     types: [ created ]
 
 permissions:
-  contents: write
+  contents: read
   issues: write
   pull-requests: write
 
 jobs:
-  build-dev:
+  build-and-preview:
     if: >
       github.event.issue.pull_request &&
       startsWith(github.event.comment.body, '/mkdocs build dev') &&
@@ -32,6 +32,9 @@ jobs:
               content: 'eyes'
             })
 
+      # ────────────────────────────────────────────────
+      # Checkout всех нужных репозиториев (как раньше)
+      # ────────────────────────────────────────────────
       - name: Checkout PR branch (docs content)
         uses: actions/checkout@v4
         with:
@@ -58,7 +61,7 @@ jobs:
           repository: Pseudolukian/cmddac
           path: cmddac
 
-      - name: Setup Python + uv (для MkDocs)
+      - name: Setup Python + uv
         uses: astral-sh/setup-uv@v7
         with:
           python-version: 3.12
@@ -68,41 +71,76 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      # ==================== ОТДЕЛЬНЫЙ ШАГ АДАПТЕРА (абсолютные пути) ====================
-      - name: Run cmddac adapter (отдельное venv + absolute paths)
+      # ────────────────────────────────────────────────
+      # Запуск адаптера (отдельное venv + абсолютные пути)
+      # ────────────────────────────────────────────────
+      - name: Run cmddac adapter
         working-directory: ./cmddac/adapters/mkdocs
         run: |
           python -m venv venv
           . venv/bin/activate
           pip install -r requirements.txt
-          
+
           DOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs"
           MKDOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn_mkdocs"
           STYLES_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs-styles"
-          
-          echo "→ Передаём абсолютные пути:"
-          echo "  docs_dir   = $DOCS_DIR"
-          echo "  mkdocs_dir = $MKDOCS_DIR"
-          echo "  styles_dir = $STYLES_DIR"
-          
+
           python main.py "$DOCS_DIR" "$MKDOCS_DIR" "$STYLES_DIR"
 
-      - name: Build MkDocs (используем out_conf.yaml)
+      # ────────────────────────────────────────────────
+      # Сборка документации
+      # ────────────────────────────────────────────────
+      - name: Build MkDocs
         working-directory: ./stormbpmn_mkdocs
         run: uv run mkdocs build --strict --config-file out_conf.yaml
 
-      - name: Deploy preview (только если НЕ форк)
-        if: success() && !github.event.issue.pull_request.head.repo.fork
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./stormbpmn_mkdocs/site
-          publish_branch: gh-pages
-          destination_dir: preview/pr-${{ github.event.issue.pull_request.number }}
-          force_orphan: false
+      # ────────────────────────────────────────────────
+      # Генерация имени поддиректории
+      # ────────────────────────────────────────────────
+      - name: Generate preview folder name
+        id: folder
+        run: |
+          PR_AUTHOR="${{ github.event.issue.user.login }}"
+          PR_NUMBER="${{ github.event.issue.number }}"
+          HEAD_SHA="${{ github.event.issue.pull_request.head.sha }}"
+          SHORT_SHA=$(echo "$HEAD_SHA" | cut -c1-7)
 
-      - name: Success reaction + preview link (только если НЕ форк)
-        if: success() && !github.event.issue.pull_request.head.repo.fork
+          NOW=$(date +"%d-%m-%H-%M")
+          FOLDER_NAME="${NOW}-${PR_AUTHOR,,}-${PR_NUMBER}-${SHORT_SHA}"
+
+          echo "folder_name=$FOLDER_NAME" >> $GITHUB_OUTPUT
+          echo "preview_url=https://${{ secrets.SSH_SERVER_IP }}/$FOLDER_NAME/" >> $GITHUB_OUTPUT
+
+      # ────────────────────────────────────────────────
+      # Создание поддиректории на сервере + SCP копирование
+      # ────────────────────────────────────────────────
+      - name: Create remote folder and SCP deploy
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "./stormbpmn_mkdocs/site/*"
+          target: "${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
+          strip_components: 0
+          rm: false
+
+      # Если хочешь очистить старую папку перед загрузкой — добавь отдельный ssh-шаг:
+      # - name: Clean remote folder (optional)
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.SSH_SERVER_IP }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     script: |
+      #       rm -rf "${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
+
+      # ────────────────────────────────────────────────
+      # Успешный комментарий + ссылка
+      # ────────────────────────────────────────────────
+      - name: Success reaction + preview link
+        if: success()
         uses: actions/github-script@v7
         with:
           script: |
@@ -113,10 +151,10 @@ jobs:
               content: '+1'
             });
 
-            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/pr-${context.issue.number}/`;
+            const previewUrl = `${{ steps.folder.outputs.preview_url }}`;
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `✅ **Документация успешно собрана!**\n\n**Preview:** ${previewUrl}\n(обновляется автоматически)`
+              body: `✅ **Документация успешно собрана и загружена на сервер!**\n\n**Preview:** ${previewUrl}\n(доступно по ссылке выше)`
             })
