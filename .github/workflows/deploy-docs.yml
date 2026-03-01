@@ -1,0 +1,173 @@
+name: StormBPMN Docs - Build & Deploy
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  issue_comment:
+    types: [ created ]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: read
+
+jobs:
+  # ==================== PRODUCTION: push в main → deploy в корень gh-pages ====================
+  #  /home/runner/work/stormbpmn_new_doc/stormbpmn_new_doc/
+  #  ├── stormbpmn-docs/          ← сюда зачекаутили основную репу с контентом документации
+  #  ├── stormbpmn_mkdocs/        ← сюда зачекаутили MkDocs-конфиг + mkdocs.yml
+  #  ├── stormbpmn-docs-styles/   ← сюда зачекаутили кастомные CSS/JS
+  #  └── cmddac/                  ← сюда зачекаутили адаптер
+
+  deploy-prod:
+    if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout repos 
+      - name: Checkout stormbpmn_new_doc (main)
+        uses: actions/checkout@v4
+        with:
+          path: stormbpmn-docs
+
+      - name: Checkout stormbpmn_mkdocs
+        uses: actions/checkout@v4
+        with:
+          repository: KotskinKotskin/stormbpmn_mkdocs
+          path: stormbpmn_mkdocs
+
+      - name: Checkout custom styles
+        uses: actions/checkout@v4
+        with:
+          repository: KotskinKotskin/stormbpmn_new_docs_css
+          path: stormbpmn-docs-styles
+
+      - name: Checkout cmddac adapter
+        uses: actions/checkout@v4
+        with:
+          repository: Pseudolukian/cmddac
+          path: cmddac
+
+    # Install uv
+      - name: Setup Python + uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: 3.12
+          enable-cache: true
+
+    
+      - name: Install MkDocs dependencies
+        working-directory: ./stormbpmn_mkdocs
+        run: uv sync --frozen
+
+      - name: Install cmddac adapter
+        working-directory: ./stormbpmn_mkdocs
+        run: uv pip install -e ../cmddac
+
+      - name: Build MkDocs
+        working-directory: ./stormbpmn_mkdocs
+        run: uv run mkdocs build --strict
+
+      - name: Deploy to gh-pages (production)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./stormbpmn_mkdocs/site
+          publish_branch: gh-pages
+          force_orphan: true
+
+  # ==================== DEV: команда /mkdocs build dev в PR → сборка + preview ====================
+  build-dev:
+    if: >
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '/mkdocs build dev') &&
+      github.event.issue.pull_request.head.ref != 'main' &&
+      github.event.issue.pull_request.head.ref != 'master'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: React 👀 on comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'eyes'
+            })
+
+      - name: Checkout PR branch (stormbpmn_new_doc)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.issue.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.issue.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: stormbpmn-docs
+
+      - name: Checkout stormbpmn_mkdocs
+        uses: actions/checkout@v4
+        with:
+          repository: KotskinKotskin/stormbpmn_mkdocs
+          path: stormbpmn_mkdocs
+
+      - name: Checkout custom styles
+        uses: actions/checkout@v4
+        with:
+          repository: KotskinKotskin/stormbpmn_new_docs_css
+          path: stormbpmn-docs-styles
+
+      - name: Checkout cmddac
+        uses: actions/checkout@v4
+        with:
+          repository: Pseudolukian/cmddac
+          path: cmddac
+
+      - name: Setup Python + uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: 3.12
+          enable-cache: true
+
+      - name: Install MkDocs dependencies
+        working-directory: ./stormbpmn_mkdocs
+        run: uv sync --frozen
+
+      - name: Install cmddac adapter
+        working-directory: ./stormbpmn_mkdocs
+        run: uv pip install -e ../cmddac
+
+      - name: Build MkDocs
+        working-directory: ./stormbpmn_mkdocs
+        run: uv run mkdocs build --strict
+
+      - name: Deploy preview (в папку preview/pr-XXX)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./stormbpmn_mkdocs/site
+          publish_branch: gh-pages
+          destination_dir: preview/pr-${{ github.event.issue.pull_request.number }}
+          force_orphan: false
+
+      - name: Success reaction + comment with preview link
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: '+1'
+            });
+
+            const previewUrl = `https://${context.repo.owner}.github.io/${context.repo.repo}/preview/pr-${context.issue.number}/`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `✅ **Документация успешно собрана!**\n\n**Preview:** ${previewUrl}\n(обновляется автоматически при каждом запуске команды)`
+            })
