@@ -58,28 +58,31 @@ jobs:
           repository: Pseudolukian/cmddac
           path: cmddac
 
-      - name: Setup Python + uv
+      - name: Setup Python + uv (для MkDocs)
         uses: astral-sh/setup-uv@v7
         with:
           python-version: 3.12
           enable-cache: true
 
-      - name: Install base dependencies (из pyproject.toml)
+      - name: Install MkDocs dependencies (из обновлённого pyproject.toml)
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Install MkDocs theme + все недостающие плагины
-        working-directory: ./stormbpmn_mkdocs
+      # ==================== ОТДЕЛЬНЫЙ ШАГ АДАПТЕРА ====================
+      - name: Run cmddac adapter (отдельное venv + requirements.txt)
+        working-directory: ./cmddac/adapters/mkdocs
         run: |
-          uv pip install \
-            mkdocs-material \
-            mkdocs-macros-plugin \
-            mkdocs-glightbox \
-            mkdocs-autorefs
+          python -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+          python main.py \
+            ../../../stormbpmn-docs \
+            ../../../stormbpmn_mkdocs \
+            ../../../stormbpmn-docs-styles
 
-      - name: Build MkDocs (с адаптером cmddac)
+      - name: Build MkDocs (используем out_conf.yaml)
         working-directory: ./stormbpmn_mkdocs
-        run: PYTHONPATH="../cmddac/adapters/mkdocs:$PYTHONPATH" uv run mkdocs build --strict
+        run: uv run mkdocs build --strict --config-file out_conf.yaml
 
       - name: Deploy preview (только если НЕ форк)
         if: success() && !github.event.issue.pull_request.head.repo.fork
