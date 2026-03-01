@@ -64,11 +64,20 @@ jobs:
           python-version: 3.12
           enable-cache: true
 
-      - name: Install MkDocs dependencies
+      - name: Install base dependencies (из pyproject.toml)
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Build MkDocs (с адаптером)
+      - name: Install MkDocs theme + все недостающие плагины
+        working-directory: ./stormbpmn_mkdocs
+        run: |
+          uv pip install \
+            mkdocs-material \
+            mkdocs-macros-plugin \
+            mkdocs-glightbox \
+            mkdocs-autorefs
+
+      - name: Build MkDocs (с адаптером cmddac)
         working-directory: ./stormbpmn_mkdocs
         run: PYTHONPATH="../cmddac/adapters/mkdocs:$PYTHONPATH" uv run mkdocs build --strict
 
