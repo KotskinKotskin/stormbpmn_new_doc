@@ -1,8 +1,6 @@
-name: StormBPMN Docs - Build & Deploy
+name: StormBPMN Docs - Dev Build & Preview
 
 on:
-  push:
-    branches: [ "main", "master" ]
   issue_comment:
     types: [ created ]
 
@@ -12,61 +10,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  # ==================== PRODUCTION ====================
-  deploy-prod:
-    if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout stormbpmn_new_doc (main)
-        uses: actions/checkout@v4
-        with:
-          path: stormbpmn-docs
-
-      - name: Checkout stormbpmn_mkdocs
-        uses: actions/checkout@v4
-        with:
-          repository: KotskinKotskin/stormbpmn_mkdocs
-          path: stormbpmn_mkdocs
-
-      - name: Checkout custom styles
-        uses: actions/checkout@v4
-        with:
-          repository: KotskinKotskin/stormbpmn_new_docs_css
-          path: stormbpmn-docs-styles
-
-      - name: Checkout cmddac adapter
-        uses: actions/checkout@v4
-        with:
-          repository: Pseudolukian/cmddac
-          path: cmddac
-
-      - name: Setup Python + uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          python-version: 3.12
-          enable-cache: true
-
-      - name: Install MkDocs dependencies
-        working-directory: ./stormbpmn_mkdocs
-        run: uv sync --frozen
-
-      - name: Build MkDocs (с адаптером)
-        working-directory: ./stormbpmn_mkdocs
-        run: PYTHONPATH="../cmddac/adapters/mkdocs:$PYTHONPATH" uv run mkdocs build --strict
-
-      - name: Deploy to gh-pages (production)
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./stormbpmn_mkdocs/site
-          publish_branch: gh-pages
-          force_orphan: true
-
-  # ==================== DEV PREVIEW ====================
   build-dev:
     if: >
-      github.event_name == 'issue_comment' &&
       github.event.issue.pull_request &&
       startsWith(github.event.comment.body, '/mkdocs build dev') &&
       github.event.issue.pull_request.head.ref != 'main' &&
