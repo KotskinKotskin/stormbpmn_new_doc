@@ -51,25 +51,9 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Debug adapter structure + Setup PYTHONPATH
+      - name: Build MkDocs (с адаптером)
         working-directory: ./stormbpmn_mkdocs
-        run: |
-          echo "=== Текущая директория ==="
-          pwd
-          echo ""
-          echo "=== Структура адаптера cmddac ==="
-          ls -laR ../cmddac 2>/dev/null || echo "Папка не найдена!"
-          echo ""
-          echo "=== mkdocs.yml (первые 60 строк) ==="
-          cat mkdocs.yml | head -60
-          echo ""
-          echo "=== PYTHONPATH для адаптера ==="
-          echo "PYTHONPATH=$PYTHONPATH:../cmddac/adapters/mkdocs" >> $GITHUB_ENV
-          echo "PYTHONPATH настроен на ../cmddac/adapters/mkdocs"
-
-      - name: Build MkDocs
-        working-directory: ./stormbpmn_mkdocs
-        run: uv run mkdocs build --strict
+        run: PYTHONPATH="../cmddac/adapters/mkdocs:$PYTHONPATH" uv run mkdocs build --strict
 
       - name: Deploy to gh-pages (production)
         uses: peaceiris/actions-gh-pages@v4
@@ -139,25 +123,9 @@ jobs:
         working-directory: ./stormbpmn_mkdocs
         run: uv sync --frozen
 
-      - name: Debug adapter structure + Setup PYTHONPATH
+      - name: Build MkDocs (с адаптером)
         working-directory: ./stormbpmn_mkdocs
-        run: |
-          echo "=== Текущая директория ==="
-          pwd
-          echo ""
-          echo "=== Структура адаптера cmddac ==="
-          ls -laR ../cmddac 2>/dev/null || echo "Папка не найдена!"
-          echo ""
-          echo "=== mkdocs.yml (первые 60 строк) ==="
-          cat mkdocs.yml | head -60
-          echo ""
-          echo "=== PYTHONPATH для адаптера ==="
-          echo "PYTHONPATH=$PYTHONPATH:../cmddac/adapters/mkdocs" >> $GITHUB_ENV
-          echo "PYTHONPATH настроен на ../cmddac/adapters/mkdocs"
-
-      - name: Build MkDocs
-        working-directory: ./stormbpmn_mkdocs
-        run: uv run mkdocs build --strict
+        run: PYTHONPATH="../cmddac/adapters/mkdocs:$PYTHONPATH" uv run mkdocs build --strict
 
       - name: Deploy preview (только если НЕ форк)
         if: success() && !github.event.issue.pull_request.head.repo.fork
