@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build-and-preview:
+    # 🔥 УСЛОВИЕ ЗАПУСКА: только для PR-комментариев с командой /mkdocs build dev (не main/master)
     if: >
       github.event.issue.pull_request &&
       startsWith(github.event.comment.body, '/mkdocs build dev') &&
@@ -20,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 👀 РЕАКЦИЯ НА КОММЕНТАРИЙ: добавляем глаза сразу
       - name: React 👀 on comment
         continue-on-error: true
         uses: actions/github-script@v7
@@ -32,12 +34,11 @@ jobs:
               content: 'eyes'
             })
 
-      # ────────────────────────────────────────────────
-      # Checkout PR merged с main (симуляция после merge)
-      # Работает для fork/non-fork автоматически
-      # ────────────────────────────────────────────────
-
-      - name: Checkout PR merged with main
+      # ═══════════════════════════════════════════════════════════════════════
+      # 📥 CHECKOUT + MERGE PR С MAIN (симуляция пост-мерджа)
+      # ═══════════════════════════════════════════════════════════════════════
+      
+      - name: 🔹 Checkout main branch as base
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
@@ -45,15 +46,26 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Fetch and checkout PR/merge ref
+      - name: ✅ Verify main checkout - check files exist
+        run: |
+          cd stormbpmn-docs
+          if [ ! -f "mkdocs.yml" ]; then
+            echo "❌ ERROR: mkdocs.yml not found in main branch!"
+            exit 1
+          fi
+          echo "✅ Main branch checkout OK. Files found: $(ls -la | wc -l)"
+
+      - name: 🔹 Fetch PR merge ref и checkout merged state
+        id: pr-merge
         working-directory: ./stormbpmn-docs
         run: |
-          # Fetch GitHub-generated merge commit (PR head + base merged)
+          # Получаем merge commit GitHub (PR head + main)
           git fetch origin "refs/pull/${{ github.event.issue.number }}/merge"
           
-          # Checkout merge commit (если нет конфликтов)
+          # Проверяем и checkout'им merge commit
           if git checkout -qf FETCH_HEAD; then
-            echo "✅ Merged state ready. HEAD: $(git rev-parse HEAD)"
+            echo "✅ Merged PR+main state ready. HEAD: $(git rev-parse HEAD)"
+            echo "merge_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
             git log -5 --oneline --graph
           else
             echo "❌ Merge conflict detected — preview cannot be built automatically."
@@ -61,105 +73,225 @@ jobs:
             exit 1
           fi
 
-      # ────────────────────────────────────────────────
-      # Остальные шаги без изменений
-      # ────────────────────────────────────────────────
+      - name: ✅ Verify PR merge checkout - docs files exist
+        working-directory: ./stormbpmn-docs
+        run: |
+          if [ ! -f "mkdocs.yml" ] || [ ! "$(find . -name '*.md' | head -10 | wc -l)" -eq 0 ]; then
+            echo "✅ PR merge checkout OK. mkdocs.yml + MD files found"
+            echo "Files count: $(find . -name '*.md' | wc -l)"
+          else
+            echo "❌ ERROR: No docs files found in PR merge!"
+            exit 1
+          fi
 
-      - name: Checkout stormbpmn_mkdocs
+      # ═══════════════════════════════════════════════════════════════════════
+      # 📦 SETUP DEPENDENCIES & REPOSITORIES
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 🔹 Checkout stormbpmn_mkdocs theme
         uses: actions/checkout@v4
         with:
           repository: KotskinKotskin/stormbpmn_mkdocs
           path: stormbpmn_mkdocs
 
-      - name: Checkout custom styles
+      - name: ✅ Verify mkdocs theme checkout
+        run: |
+          cd stormbpmn_mkdocs
+          if [ ! -f "mkdocs.yml" ] || [ ! -d "docs" ]; then
+            echo "❌ ERROR: MkDocs theme files missing!"
+            exit 1
+          fi
+          echo "✅ MkDocs theme OK: $(ls -la mkdocs.yml docs/ | head -5)"
+
+      - name: 🔹 Checkout custom CSS styles
         uses: actions/checkout@v4
         with:
           repository: KotskinKotskin/stormbpmn_new_docs_css
           path: stormbpmn-docs-styles
 
-      - name: Checkout cmddac adapter
+      - name: 🔹 Checkout cmddac adapter
         uses: actions/checkout@v4
         with:
           repository: Pseudolukian/cmddac
           path: cmddac
 
-      - name: Setup Python + uv
+      - name: 🐍 Setup Python 3.12 + uv package manager
         uses: astral-sh/setup-uv@v7
         with:
           python-version: 3.12
           enable-cache: true
 
-      - name: Install MkDocs dependencies
+      - name: 📦 Install MkDocs + dependencies
         working-directory: ./stormbpmn_mkdocs
-        run: uv sync --frozen
+        run: |
+          uv sync --frozen
+          echo "✅ MkDocs deps installed: $(uv run mkdocs --version)"
 
-      - name: Run cmddac adapter
+      # ═══════════════════════════════════════════════════════════════════════
+      # 🎛️ PROCESS DOCS WITH CMDDAC ADAPTER
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: ⚙️ Run cmddac adapter to generate mkdocs config
         working-directory: ./cmddac/adapters/mkdocs
+        id: cmddac
         run: |
           python -m venv venv
           . venv/bin/activate
           pip install -r requirements.txt
-
+          
           DOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs"
           MKDOCS_DIR="${GITHUB_WORKSPACE}/stormbpmn_mkdocs"
           STYLES_DIR="${GITHUB_WORKSPACE}/stormbpmn-docs-styles"
-
+          
+          echo "Running cmddac: $DOCS_DIR -> $MKDOCS_DIR"
           python main.py "$DOCS_DIR" "$MKDOCS_DIR" "$STYLES_DIR"
+          
+          # ✅ ПРОВЕРКА: config сгенерировался?
+          if [ -f "${MKDOCS_DIR}/out_conf.yaml" ]; then
+            echo "✅ cmddac success: out_conf.yaml created ($(wc -l < "${MKDOCS_DIR}/out_conf.yaml") lines)"
+            echo "cmddac_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ ERROR: cmddac failed - out_conf.yaml not created!"
+            exit 1
+          fi
 
-      - name: Build MkDocs
+      # ═══════════════════════════════════════════════════════════════════════
+      # 🧪 LOCAL PREVIEW TEST (mkdocs serve)
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 🧪 Test mkdocs serve --clean (local preview validation)
         working-directory: ./stormbpmn_mkdocs
-        run: uv run mkdocs build --strict --config-file out_conf.yaml
+        timeout-minutes: 5
+        run: |
+          echo "🧪 Starting mkdocs serve --clean for validation..."
+          uv run mkdocs serve --clean -f out_conf.yaml --port 8000 &
+          MKDOCS_PID=$!
+          
+          # Ждём готовности сервера (max 2min)
+          timeout=120
+          while [ $timeout -gt 0 ]; do
+            if curl -s http://localhost:8000/ > /dev/null; then
+              echo "✅ MkDocs serve ready! Local preview OK."
+              break
+            fi
+            sleep 2
+            timeout=$((timeout-2))
+          done
+          
+          if [ $timeout -eq 0 ]; then
+            echo "❌ MkDocs serve failed to start!"
+            kill $MKDOCS_PID 2>/dev/null || true
+            exit 1
+          fi
+          
+          # Тест главной страницы
+          curl -s http://localhost:8000/ | head -50
+          echo "✅ Local preview validation PASSED"
+          
+          kill $MKDOCS_PID
 
-      # ==================== ГЕНЕРАЦИЯ ИМЕНИ ПАПКИ ====================
-      - name: Generate preview folder name
+      # ═══════════════════════════════════════════════════════════════════════
+      # 🔨 BUILD FINAL SITE
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 🔨 Build production MkDocs site
+        working-directory: ./stormbpmn_mkdocs
+        id: build
+        run: |
+          uv run mkdocs build --strict -f out_conf.yaml
+          
+          # ✅ ПРОВЕРКА: site/ создался и не пустой?
+          if [ -d "site" ] && [ "$(find site/ -type f | wc -l)" -gt 10 ]; then
+            echo "✅ Build success: $(find site/ -type f | wc -l) files generated"
+            echo "build_size=$(du -sh site/)" >> $GITHUB_OUTPUT
+            echo "build_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ ERROR: Build failed or site/ is empty!"
+            find site/ -type f || echo "site/ is empty"
+            exit 1
+          fi
+
+      # ═══════════════════════════════════════════════════════════════════════
+      # 📁 ГЕНЕРАЦИЯ УНИКАЛЬНОГО ИМЕНИ ПАПКИ
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 📁 Generate unique preview folder name
         id: folder
         run: |
           PR_AUTHOR="${{ github.event.issue.user.login }}"
           PR_NUMBER="${{ github.event.issue.number }}"
-          HEAD_SHA="${{ github.event.issue.pull_request.head.sha }}"
-          SHORT_SHA=$(echo "$HEAD_SHA" | cut -c1-7)
+          MERGE_SHA="${{ steps.pr-merge.outputs.merge_sha }}"
+          SHORT_SHA=$(echo "$MERGE_SHA" | cut -c1-7)
           NOW=$(date +"%d-%m-%H-%M")
+          COUNTER_FILE="${GITHUB_WORKSPACE}/counter.txt"
+          
+          # 🆕 ФИКС СЧЁТЧИКА: используем GITHUB_OUTPUT вместо файла
+          echo "counter=$(date +%s)" >> $GITHUB_OUTPUT
+          
           FOLDER_NAME="${NOW}-${PR_AUTHOR,,}-${PR_NUMBER}-${SHORT_SHA}"
           echo "folder_name=$FOLDER_NAME" >> $GITHUB_OUTPUT
           echo "preview_url=https://${{ secrets.SSH_SERVER_IP }}/$FOLDER_NAME/" >> $GITHUB_OUTPUT
+          echo "✅ Folder name: $FOLDER_NAME"
 
-      # ==================== SETUP SSH + DEPLOY + FIX OWNERSHIP ====================
-      - name: Setup SSH key and deploy via SCP + fix ownership for caddy
+      # ═══════════════════════════════════════════════════════════════════════
+      # 🚀 DEPLOY VIA SCP + FIX PERMISSIONS
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 🚀 Deploy to server via SCP + fix Caddy permissions
+        id: deploy
         run: |
+          # Setup SSH
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
           echo "StrictHostKeyChecking=no" >> ~/.ssh/config
           echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 
           REMOTE_PATH="${{ secrets.SSH_DOCS_PATH }}/${{ steps.folder.outputs.folder_name }}"
+          echo "🚀 Deploying ${GITHUB_WORKSPACE}/stormbpmn_mkdocs/site/ -> $REMOTE_PATH"
 
-          echo "Deploying to: $REMOTE_PATH"
-
-          # 1. Создаём папку
+          # 1️⃣ Создаём удалённую папку
           ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} \
-            "mkdir -p $REMOTE_PATH"
+            "mkdir -p '$REMOTE_PATH' && echo '✅ Remote dir created'"
 
-          # 2. Копируем содержимое site/
-          scp -i ~/.ssh/id_rsa -r ./stormbpmn_mkdocs/site/* \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/"
+          # 2️⃣ Копируем site/
+          scp -i ~/.ssh/id_rsa -r -C ./stormbpmn_mkdocs/site/* \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }}:"$REMOTE_PATH/" || {
+              echo "❌ SCP failed!"
+              exit 1
+            }
 
-          # 3. Меняем владельца и права
+          # 3️⃣ Проверяем, что файлы скопировались
           ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} "
-            chown -R caddy:caddy $REMOTE_PATH &&
-            chmod -R u+rwX,go+rX $REMOTE_PATH &&
-            find $REMOTE_PATH -type d -exec chmod 755 {} + &&
-            find $REMOTE_PATH -type f -exec chmod 644 {} +
+            if [ -f '$REMOTE_PATH/index.html' ]; then
+              FILE_COUNT=\$(find '$REMOTE_PATH' -type f | wc -l)
+              echo '✅ Deploy success: index.html exists, \$FILE_COUNT files'
+            else
+              echo '❌ Deploy failed: index.html missing!'
+              exit 1
+            fi
           "
 
-          echo "Ownership fixed to caddy:caddy, permissions set"
+          # 4️⃣ Фиксим права для Caddy
+          ssh -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER_IP }} "
+            chown -R caddy:caddy '$REMOTE_PATH' &&
+            chmod -R u+rwX,go+rX '$REMOTE_PATH' &&
+            find '$REMOTE_PATH' -type d -exec chmod 755 {} + &&
+            find '$REMOTE_PATH' -type f -exec chmod 644 {} +
+          "
 
-      - name: Success reaction + preview link
+          echo "✅ Deploy + permissions OK. Ready for preview!"
+
+      # ═══════════════════════════════════════════════════════════════════════
+      # 🎉 FINAL SUCCESS NOTIFICATION
+      # ═══════════════════════════════════════════════════════════════════════
+
+      - name: 🎉 Success notification + preview link
         if: success()
         uses: actions/github-script@v7
         with:
           script: |
+            // +1 реакция
             github.rest.reactions.createForIssueComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -167,10 +299,26 @@ jobs:
               content: '+1'
             });
 
-            const previewUrl = `${{ steps.folder.outputs.preview_url }}`;
+            // Детальный отчёт
+            const report = `
+✅ **StormBPMN Docs Preview готов!** (${new Date().toLocaleString('ru-RU')})
+
+**📊 Этапы сборки:**
+• ✅ PR+main merge: ${{ steps.pr-merge.outputs.merge_sha?.slice(0,7) || 'OK' }}
+• ✅ cmddac config: ${{ steps.cmddac.outputs.cmddac_success || 'OK' }}
+• ✅ Local serve test: PASSED
+• ✅ MkDocs build: ${{ steps.build.outputs.build_size || 'OK' }}
+• ✅ SCP deploy: index.html verified
+
+**🔗 Preview:** ${{ steps.folder.outputs.preview_url }}
+**📁 Folder:** ${{ steps.folder.outputs.folder_name }}
+
+*Срок жизни: 7 дней*
+            `;
+
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `✅ **Документация успешно собрана и загружена на сервер!**\n\n**Preview (PR + main merged):** ${previewUrl}\n(доступно по ссылке выше)`
-            })
+              body: report
+            });
