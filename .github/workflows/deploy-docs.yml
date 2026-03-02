@@ -35,10 +35,10 @@ jobs:
             })
 
       # ═══════════════════════════════════════════════════════════════════════
-      # 📥 CHECKOUT + MERGE PR С MAIN (симуляция пост-мерджа)
+      # 📥 CHECKOUT MAIN BRANCH (документация PR)
       # ═══════════════════════════════════════════════════════════════════════
 
-      - name: 🔹 Checkout main branch as base
+      - name: 🔹 Checkout main branch docs content
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
@@ -46,62 +46,49 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: ✅ Verify main checkout - check files exist
+      - name: ✅ Verify docs content checkout (MD files only)
+        working-directory: ./stormbpmn-docs
         run: |
-          cd stormbpmn-docs
-          if [ ! -f "mkdocs.yml" ]; then
-            echo "❌ ERROR: mkdocs.yml not found in main branch!"
+          MD_COUNT=$(find . -name '*.md' | wc -l)
+          if [ "$MD_COUNT" -eq 0 ]; then
+            echo "❌ ERROR: No .md documentation files found!"
             exit 1
           fi
-          echo "✅ Main branch checkout OK. Files found: $(ls -la | wc -l)"
+          echo "✅ Docs content OK: $MD_COUNT markdown files found"
 
-      - name: 🔹 Fetch PR merge ref и checkout merged state
+      - name: 🔹 Fetch PR merge ref и checkout merged docs
         id: pr-merge
         working-directory: ./stormbpmn-docs
         run: |
-          # Получаем merge commit GitHub (PR head + main)
           git fetch origin "refs/pull/${{ github.event.issue.number }}/merge"
-
-          # Проверяем и checkout'им merge commit
           if git checkout -qf FETCH_HEAD; then
-            echo "✅ Merged PR+main state ready. HEAD: $(git rev-parse HEAD)"
+            echo "✅ Merged PR+main docs ready"
             echo "merge_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-            git log -5 --oneline --graph
           else
-            echo "❌ Merge conflict detected — preview cannot be built automatically."
-            echo "Please resolve conflicts in the PR first."
-            exit 1
-          fi
-
-      - name: ✅ Verify PR merge checkout - docs files exist
-        working-directory: ./stormbpmn-docs
-        run: |
-          if [ ! -f "mkdocs.yml" ] || [ ! "$(find . -name '*.md' | head -10 | wc -l)" -eq 0 ]; then
-            echo "✅ PR merge checkout OK. mkdocs.yml + MD files found"
-            echo "Files count: $(find . -name '*.md' | wc -l)"
-          else
-            echo "❌ ERROR: No docs files found in PR merge!"
+            echo "❌ Merge conflict detected!"
             exit 1
           fi
 
       # ═══════════════════════════════════════════════════════════════════════
-      # 📦 SETUP DEPENDENCIES & REPOSITORIES
+      # 📦 CHECKOUT MKDOCS THEME + CONFIG (отдельный репозиторий)
       # ═══════════════════════════════════════════════════════════════════════
 
-      - name: 🔹 Checkout stormbpmn_mkdocs theme
+      - name: 🔹 Checkout stormbpmn_mkdocs THEME (содержит mkdocs.yml)
         uses: actions/checkout@v4
         with:
           repository: KotskinKotskin/stormbpmn_mkdocs
+          ref: main  # или нужная ветка
           path: stormbpmn_mkdocs
 
-      - name: ✅ Verify mkdocs theme checkout
+      - name: ✅ Verify MkDocs theme + config (mkdocs.yml здесь!)
+        working-directory: ./stormbpmn_mkdocs
         run: |
-          cd stormbpmn_mkdocs
-          if [ ! -f "mkdocs.yml" ] || [ ! -d "docs" ]; then
-            echo "❌ ERROR: MkDocs theme files missing!"
+          if [ ! -f "mkdocs.yml" ]; then
+            echo "❌ ERROR: mkdocs.yml not found in stormbpmn_mkdocs!"
             exit 1
           fi
-          echo "✅ MkDocs theme OK: $(ls -la mkdocs.yml docs/ | head -5)"
+          echo "✅ MkDocs theme OK: mkdocs.yml ($(wc -l < mkdocs.yml) lines)"
+          echo "Theme files: $(ls -la | head -5)"
 
       - name: 🔹 Checkout custom CSS styles
         uses: actions/checkout@v4
