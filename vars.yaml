@@ -27,6 +27,7 @@ process_editor:
       notice_inactive: '<span style = "color:#22c55e"><i class="pi pi-check-circle"></i></span>'
       search: '<i class="pi pi-search"></i>'
       extra: '<i class="pi pi-ellipsis-h"></i>'
+      archetecture: '<i class="pi pi-objects-column"></i> **Элементы архитектуры**'
   modals:
     delete_approval_request: 
       buttons:
@@ -65,6 +66,11 @@ left_main_menu:
     approve:
       section_name: '<i class="pi pi-check-circle"></i> **Согласования**'
       inbox: '<i class="pi pi-arrow-right"></i> **Входящие**'
+
+
+account_dropdown_menu:
+  icon: '<i class="pi pi-user"></i> **Профиль**'
+  upgrade_plan: '<i class="pi pi-star-fill"></i> **Улучшить подписку**'
 
 universal:
   plus: '<i class="pi pi-plus"></i>'
