@@ -2,11 +2,11 @@
 
 После активации аккаунта и входа в систему — вы окажетесь на главной странице {{ product_name }}, где при первом входе в систему не будет моделей процессов:
 
-    ![main_window](./img/main_window.png)
+![main_window](./img/main_window.png)
 
 Для быстрого ознакомления с возможностями {{ product_name }} по работе с моделями и быстрого старта — рекомендуем создать тестовую модель. Нажмите на кнопку {{ main_window.create_model_modal_window.create_new_model_button }} в диалоговом окне {{ main_window.create_model_modal_window.window_name }}:
 
-    ![main_window_create_new_model](./img/main_window_create_new_model.png)
+![main_window_create_new_model](./img/main_window_create_new_model.png)
 
 Откроется модальное окно **Создать модель**, в котором будет предложено создать модель одним из следующих способов:
 
