@@ -28,6 +28,8 @@ process_editor:
       search: '<i class="pi pi-search"></i>'
       extra: '<i class="pi pi-ellipsis-h"></i>'
       archetecture: '<i class="pi pi-objects-column"></i> **Элементы архитектуры**'
+      check_mistakes: '<i class="pi pi-check-circle"></i> **Проверка ошибок**'
+
   modals:
     delete_approval_request: 
       buttons:
@@ -59,7 +61,17 @@ section_team:
     business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
     all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
     folders: '<i class="pi pi-folder"></i> **Папки**'
+    roles: '<i class="pi pi-id-card"></i> **Роли**'
 
+roles:
+  buttons:
+    create_role: '<i class="pi pi-plus"></i> **Создать роль**'
+    edit_role: '<i class="pi pi-pen-to-square"></i> **Редактировать**'
+
+org_structure:
+  name: '<i class="pi-building"></i> **Оргструктура**'
+  scheme: '<i class="pi-sitemap"></i> **Схема**'
+  
 left_main_menu:
   personal:
     section_name: '<i class="pi pi-user"></i> **Личное**'
@@ -67,6 +79,17 @@ left_main_menu:
       section_name: '<i class="pi pi-check-circle"></i> **Согласования**'
       inbox: '<i class="pi pi-arrow-right"></i> **Входящие**'
 
+main_window:
+  create_model_modal_window:
+    window_name: '<i class="pi pi-file"></i> **Модель (диаграмма)**'
+    create_new_model_button: '**Новая модель**'
+
+create_model:
+  blank: '<i class="pi pi-plus"></i> **С чистого листа**'
+  template: '<i class="pi pi-copy"></i> **По шаблону**'
+  upload: '<i class="pi pi-download"></i> **Загрузить BPMN**'
+  ai: '<i class="pi pi-sparkles"></i> **С помощью AI**'
+  copy: '<i class="pi pi-clone"></i> **Скопировать модель**'
 
 account_dropdown_menu:
   icon: '<i class="pi pi-user"></i> **Профиль**'
@@ -78,3 +101,9 @@ universal:
   folder: '<i class="pi pi-folder"></i>'
   wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
   youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
+  right_arrow: ':fontawesome-arrow-right'
+
+bpmn:
+  call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
+  end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
+  task: '<span class="bpmn-icon-task-none"></span> **Задача**'
