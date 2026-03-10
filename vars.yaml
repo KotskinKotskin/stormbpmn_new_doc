@@ -30,7 +30,6 @@ process_editor:
       extra: '<i class="pi pi-ellipsis-h"></i>'
       archetecture: '<i class="pi pi-objects-column"></i> **Элементы архитектуры**'
       check_mistakes: '<i class="pi pi-check-circle"></i> **Проверка ошибок**'
-
   modals:
     delete_approval_request: 
       buttons:
