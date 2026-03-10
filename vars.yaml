@@ -16,6 +16,7 @@ process_editor:
     buttons:
       plus: '<i class="pi pi-plus"></i>'
       save: '**Сохранить как версию**'
+
   right_toolbar:
     buttons:
       send_on_approve_open_menu:  '<i class="pi pi-thumbs-up"></i> **Согласования**'
@@ -78,6 +79,18 @@ left_main_menu:
     approve:
       section_name: '<i class="pi pi-check-circle"></i> **Согласования**'
       inbox: '<i class="pi pi-arrow-right"></i> **Входящие**'
+
+main_window:
+  create_model_modal_window:
+    window_name: '<i class="pi pi-file"></i> **Модель (диаграмма)**'
+    create_new_model_button: '**Новая модель**'
+
+create_model:
+  blank: '<i class="pi pi-plus"></i> **С чистого листа**'
+  template: '<i class="pi pi-copy"></i> **По шаблону**'
+  upload: '<i class="pi pi-download"></i> **Загрузить BPMN**'
+  ai: '<i class="pi pi-sparkles"></i> **С помощью AI**'
+  copy: '<i class="pi pi-clone"></i> **Скопировать модель**'
 
 main_window:
   create_model_modal_window:
