@@ -63,14 +63,14 @@ section_team:
     folders: '<i class="pi pi-folder"></i> **Папки**'
     roles: '<i class="pi pi-id-card"></i> **Роли**'
 
-roles:
+role:
   buttons:
     create_role: '<i class="pi pi-plus"></i> **Создать роль**'
     edit_role: '<i class="pi pi-pen-to-square"></i> **Редактировать**'
 
 org_structure:
-  name: '<i class="pi-building"></i> **Оргструктура**'
-  scheme: '<i class="pi-sitemap"></i> **Схема**'
+  name: '<i class="pi pi-building"></i> **Оргструктура**'
+  scheme: '<i class="pi pi-sitemap"></i> **Схема**'
   
 left_main_menu:
   personal:
@@ -101,7 +101,7 @@ universal:
   folder: '<i class="pi pi-folder"></i>'
   wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
   youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
-  right_arrow: ':fontawesome-arrow-right'
+  right_arrow: ':fontawesome-solid-arrow-right:'
 
 bpmn:
   call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'

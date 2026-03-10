@@ -51,7 +51,7 @@
 
         После нажатия на кнопку {{ view_process.buttons.cover_from_version }} — процесс будет восстановлен, откроется редактор процессов, а восстановленная версия станет текущей (последней).
 
-2. Из раздела {{ section_team.buttons.team_swicher }}:
+2. Из раздела {{ section_team.buttons.team_switcher }}:
 
     * Разверните вкладку {{ section_team.layouts.business_models }} и перейдите в раздел {{ section_team.layouts.all_models }}.
     * Найдите в списке нужную вам модель процесса, прокрутите экран вправо и нажмите на кнопку {{ section_team.buttons.show_more}}.

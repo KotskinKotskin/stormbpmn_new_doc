@@ -4,8 +4,8 @@
   - FAQ по Stormbpmn: main/faq/index.md
   - Видеозаписи: 
     - main/extra_content/videos/index.md
-    - Работа с версионированием процессов в Stormbpmn: /main/extra_content/videos/versioning/index.md
-    - 'Мастер-класс: моделируем процессы Stormbpmn в Stormbpmn' : /main/extra_content/videos/process_modeling/index.md
+    - Работа с версионированием процессов в Stormbpmn: main/extra_content/videos/versioning/index.md
+    - 'Мастер-класс: моделируем процессы Stormbpmn в Stormbpmn' : main/extra_content/videos/process_modeling/index.md
   - О документации: main/about_doc/index.md
 Начинающим пользователям: beginners/index.md
 Аналитикам: 

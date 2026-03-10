@@ -2,7 +2,7 @@
 
 На мастер‑классе Денис Котов (CEO {{ product_name }}) рассказывает о практическом применении BPMN для описания реальных бизнес‑процессов. Он на живом примере показывает, как с нуля смоделировать процессы собственной компании: от создания верхнеуровневой карты (маркетинг, продажи, разработка, поддержка) до детального разбора процесса «от лида до договора». Основной упор сделан на описании процессов онбординга новых сотрудников отдела продаж.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5wmeM3gWwbs?si=JcUOwa8Es6j__XE4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5wmeM3gWwbs?si=G_dRlXGWBREZDy6J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **Вы узнаете** три главные причины, зачем бизнесу описывать процессы. Кроме того, вы увидите «внутреннюю кухню» работы аналитика: как правильно детализировать операции, привязывать к ним ИТ‑системы, роли, входные и выходные данные, а также прописывать альтернативные сценарии (например, если клиент не выходит на связь), чтобы схема стала реальной рабочей инструкцией.
 
