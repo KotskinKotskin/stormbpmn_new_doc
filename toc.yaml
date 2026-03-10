@@ -5,7 +5,9 @@
   - Видеозаписи: main/extra_content/videos/index.md
   - О документации: main/about_doc/index.md
 Начинающим пользователям: beginners/index.md
-Аналитикам: analytics/index.md
+Аналитикам: 
+  - analytics/index.md
+  - 'Stormbpmn и 1С: проектирования и согласования тех. заданий': analytics/1c/index.md
 Архитекторам:
   - architects/index.md
 Администраторам:
