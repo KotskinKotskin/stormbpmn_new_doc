@@ -6,6 +6,8 @@
     - main/extra_content/videos/index.md
     - Работа с версионированием процессов в Stormbpmn: main/extra_content/videos/versioning/index.md
     - 'Мастер-класс: моделируем процессы Stormbpmn в Stormbpmn' : main/extra_content/videos/process_modeling/index.md
+    - Как согласовывать процессы в Stormbpmn и нотации BPMN: main/extra_content/videos/approve_process/index.md
+    - BPMN не для оптимизации процессов: main/extra_content/videos/optimise/index.md
   - О документации: main/about_doc/index.md
 Начинающим пользователям: beginners/index.md
 Аналитикам: 
