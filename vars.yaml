@@ -107,3 +107,8 @@ bpmn:
   call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
   end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
   task: '<span class="bpmn-icon-task-none"></span> **Задача**'
+
+git:
+  pencil: ':fontawesome-pencil-solid:'
+  fork: ':fontawesome-code-fork-solid: **Fork**'
+  pr: ':fontawesome-code-pull-request-solid: **Pull requests**'
