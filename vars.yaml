@@ -109,6 +109,6 @@ bpmn:
   task: '<span class="bpmn-icon-task-none"></span> **Задача**'
 
 git:
-  pencil: ':fontawesome-pencil-solid:'
-  fork: ':fontawesome-code-fork-solid: **Fork**'
-  pr: ':fontawesome-code-pull-request-solid: **Pull requests**'
+  pencil: ':fontawesome-solid-pencil:'
+  fork: ':fontawesome-solid-code-fork: **Fork**'
+  pr: ':fontawesome-solid-code-pull-request: **Pull requests**'
