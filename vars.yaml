@@ -103,6 +103,7 @@ universal:
   youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
   right_arrow: ':fontawesome-solid-arrow-right:'
 
+
 bpmn:
   call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
   end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
