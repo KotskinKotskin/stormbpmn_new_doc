@@ -10,8 +10,13 @@ process_editor:
       choose_color: '<i class="pi pi-palette"></i> **Изменить цвет выделенного**'
       share: '<i class="pi pi-share-alt"></i> **Поделиться**'
       embded_iframe: '<i class="pi pi-copy"></i> **Встроить iframe**' 
+      overlays: '<i class="pi pi-bars"></i> **Оверлеи**' 
+      errors: '<i class="pi pi-exclamation-triangle"></i> **Ошибки**'
     sections:
       messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
+      overlays:
+        overlays_show: <i class="pi pi-check-square"></i> **Изменить видимость всех оверлеев**
+        overlays_hide: <i class="pi pi-check-square"></i> **Изменить состояние свернутости всех оверлеев**
   save_process_modal:
     buttons:
       plus: '<i class="pi pi-plus"></i>'
