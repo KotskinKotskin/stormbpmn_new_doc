@@ -18,7 +18,7 @@
 
 ![overlays_list](./img/overlays_list.png)
 
-Если вы хотите отключить видимость всех оверлеев, деактивируйте чек-бокс {{ process_editor.upper_toolbar.sections.overlays.overlays_show }}. Отдельно можно свернуть или развернуть оверлеи <span class = "pi pi-database"></span> **Системы** и <span class = "pi pi-file"></span> **Документы** с помощью чекбокса {{ process_editor.upper_toolbar.sections.overlays_hide }}.
+Если вы хотите отключить видимость всех оверлеев, деактивируйте чек-бокс {{ process_editor.upper_toolbar.sections.overlays.overlays_show }}. Отдельно можно свернуть или развернуть оверлеи <span class = "pi pi-database"></span> **Системы** и <span class = "pi pi-file"></span> **Документы** с помощью чекбокса {{ process_editor.upper_toolbar.sections.overlays.overlays_hide }}.
 
 Также на диаграмме можно отображать ошибки работы с элементами диаграммы. Для этого нужно переключить тумблер справа от кнопки {{ process_editor.upper_toolbar.buttons.overlays }} с **Оверлеи** на **Ошибки**:
 

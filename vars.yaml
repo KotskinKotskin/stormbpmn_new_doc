@@ -15,8 +15,8 @@ process_editor:
     sections:
       messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
       overlays:
-        overlays_show: <i class="pi pi-check-square"></i> **Изменить видимость всех оверлеев**
-        overlays_hide: <i class="pi pi-check-square"></i> **Изменить состояние свернутости всех оверлеев**
+        overlays_show: '<i class="pi pi-check-square"></i> **Изменить видимость всех оверлеев**'
+        overlays_hide: '<i class="pi pi-check-square"></i> **Изменить состояние свернутости всех оверлеев**'
   save_process_modal:
     buttons:
       plus: '<i class="pi pi-plus"></i>'
