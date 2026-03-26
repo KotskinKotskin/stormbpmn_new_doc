@@ -47,7 +47,7 @@
 
 **Создания ЭА в разделе {{ architecture.elements }}**:
 
-1. Перейдите в раздел {{ section_team.buttons.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} и кликнете на кнопку {{ universal.plus }} **Создать**:
+1. Перейдите в раздел {{ section_team.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} и кликнете на кнопку {{ universal.plus }} **Создать**:
 
 ![create_element_from_elements_section](./img/create_element_from_elements_section.png)
 
