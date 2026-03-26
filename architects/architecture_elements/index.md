@@ -63,7 +63,7 @@
 
 ## Просмотр списка ЭА
 
-Раздел {{ section_team.buttons.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} содержит удобную таблицу со всеми ЭА с удобной и понятной навигацией по типам ЭА:
+Раздел {{ section_team.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} содержит удобную таблицу со всеми ЭА с удобной и понятной навигацией по типам ЭА:
 
 ![arcitechture_element_table_list](./img/arcitechture_element_table_list.png)
 
