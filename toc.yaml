@@ -16,6 +16,7 @@
   - analytics/index.md
 Архитекторам:
   - architects/index.md
+  - Работа с элементами архитектуры: architects/architecture_elements/index.md
 Администраторам:
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md

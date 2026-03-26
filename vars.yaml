@@ -67,6 +67,10 @@ section_team:
     all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
     folders: '<i class="pi pi-folder"></i> **Папки**'
     roles: '<i class="pi pi-id-card"></i> **Роли**'
+    architecture: '<i class="pi pi-objects-column"></i> **Архитектура**'
+
+architecture:
+  elements: '<i class="pi pi-table"></i> **Элементы**'
 
 role:
   buttons:
