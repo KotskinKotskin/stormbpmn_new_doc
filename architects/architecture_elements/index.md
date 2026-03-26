@@ -22,7 +22,7 @@
 
 ## Создание ЭА
 
-Создать ЭА можно в редакторе диаграмм или в разделе {{ section_team.buttons.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }}. 
+Создать ЭА можно в редакторе диаграмм или в разделе {{ section_team.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }}. 
 
 **Создания ЭА в редакторе диаграмм**:
 
