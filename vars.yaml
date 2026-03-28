@@ -72,6 +72,28 @@ section_team:
 architecture:
   elements: '<i class="pi pi-table"></i> **Элементы**'
 
+
+team:
+  icon: '<i class="pi pi-users"></i> **Команда**'
+  bp_reg: 
+    icon: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
+    bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
+
+bp_tree:
+  tree: '<i class="pi pi-sitemap"></i> **Дерево**'
+  catalog: '<i class="pi pi-folder"></i> **Каталог**'
+  create_bp: '<i class="pi pi-folder"></i> **Создать**'
+  metrics: '<i class="pi pi-chart-line"></i> **Показатели**'
+  options: '<i class="pi pi-hashtag"></i> **Параметры**'
+  documents: '<i class="pi pi-file"></i> **Документы**'
+  bpmn_models: '<i class="pi pi-sun"></i> **Модели BPMN**'
+  reglament: '<i class="pi pi-book"></i> **Регламент**'
+  log: '<i class="pi pi-history"></i> **Изменения**'
+  create_sub_process: '<i class="pi pi-database"></i> **Создать дочерний процесс**'
+  link_process: '<i class="pi pi-link"></i> **Добавить переиспользуемый процесс**'
+  edit: '<i class="pi pi-pencil"></i> **Редактировать**'
+  add_process_to_folder: '<i class="pi pi-database"></i> **Добавить процессы в папку**'
+
 role:
   buttons:
     create_role: '<i class="pi pi-plus"></i> **Создать роль**'
@@ -111,6 +133,7 @@ universal:
   wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
   youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
   right_arrow: ':fontawesome-solid-arrow-right:'
+  show_more: '<i class="pi pi-ellipsis-v"></i>'
 
 
 bpmn:
