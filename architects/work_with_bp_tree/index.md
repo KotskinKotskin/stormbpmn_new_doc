@@ -113,7 +113,7 @@
 
     ![process_card_body](./img/process_card_body.png)
 
-- Нижнее меню карточки бизнес-процесса, в котором доступны вкладки {{ bp_tree.metrics }}, {{ bp_tree.options }}, {{ bp_tree.documents }}, {{ bp_tree.bpmn-models }}, {{ bp_tree.reglament }}, {{ bp_tree.log }}.
+- Нижнее меню карточки бизнес-процесса, в котором доступны вкладки {{ bp_tree.metrics }}, {{ bp_tree.options }}, {{ bp_tree.documents }}, {{ bp_tree.bpmn_models }}, {{ bp_tree.reglament }}, {{ bp_tree.log }}.
 
     ![process_card_footer](./img/process_card_footer.png)
 

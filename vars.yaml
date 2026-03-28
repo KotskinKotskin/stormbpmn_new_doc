@@ -86,7 +86,7 @@ bp_tree:
   metrics: '<i class="pi pi-chart-line"></i> **Показатели**'
   options: '<i class="pi pi-hashtag"></i> **Параметры**'
   documents: '<i class="pi pi-file"></i> **Документы**'
-  bpmn-models: '<i class="pi pi-sun"></i> **Модели BPMN**'
+  bpmn_models: '<i class="pi pi-sun"></i> **Модели BPMN**'
   reglament: '<i class="pi pi-book"></i> **Регламент**'
   log: '<i class="pi pi-history"></i> **Изменения**'
   create_sub_process: '<i class="pi pi-database"></i> **Создать дочерний процесс**'
