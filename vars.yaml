@@ -78,6 +78,9 @@ team:
   bp_reg: 
     icon: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
     bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
+    dict: '<i class="pi pi-book"></i> **Справочник**'
+    create_dict: '<i class="pi pi-plus"></i> **Создать справочник**'
+    
 
 bp_tree:
   tree: '<i class="pi pi-sitemap"></i> **Дерево**'
@@ -93,6 +96,8 @@ bp_tree:
   link_process: '<i class="pi pi-link"></i> **Добавить переиспользуемый процесс**'
   edit: '<i class="pi pi-pencil"></i> **Редактировать**'
   add_process_to_folder: '<i class="pi pi-database"></i> **Добавить процессы в папку**'
+  upload_xlsx: '<i class="pi pi-upload relative"></i> **Импорт реестра**'
+  download_xlsx: '<i class="pi pi-download relative"></i> **Экспорт реестра**'
 
 role:
   buttons:
@@ -134,6 +139,7 @@ universal:
   youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
   right_arrow: ':fontawesome-solid-arrow-right:'
   show_more: '<i class="pi pi-ellipsis-v"></i>'
+  delete: '<i class="pi pi-trash"></i>'
 
 
 bpmn:
