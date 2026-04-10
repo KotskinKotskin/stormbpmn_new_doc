@@ -1,0 +1,18 @@
+config:
+  doc_input: /root/stormbpmn_doc_project/stormbpmn-docs
+
+adapers:
+  mkdocs:
+    doc_output: /root/mkdocs_out
+    mkdocs_path: /root/stormbpmn_doc_project/mkdocs
+    config:
+      output_config_name: stormbpmn
+      options:
+        docs_dir: /root/mkdocs_out
+      sections:
+        nav: /root/stormbpmn_doc_project/stormbpmn-docs/nav.yaml
+        extra: /root/stormbpmn_doc_project/stormbpmn-docs/vars.yaml
+    media:
+      media_storage_output: /var/www/html/media/
+      media_base_url: /media
+      image_extantion: webp

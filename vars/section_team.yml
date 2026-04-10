@@ -1,0 +1,12 @@
+section_team:
+  buttons:
+    team_switcher: '<i class="pi pi-users"></i> **Команда**'
+    show_more: '<i class="pi pi-ellipsis-v"></i>'
+    all_versions: '<i class="pi pi-sitemap"></i> **Все версии**'
+    move_diagram: '<i class="pi pi-arrows-alt"></i> **Переместить**'
+  layouts:
+    business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
+    all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
+    folders: '<i class="pi pi-folder"></i> **Папки**'
+    roles: '<i class="pi pi-id-card"></i> **Роли**'
+    architecture: '<i class="pi pi-objects-column"></i> **Архитектура**'

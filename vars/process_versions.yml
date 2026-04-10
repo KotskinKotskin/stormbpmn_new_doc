@@ -1,0 +1,6 @@
+process_versions:
+  checkboxes:
+    show_autosave: '**Показать автосохранение**'
+  buttons:
+    view_version: '<i class="pi pi-eye"></i> **Посмотреть версию**'
+    view_version_diff: '<i class="pi pi-arrow-right-arrow-left"></i> **Сравнить версии**'
