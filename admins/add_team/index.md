@@ -1,0 +1,11 @@
+---
+title: My Custom Title
+role: Администратор
+plan:
+- Business
+permissions:
+- ADMIN
+tags:
+- С чего начать
+---
+

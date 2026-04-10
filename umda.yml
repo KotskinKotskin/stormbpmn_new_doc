@@ -1,17 +1,17 @@
 config:
-  doc_input: /root/stormbpmn_doc_project/stormbpmn-docs
+  doc_input: /root/stormbpmn_project/stormbpmn_new_doc
 
 adapers:
   mkdocs:
-    doc_output: /root/mkdocs_out
-    mkdocs_path: /root/stormbpmn_doc_project/mkdocs
+    doc_output: /root/output/mkdocs
+    mkdocs_path: /root/stormbpmn_project/stormbpmn_mkdocs
     config:
       output_config_name: stormbpmn
       options:
-        docs_dir: /root/mkdocs_out
+        docs_dir: /root/output/mkdocs
       sections:
-        nav: /root/stormbpmn_doc_project/stormbpmn-docs/nav.yaml
-        extra: /root/stormbpmn_doc_project/stormbpmn-docs/vars.yaml
+        nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
+        extra: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
       media_storage_output: /var/www/html/media/
       media_base_url: /media
