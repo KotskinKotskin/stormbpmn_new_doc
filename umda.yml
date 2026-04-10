@@ -16,3 +16,15 @@ adapers:
       media_storage_output: /var/www/html/media/
       media_base_url: /media
       image_extantion: webp
+  vuepress_hope:
+    doc_output: /root/stormbpmn_doc_project/vuepress/vuepress-starter/hope
+    vuepress_path: /root/stormbpmn_doc_project/vuepress/vuepress-starter/hope/.vuepress
+    config:
+      output_config_name: stormbpmn
+      sections:
+        nav: /root/stormbpmn_doc_project/stormbpmn-docs/nav.yaml
+        extra: /root/stormbpmn_doc_project/stormbpmn-docs/vars.yaml
+    media:
+      media_storage_output: /var/www/html/media/
+      media_base_url: /media
+      image_extantion: webp

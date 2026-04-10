@@ -1,4 +1,7 @@
-# {{ page.meta.title }}
+---
+title: FAQ по Stormbpmn 
+---
+# FAQ по Stormbpmn
 
 Этот раздел содержит ответы на частые вопросы, которые возникают у пользователей {{ product_name }}.
 
