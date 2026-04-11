@@ -1,8 +1,14 @@
-# {{ page.meta.title }}
+---
+title: Работа со слоями видимости в редакторе диаграмм (Overlay)
+description: 'Руководство по работе с оверлеями в редакторе диаграмм Stormbpmn: как
+  включать и отключать слои видимости, отображать ошибки и задавать настройки по умолчанию.'
+version: 2
+---
 
+# Работа со слоями видимости в редакторе диаграмм (Overlay)
 **Overlay** (оверлей) — это дополнительный слой информации, который накладывается на диаграмму. На диаграмме оверлеи выполнены в приглушенных цветах с эффектом прозрачности — это сделано для того, чтобы не мешать основным элементам диаграммы:
 
-![overlay_example](./img/overlay_example.png)
+![Default;Crops=["Canvas"]]({{ media.screenshots.diagram }})
 
 Однако, когда диаграмма сложная, большое количество дополнительной информации может перегружать визуальное восприятие и мешать фокусироваться на главном — поэтому видимостью оверлеев можно управлять. Кликните по кнопке {{ process_editor.upper_toolbar.buttons.overlays }} и из появившегося меню выберите оверлеи, отображение которых хотите включить или выключить:
 
@@ -16,13 +22,13 @@
 - <span class = "pi pi-arrow-right"></span> **Связи (входящие)** — на диаграмме отображаются входящие связи выбранного элемента.
 - <span class = "pi pi-arrow-left"></span> **Связи (исходящие)** — на диаграмме отображаются исходящие связи выбранного элемента.
 
-![overlays_list](./img/overlays_list.png)
+![Overlays;Frames=["Overlays_options","Overlay_button"]]({{ media.screenshots.diagram }})
 
 Если вы хотите отключить видимость всех оверлеев, деактивируйте чек-бокс {{ process_editor.upper_toolbar.sections.overlays.overlays_show }}. Отдельно можно свернуть или развернуть оверлеи <span class = "pi pi-database"></span> **Системы** и <span class = "pi pi-file"></span> **Документы** с помощью чекбокса {{ process_editor.upper_toolbar.sections.overlays.overlays_hide }}.
 
 Также на диаграмме можно отображать ошибки работы с элементами диаграммы. Для этого нужно переключить тумблер справа от кнопки {{ process_editor.upper_toolbar.buttons.overlays }} с **Оверлеи** на **Ошибки**:
 
-![errors](./img/errors.png)
+![Errors;Frames=["Error_switcher","Error_layer"]]({{ media.screenshots.diagram }}) 
 
 ## Определение видимости оверлеев по умолчанию
 
@@ -31,7 +37,7 @@
 1. В главном меню {{ product_name }} кликните по профилю в правом верхнем углу.
 1. Из выпадающего списка выберите первый пункт с вашим email:
 
-    ![setup_def_options](./img/setup_def_options.png)
+    ![Account;Focuses=["Account"];Frames=["Account_btn","Account_email"]]({{ media.screenshots.diagram }})
 
 1. Перейдите в раздел **Настройки** и выберите оверлеи, которые будут отображаться по умолчанию во всех диаграммах:
 

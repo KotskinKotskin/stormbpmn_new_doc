@@ -1,51 +1,11 @@
-process_editor:
-  canvas:
-    elements: 
-      add_notice: '<i class="pi pi-plus"></i> **Написать комментарий**'
-  
-  upper_toolbar:
-    buttons:
-      save_as_version: '<i class="pi pi-save"></i> **Сохранить как версию**'
-      show_all_versions: '<i class="pi pi-database"></i> **Посмотреть все версии**'
-      choose_color: '<i class="pi pi-palette"></i> **Изменить цвет выделенного**'
-      share: '<i class="pi pi-share-alt"></i> **Поделиться**'
-      embded_iframe: '<i class="pi pi-copy"></i> **Встроить iframe**' 
-      overlays: '<i class="pi pi-bars"></i> **Оверлеи**' 
-      errors: '<i class="pi pi-exclamation-triangle"></i> **Ошибки**'
-    sections:
-      messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
-      overlays:
-        overlays_show: '<i class="pi pi-check-square"></i> **Изменить видимость всех оверлеев**'
-        overlays_hide: '<i class="pi pi-check-square"></i> **Изменить состояние свернутости всех оверлеев**'
-  save_process_modal:
-    buttons:
-      plus: '<i class="pi pi-plus"></i>'
-      save: '**Сохранить как версию**'
+product_name: Stormbpmn
+repo_url: https://github.com/KotskinKotskin/stormbpmn_new_doc
 
-  right_toolbar:
-    buttons:
-      send_on_approve_open_menu:  '<i class="pi pi-thumbs-up"></i> **Согласования**'
-      send_on_approve: '**Отправить согласование**'
-      add_more_approvals: '<i class="pi pi-plus"></i>'
-      delete_approval_send: '<i class="pi pi-trash"></i>'
-      notices: '<i class="pi pi-comments"></i> **Комментарии**'
-      notice_active: '<i class="pi pi-check-circle"></i>'
-      notice_inactive: '<span style = "color:#22c55e"><i class="pi pi-check-circle"></i></span>'
-      search: '<i class="pi pi-search"></i>'
-      extra: '<i class="pi pi-ellipsis-h"></i>'
-      archetecture: '<i class="pi pi-objects-column"></i> **Элементы архитектуры**'
-      check_mistakes: '<i class="pi pi-check-circle"></i> **Проверка ошибок**'
-  modals:
-    delete_approval_request: 
-      buttons:
-        delete: '**Удалить**'
-
-process_versions:
-  checkboxes:
-    show_autosave: '**Показать автосохранение**'
-  buttons:
-    view_version: '<i class="pi pi-eye"></i> **Посмотреть версию**'
-    view_version_diff: '<i class="pi pi-arrow-right-arrow-left"></i> **Сравнить версии**'
+include: ./vars/media.yml
+include: ./vars/process_editor.yml
+include: ./vars/process_versions.yml
+include: ./vars/section_team.yml
+include: ./vars/bp_tree.yml
 
 approval_editor:
   buttons:
@@ -55,19 +15,6 @@ approval_editor:
 view_process:
   buttons:
     cover_from_version: '<i class="pi pi-arrow-left"></i> **Восстановить версию**'
-
-section_team:
-  buttons:
-    team_switcher: '<i class="pi pi-users"></i> **Команда**'
-    show_more: '<i class="pi pi-ellipsis-v"></i>'
-    all_versions: '<i class="pi pi-sitemap"></i> **Все версии**'
-    move_diagram: '<i class="pi pi-arrows-alt"></i> **Переместить**'
-  layouts:
-    business_models: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
-    all_models: '<i class="pi pi-sitemap"></i> **Все модели**'
-    folders: '<i class="pi pi-folder"></i> **Папки**'
-    roles: '<i class="pi pi-id-card"></i> **Роли**'
-    architecture: '<i class="pi pi-objects-column"></i> **Архитектура**'
 
 architecture:
   elements: '<i class="pi pi-table"></i> **Элементы**'
@@ -80,24 +27,7 @@ team:
     bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
     dict: '<i class="pi pi-book"></i> **Справочник**'
     create_dict: '<i class="pi pi-plus"></i> **Создать справочник**'
-    
 
-bp_tree:
-  tree: '<i class="pi pi-sitemap"></i> **Дерево**'
-  catalog: '<i class="pi pi-folder"></i> **Каталог**'
-  create_bp: '<i class="pi pi-folder"></i> **Создать**'
-  metrics: '<i class="pi pi-chart-line"></i> **Показатели**'
-  options: '<i class="pi pi-hashtag"></i> **Параметры**'
-  documents: '<i class="pi pi-file"></i> **Документы**'
-  bpmn_models: '<i class="pi pi-sun"></i> **Модели BPMN**'
-  reglament: '<i class="pi pi-book"></i> **Регламент**'
-  log: '<i class="pi pi-history"></i> **Изменения**'
-  create_sub_process: '<i class="pi pi-database"></i> **Создать дочерний процесс**'
-  link_process: '<i class="pi pi-link"></i> **Добавить переиспользуемый процесс**'
-  edit: '<i class="pi pi-pencil"></i> **Редактировать**'
-  add_process_to_folder: '<i class="pi pi-database"></i> **Добавить процессы в папку**'
-  upload_xlsx: '<i class="pi pi-upload relative"></i> **Импорт реестра**'
-  download_xlsx: '<i class="pi pi-download relative"></i> **Экспорт реестра**'
 
 role:
   buttons:
@@ -133,11 +63,11 @@ account_dropdown_menu:
 
 universal:
   plus: '<i class="pi pi-plus"></i>'
-  toggle: ':fontawesome-solid-toggle-on:{ .blue-toggle }'
+  toggle: '<i class="fa-solid fa-toggle-on"></i>'
   folder: '<i class="pi pi-folder"></i>'
-  wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
-  youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
-  right_arrow: ':fontawesome-solid-arrow-right:'
+  wrench: '<i class="fa-solid fa-wrench"></i>'
+  youtube: '<i class="fa-brands fa-youtube"></i>'
+  right_arrow: '<i class="fa-solid fa-arrow-right"></i>'
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
 
@@ -148,6 +78,6 @@ bpmn:
   task: '<span class="bpmn-icon-task-none"></span> **Задача**'
 
 git:
-  pencil: ':fontawesome-solid-pencil:'
-  fork: ':fontawesome-solid-code-fork: **Fork**'
-  pr: ':fontawesome-solid-code-pull-request: **Pull requests**'
+  pencil: '<i class="fa-solid fa-pencil"></i>'
+  fork: '<i class="fa-solid fa-code-fork"></i> **Fork**'
+  pr: '<i class="fa-solid fa-code-pull-request"></i> **Pull requests**'
