@@ -63,11 +63,11 @@ account_dropdown_menu:
 
 universal:
   plus: '<i class="pi pi-plus"></i>'
-  toggle: ':fontawesome-solid-toggle-on:{ .blue-toggle }'
+  toggle: '<i class="fa-solid fa-toggle-on"></i>'
   folder: '<i class="pi pi-folder"></i>'
-  wrench: ':fontawesome-solid-wrench:{ .blue-toggle }'
-  youtube: ':fontawesome-brands-youtube:{ .blue-toggle }'
-  right_arrow: ':fontawesome-solid-arrow-right:'
+  wrench: '<i class="fa-solid fa-wrench"></i>'
+  youtube: '<i class="fa-brands fa-youtube"></i>'
+  right_arrow: '<i class="fa-solid fa-arrow-right"></i>'
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
 
@@ -78,6 +78,6 @@ bpmn:
   task: '<span class="bpmn-icon-task-none"></span> **Задача**'
 
 git:
-  pencil: ':fontawesome-solid-pencil:'
-  fork: ':fontawesome-solid-code-fork: **Fork**'
-  pr: ':fontawesome-solid-code-pull-request: **Pull requests**'
+  pencil: '<i class="fa-solid fa-pencil"></i>'
+  fork: '<i class="fa-solid fa-code-fork"></i> **Fork**'
+  pr: '<i class="fa-solid fa-code-pull-request"></i> **Pull requests**'

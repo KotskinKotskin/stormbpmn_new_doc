@@ -4,6 +4,7 @@ config:
 adapers:
   mkdocs:
     doc_output: /root/output/mkdocs
+    site_dir: /var/www/html/mkdocs
     mkdocs_path: /root/stormbpmn_project/stormbpmn_mkdocs
     config:
       output_config_name: stormbpmn
@@ -14,17 +15,16 @@ adapers:
         extra: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
       media_storage_output: /var/www/html/media/
-      media_base_url: /media
+      media_base_url: http://78.140.223.140/media
       image_extantion: webp
   vuepress_hope:
-    doc_output: /root/stormbpmn_doc_project/vuepress/vuepress-starter/hope
-    vuepress_path: /root/stormbpmn_doc_project/vuepress/vuepress-starter/hope/.vuepress
-    config:
-      output_config_name: stormbpmn
-      sections:
-        nav: /root/stormbpmn_doc_project/stormbpmn-docs/nav.yaml
-        extra: /root/stormbpmn_doc_project/stormbpmn-docs/vars.yaml
+    doc_output: /root/output/vuepress_hope
+    site_dir: /var/www/html/vuepress
+    base: /vuepress/
+    vuepress_path: /root/stormbpmn_project/stormbpmn_vuepress_hope/src/.vuepress
+    nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
+    vars: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
       media_storage_output: /var/www/html/media/
-      media_base_url: /media
+      media_base_url: http://78.140.223.140/media
       image_extantion: webp

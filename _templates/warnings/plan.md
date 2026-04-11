@@ -2,6 +2,7 @@
 
     Данная статья описывает работу с функциями сервиса, доступными на тарифных планах:
     
-    [{{ page.meta.plan }}](https://stormbpmn.com/pricing)
+    - [Team](https://stormbpmn.com/pricing).
+    - [Business](https://stormbpmn.com/pricing).
 
     Если нужные вам функции сервиса не входят в ваш текущий тарифный план — обратитесь к вашему администратору {{ product_name }}.
