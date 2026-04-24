@@ -1,5 +1,10 @@
 config:
   doc_input: /root/stormbpmn_project/stormbpmn_new_doc
+  S3:
+    endpoint_url: https://storage.yandexcloud.net
+    region_name: ru-central1
+    aws_access_key_id: ${AWS_ACCESS_KEY_ID}
+    aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
 
 adapers:
   mkdocs:
@@ -14,9 +19,10 @@ adapers:
         nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
         extra: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
-      media_storage_output: /var/www/html/media/
-      media_base_url: http://78.140.223.140/media
+      media_storage_output: stormbpmn-img-prod
+      media_base_url: stormbpmn-img-prod
       image_extantion: webp
+
   vuepress_hope:
     doc_output: /root/output/vuepress_hope
     site_dir: /var/www/html/vuepress
@@ -25,6 +31,6 @@ adapers:
     nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
     vars: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
-      media_storage_output: /var/www/html/media/
-      media_base_url: http://78.140.223.140/media
+      media_storage_output: stormbpmn-img-prod
+      media_base_url: stormbpmn-img-prod
       image_extantion: webp
