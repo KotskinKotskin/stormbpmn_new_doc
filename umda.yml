@@ -1,10 +1,11 @@
 config:
-  doc_input: /root/stormbpmn_project/stormbpmn_new_doc
+  doc_input: ${GITHUB_WORKSPACE}
   S3:
-    endpoint_url: https://storage.yandexcloud.net
+    endpoint_url: ${S3_ENDPOINT}
     region_name: ru-central1
     aws_access_key_id: ${AWS_ACCESS_KEY_ID}
     aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    doc_prod_output: stormbpmn-doc-prod
 
 adapers:
   mkdocs:
@@ -19,8 +20,8 @@ adapers:
         nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
         extra: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
-      media_storage_output: stormbpmn-img-prod
-      media_base_url: stormbpmn-img-prod
+      media_storage_output: ${S3_BUCKET_PROD_IMG}
+      media_base_url: ${S3_BUCKET_PROD_IMG}
       image_extantion: webp
 
   vuepress_hope:
@@ -31,6 +32,6 @@ adapers:
     nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
     vars: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml
     media:
-      media_storage_output: stormbpmn-img-prod
-      media_base_url: stormbpmn-img-prod
+      media_storage_output: ${S3_BUCKET_PROD_IMG}
+      media_base_url: ${S3_BUCKET_PROD_IMG}
       image_extantion: webp
