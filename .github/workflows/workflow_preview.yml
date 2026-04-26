@@ -244,7 +244,7 @@ jobs:
           vuepress = ws / "stormbpmn_project" / "stormbpmn_vuepress_hope"
 
           src = docs / "umda.yml"
-          dst = ws / "stormbpmn_project" / "ci.umda.yml"
+          dst = docs / "umda.yml"
 
           with src.open("r", encoding="utf-8") as f:
               cfg = yaml.safe_load(f)
@@ -275,7 +275,7 @@ jobs:
         working-directory: stormbpmn_project/umda
         shell: bash
         env:
-          UMDA_YML: ${{ github.workspace }}/stormbpmn_project/ci.umda.yml
+          UMDA_YML: ${{ github.workspace }}/stormbpmn_project/stormbpmn_new_doc/umda.yml
         run: |
           set -euo pipefail
           source .umda/bin/activate
