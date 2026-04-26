@@ -206,10 +206,11 @@ jobs:
           fi
 
       - name: Prepare CI umda.yml
+        working-directory: stormbpmn_project/umda
         shell: bash
         run: |
           set -euo pipefail
-          python - <<'PY'
+          .umda/bin/python - <<'PY'
           import os
           import re
           from pathlib import Path
