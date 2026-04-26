@@ -1,6 +1,8 @@
 name: VuePress Preview (PR)
 
 'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -19,6 +21,7 @@ jobs:
   preview:
     if: >-
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'pull_request' ||
       (github.event.issue.pull_request && startsWith(github.event.comment.body, '/vuepress build dev'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
@@ -57,6 +60,8 @@ jobs:
           set -euo pipefail
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             PR_NUMBER="${{ inputs.pr_number }}"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            PR_NUMBER="${{ github.event.pull_request.number }}"
           else
             PR_NUMBER="${{ github.event.issue.number }}"
           fi
@@ -243,7 +248,7 @@ jobs:
           with src.open("r", encoding="utf-8") as f:
               cfg = yaml.safe_load(f)
 
-            cfg = expand_obj(cfg)
+          cfg = expand_obj(cfg)
 
           cfg["config"]["doc_input"] = str(docs)
 
@@ -337,7 +342,7 @@ jobs:
              rm -f '${REMOTE_ZIP}'"
 
       - name: Comment PR with preview URL
-        if: github.event_name == 'issue_comment'
+        if: github.event_name == 'issue_comment' || github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
