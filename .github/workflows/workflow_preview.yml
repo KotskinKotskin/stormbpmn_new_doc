@@ -276,6 +276,26 @@ jobs:
           docs = ws / "stormbpmn_project" / "stormbpmn_new_doc"
           vuepress = ws / "stormbpmn_project" / "stormbpmn_vuepress_hope"
 
+          # In CI there is no /root/stormbpmn_project/src_storage.
+          # Rewrite local PSD routes to public source URLs so UMDA can render.
+          media_vars_path = docs / "vars" / "media.yml"
+          if media_vars_path.exists():
+            with media_vars_path.open("r", encoding="utf-8") as f:
+              media_cfg = yaml.safe_load(f) or {}
+
+            screenshots = media_cfg.get("media", {}).get("screenshots", {})
+            changed = False
+            if isinstance(screenshots, dict):
+              for key, value in list(screenshots.items()):
+                if isinstance(value, str) and value.startswith("/root/stormbpmn_project/src_storage/"):
+                  screenshots[key] = "https://storage.yandexcloud.net/stormbpmn-psd-src/" + Path(value).name
+                  changed = True
+
+            if changed:
+              with media_vars_path.open("w", encoding="utf-8") as f:
+                yaml.safe_dump(media_cfg, f, allow_unicode=False, sort_keys=False)
+              print(f"Normalized media vars for CI: {media_vars_path}")
+
           src = docs / "umda.yml"
           dst = docs / "umda.yml"
 
