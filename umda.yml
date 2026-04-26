@@ -27,7 +27,7 @@ adapers:
   vuepress_hope:
     doc_output: /root/output/vuepress_hope
     site_dir: /var/www/html/vuepress
-    base: /vuepress/
+    base: /
     vuepress_path: /root/stormbpmn_project/stormbpmn_vuepress_hope/src/.vuepress
     nav: /root/stormbpmn_project/stormbpmn_new_doc/nav.yaml
     vars: /root/stormbpmn_project/stormbpmn_new_doc/vars.yaml

@@ -238,9 +238,28 @@ jobs:
             exit 1
           fi
 
+      - name: Build preview metadata
+        id: preview_meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          NOW="$(date +'%Y%m%d-%H%M%S')"
+          SHA_SHORT="${GITHUB_SHA::7}"
+          PREVIEW_ID="vp-${NOW}-pr${{ steps.pr.outputs.number }}-${SHA_SHORT}"
+          SSH_USER_SAFE="${SSH_USER:-root}"
+          REMOTE_DIR="${REMOTE_BASE_PATH%/}/${PREVIEW_ID}"
+          URL="https://${SERVER_IP}/${PREVIEW_ID}/"
+
+          echo "preview_id=${PREVIEW_ID}" >> "$GITHUB_OUTPUT"
+          echo "remote_dir=${REMOTE_DIR}" >> "$GITHUB_OUTPUT"
+          echo "preview_url=${URL}" >> "$GITHUB_OUTPUT"
+          echo "ssh_user=${SSH_USER_SAFE}" >> "$GITHUB_OUTPUT"
+
       - name: Prepare CI umda.yml
         working-directory: stormbpmn_project/umda
         shell: bash
+        env:
+          PREVIEW_ID: ${{ steps.preview_meta.outputs.preview_id }}
         run: |
           set -euo pipefail
           .umda/bin/python - <<'PY'
@@ -309,6 +328,7 @@ jobs:
           vp = cfg["adapers"]["vuepress_hope"]
           vp["doc_output"] = str(ws / "output" / "vuepress_hope")
           vp["site_dir"] = str(ws / "site" / "vuepress")
+          vp["base"] = f"/{os.environ['PREVIEW_ID']}/"
           vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
           vp["nav"] = str(docs / "nav.yaml")
           vp["vars"] = str(docs / "vars.yaml")
@@ -339,29 +359,12 @@ jobs:
             exit 1
           fi
 
-      - name: Build preview metadata
-        id: meta
-        shell: bash
-        run: |
-          set -euo pipefail
-          NOW="$(date +'%Y%m%d-%H%M%S')"
-          SHA_SHORT="${GITHUB_SHA::7}"
-          PREVIEW_ID="vp-${NOW}-pr${{ steps.pr.outputs.number }}-${SHA_SHORT}"
-          SSH_USER_SAFE="${SSH_USER:-root}"
-          REMOTE_DIR="${REMOTE_BASE_PATH%/}/${PREVIEW_ID}"
-          URL="https://${SERVER_IP}/stormbpmn/${PREVIEW_ID}/"
-
-          echo "preview_id=${PREVIEW_ID}" >> "$GITHUB_OUTPUT"
-          echo "remote_dir=${REMOTE_DIR}" >> "$GITHUB_OUTPUT"
-          echo "preview_url=${URL}" >> "$GITHUB_OUTPUT"
-          echo "ssh_user=${SSH_USER_SAFE}" >> "$GITHUB_OUTPUT"
-
       - name: Pack site bundle (zip)
         shell: bash
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE/site/vuepress"
-          zip -r "$GITHUB_WORKSPACE/${{ steps.meta.outputs.preview_id }}.zip" .
+          zip -r "$GITHUB_WORKSPACE/${{ steps.preview_meta.outputs.preview_id }}.zip" .
 
       - name: Deploy preview via SCP
         shell: bash
@@ -376,19 +379,19 @@ jobs:
             UserKnownHostsFile /dev/null
           CFG
 
-          REMOTE_ZIP="/tmp/${{ steps.meta.outputs.preview_id }}.zip"
-          LOCAL_ZIP="$GITHUB_WORKSPACE/${{ steps.meta.outputs.preview_id }}.zip"
+          REMOTE_ZIP="/tmp/${{ steps.preview_meta.outputs.preview_id }}.zip"
+          LOCAL_ZIP="$GITHUB_WORKSPACE/${{ steps.preview_meta.outputs.preview_id }}.zip"
 
-          ssh -i ~/.ssh/id_ed25519 "${{ steps.meta.outputs.ssh_user }}@${SERVER_IP}" \
-            "mkdir -p '${{ steps.meta.outputs.remote_dir }}'"
+          ssh -i ~/.ssh/id_ed25519 "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}" \
+            "mkdir -p '${{ steps.preview_meta.outputs.remote_dir }}'"
 
           scp -i ~/.ssh/id_ed25519 "$LOCAL_ZIP" \
-            "${{ steps.meta.outputs.ssh_user }}@${SERVER_IP}:${REMOTE_ZIP}"
+            "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}:${REMOTE_ZIP}"
 
-          ssh -i ~/.ssh/id_ed25519 "${{ steps.meta.outputs.ssh_user }}@${SERVER_IP}" \
+          ssh -i ~/.ssh/id_ed25519 "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}" \
             "set -e; \
              if command -v unzip >/dev/null 2>&1; then \
-               unzip -oq '${REMOTE_ZIP}' -d '${{ steps.meta.outputs.remote_dir }}'; \
+               unzip -oq '${REMOTE_ZIP}' -d '${{ steps.preview_meta.outputs.remote_dir }}'; \
              else \
                echo 'ERROR: unzip is not installed on remote host'; \
                exit 1; \
@@ -403,7 +406,7 @@ jobs:
             const body = [
               '✅ Preview успешно собран и опубликован.',
               '',
-              `Preview URL: ${{ steps.meta.outputs.preview_url }}`
+              `Preview URL: ${{ steps.preview_meta.outputs.preview_url }}`
             ].join('\n');
 
             await github.rest.issues.createComment({
