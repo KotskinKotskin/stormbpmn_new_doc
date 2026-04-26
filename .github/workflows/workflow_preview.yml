@@ -175,6 +175,29 @@ jobs:
           repository: Pseudolukian/umda
           path: stormbpmn_project/umda
 
+      - name: Patch UMDA PSD markdown regex
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("md_handler/md_handler.py")
+          src = p.read_text(encoding="utf-8")
+
+          old = "_PSD_LINK_RE = re.compile(r'(!\\[(.+?)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
+          new = "_PSD_LINK_RE = re.compile(r'(!\\[([^\\]]*(?:\\[[^\\]]*\\][^\\]]*)*)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
+
+          if new in src:
+              print("UMDA regex already patched")
+          elif old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("UMDA regex patched")
+          else:
+              raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
+          PY
+
       - name: Install UMDA dependencies
         working-directory: stormbpmn_project/umda
         shell: bash
