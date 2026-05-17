@@ -426,7 +426,7 @@ title: FAQ по Stormbpmn
 
     ![bp_reg_map_forward_to_bp_tree](./img/map/bp_reg_map_forward_to_bp_tree.png)
 
-➡️ (./bp_table/index.md)
+➡️ (main/faq/bp_table/index.md)
 
 <h2 id="plan">Тарифы</h2>
 
