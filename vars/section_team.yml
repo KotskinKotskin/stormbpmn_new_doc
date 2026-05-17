@@ -17,3 +17,4 @@ bp_reg:
   bp_reg: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
   tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
   map: '<i class="pi pi-compass"></i> **Карта**'
+  table: '<i class="pi pi-list"></i> **Таблица**'

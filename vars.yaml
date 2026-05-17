@@ -7,6 +7,7 @@ include: ./vars/process_versions.yml
 include: ./vars/section_team.yml
 include: ./vars/bp_tree.yml
 include: ./vars/map.yml
+include: ./vars/table.yml
 
 approval_editor:
   buttons:
@@ -71,6 +72,7 @@ universal:
   right_arrow: '<i class="fa-solid fa-arrow-right"></i>'
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
+  dropdown: '<i class="pi pi-angle-down"></i>'
 
 
 bpmn:
