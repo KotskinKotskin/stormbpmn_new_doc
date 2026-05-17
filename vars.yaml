@@ -6,6 +6,7 @@ include: ./vars/process_editor.yml
 include: ./vars/process_versions.yml
 include: ./vars/section_team.yml
 include: ./vars/bp_tree.yml
+include: ./vars/map.yml
 
 approval_editor:
   buttons:

@@ -1,0 +1,3 @@
+map:
+  buttons:
+    focus: '<i class="pi pi-expand"></i> **Сфокусироваться на процессе**'
