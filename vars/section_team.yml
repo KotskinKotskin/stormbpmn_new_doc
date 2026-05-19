@@ -18,3 +18,4 @@ bp_reg:
   tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
   map: '<i class="pi pi-compass"></i> **Карта**'
   table: '<i class="pi pi-list"></i> **Таблица**'
+  custom-fields: '<i class="pi pi-sliders-h"></i> **Пользовательские поля**'
