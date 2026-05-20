@@ -1,3 +1,4 @@
+# Это не очень удачная структура вложенности переменных -- она не отражает UI
 section_team:
   buttons:
     team_switcher: '<i class="pi pi-users"></i> **Команда**'
@@ -10,3 +11,12 @@ section_team:
     folders: '<i class="pi pi-folder"></i> **Папки**'
     roles: '<i class="pi pi-id-card"></i> **Роли**'
     architecture: '<i class="pi pi-objects-column"></i> **Архитектура**'
+
+# Это удачная структура вложенности переменных -- она отражает UI
+bp_reg:
+  bp_reg: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
+  tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
+  map: '<i class="pi pi-compass"></i> **Карта**'
+  table: '<i class="pi pi-list"></i> **Таблица**'
+  status: '<i class="pi pi-sitemap"></i> **Статусы**'
+  custom_fields: '<i class="pi pi-sliders-h"></i> **Пользовательские поля**'

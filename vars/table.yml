@@ -1,0 +1,6 @@
+table:
+  hide_column: '<i class="pi pi-eye-slash"></i> **Скрыть колонку**'
+  filter: '<i class="pi pi-filter"></i> **Фильтр**'
+  rename: '<i class="pi pi-file-edit"></i> **Переименовать**'
+  copy: '<i class="pi pi-file-edit"></i> **Дублировать**'
+  download: '<i class="pi pi-file-export"></i> **Скачать список процессов**'
