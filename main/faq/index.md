@@ -14,6 +14,7 @@ title: FAQ по Stormbpmn
     - [Карта](#bp_map).
     - [Таблица бизнес-процессов](#bp_table).
     - [Пользовательские поля](#custom-fields).
+    - [Статусы бизнес-процессов](#status).
 - [Тарифы](#plan).
 
 <h2 id="diagram">Редактор диаграмм</h2>
@@ -430,6 +431,8 @@ title: FAQ по Stormbpmn
 ➡️ (main/faq/bp_table/index.md)
 
 ➡️ (main/faq/custom-fields/index.md)
+
+➡️ (main/faq/status/index.md)
 
 <h2 id="plan">Тарифы</h2>
 
