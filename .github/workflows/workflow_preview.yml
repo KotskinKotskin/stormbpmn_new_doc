@@ -214,25 +214,27 @@ jobs:
               print("UMDA S3 media upload patch already applied")
               raise SystemExit(0)
 
-          old = """    try:
-        md_handle.run()
-    finally:
-        psd_handler.terminate()
-        if temp_media_root and temp_media_root.exists():
-            shutil.rmtree(temp_media_root, ignore_errors=True)
-"""
+          old = (
+              "    try:\n"
+              "        md_handle.run()\n"
+              "    finally:\n"
+              "        psd_handler.terminate()\n"
+              "        if temp_media_root and temp_media_root.exists():\n"
+              "            shutil.rmtree(temp_media_root, ignore_errors=True)\n"
+          )
 
-          new = """    try:
-        md_handle.run()
-    finally:
-        psd_handler.terminate()
-
-    if use_s3 and temp_media_root and temp_media_root.exists():
-        _upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, "media_storage_output")
-
-    if temp_media_root and temp_media_root.exists():
-        shutil.rmtree(temp_media_root, ignore_errors=True)
-"""
+          new = (
+              "    try:\n"
+              "        md_handle.run()\n"
+              "    finally:\n"
+              "        psd_handler.terminate()\n"
+              "\n"
+              "    if use_s3 and temp_media_root and temp_media_root.exists():\n"
+              "        _upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, \"media_storage_output\")\n"
+              "\n"
+              "    if temp_media_root and temp_media_root.exists():\n"
+              "        shutil.rmtree(temp_media_root, ignore_errors=True)\n"
+          )
 
           if old in src:
               p.write_text(src.replace(old, new, 1), encoding="utf-8")
