@@ -19,4 +19,4 @@ bp_reg:
   map: '<i class="pi pi-compass"></i> **Карта**'
   table: '<i class="pi pi-list"></i> **Таблица**'
   status: '<i class="pi pi-sitemap"></i> **Статусы**'
-  custom-fields: '<i class="pi pi-sliders-h"></i> **Пользовательские поля**'
+  custom_fields: '<i class="pi pi-sliders-h"></i> **Пользовательские поля**'
