@@ -198,6 +198,49 @@ jobs:
               raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
           PY
 
+      - name: Patch UMDA S3 media upload
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("main.py")
+          src = p.read_text(encoding="utf-8")
+
+          marker = '_upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, "media_storage_output")'
+          if marker in src:
+              print("UMDA S3 media upload patch already applied")
+              raise SystemExit(0)
+
+          old = """    try:
+        md_handle.run()
+    finally:
+        psd_handler.terminate()
+        if temp_media_root and temp_media_root.exists():
+            shutil.rmtree(temp_media_root, ignore_errors=True)
+"""
+
+          new = """    try:
+        md_handle.run()
+    finally:
+        psd_handler.terminate()
+
+    if use_s3 and temp_media_root and temp_media_root.exists():
+        _upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, "media_storage_output")
+
+    if temp_media_root and temp_media_root.exists():
+        shutil.rmtree(temp_media_root, ignore_errors=True)
+"""
+
+          if old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("UMDA S3 media upload patched")
+          else:
+              raise SystemExit("Expected media cleanup block not found in main.py")
+          PY
+
       - name: Install UMDA dependencies
         working-directory: stormbpmn_project/umda
         shell: bash
