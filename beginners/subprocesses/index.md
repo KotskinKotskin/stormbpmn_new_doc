@@ -34,11 +34,7 @@ tags:
 ![create_subprocess_collapse_step_04](./img/create_subprocess_collapse/create_subprocess_collapse_step_04.png)
 
 Также **Свернутый подпроцесс** можно создать из элемента {{ bpmn.task }} — следуйте инструкции выше.  
-Для перехода внутрь свёрнутого подпроцесса кликните по <span style="display:inline-block;vertical-align:middle">
-<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:-3px">
-  <path fill-rule="evenodd" d="M4.81801948,3.50735931 L10.4996894,9.1896894 L10.5,4 L12,4 L12,12 L4,12 L4,10.5 L9.6896894,10.4996894 L3.75735931,4.56801948 C3.46446609,4.27512627 3.46446609,3.80025253 3.75735931,3.50735931 C4.05025253,3.21446609 4.52512627,3.21446609 4.81801948,3.50735931 Z"/>
-</svg>
-</span> — откроется диаграмма свёрнутого подпроцесса:
+Для перехода внутрь свёрнутого подпроцесса кликните по иконке "стрелка" открытия окна — откроется диаграмма свёрнутого подпроцесса:
 ![subprocess_collapsed_open](./img/subprocess_collapsed_open.png)
 
 ## Дополнительные материалы
