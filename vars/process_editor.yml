@@ -12,6 +12,7 @@ process_editor:
       embded_iframe: '<i class="pi pi-copy"></i> **Встроить iframe**' 
       overlays: '<i class="pi pi-bars"></i> **Оверлеи**' 
       errors: '<i class="pi pi-exclamation-triangle"></i> **Ошибки**'
+      tokken: '<i class="pi pi-play-circle"></i> **Включить симуляцию токена**'
     sections:
       messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
       overlays:

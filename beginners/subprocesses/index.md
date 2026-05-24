@@ -1,6 +1,6 @@
 ---
 title: Свернутый подпроцесс
-description:
+description: Как создать свёрнутый подпроцесс в BPMN, перейти внутрь и запустить симуляцию токена.
 tags:
     - Гайды создания элементов диаграммы BPMN
 ---
@@ -37,8 +37,31 @@ tags:
 Для перехода внутрь свёрнутого подпроцесса кликните по иконке "стрелка" открытия окна — откроется диаграмма свёрнутого подпроцесса:
 ![subprocess_collapsed_open](./img/subprocess_collapsed_open.png)
 
+## Симуляция токена в свёрнутом подпроцессе
+
+1. Перейдите в свёрнутый подпроцесс, нажав на стрелку открытия окна свёрнутого подпроцесса. В окне просмотра и редактирования нажмите на кнопку {{ process_editor.upper_toolbar.tokken }}:
+
+    ![tokeken_simulate_step_01](./img/tokken_simulate/tokeken_simulate_step_01.png)
+
+    Активируется процесс симуляции токена -- появится тёмно-синяя окантовка окна редактора и появится панель управления скоростью симуляции токена:
+
+    ![tokeken_simulate_step_02](./img/tokken_simulate/tokeken_simulate_step_02.png)
+
+1. Перейдите в основной процесс с помощью панели быстрой навигации:
+
+    ![tokeken_simulate_step_03](./img/tokken_simulate/tokeken_simulate_step_03.png)
+
+1. Запустите процесс симуляции токена нажатием на кнопку <i class="fa-sharp fa-solid fa-square-caret-right" style="color: #3d3d41;"></i>.
+
+1. Вернитесь в свёрнутый подпроцесс и наблюдайте работу симуляции токена.
+
 ## Дополнительные материалы
 
 В видео подробно показали, как создавать и настраивать свёрнутый подпроцесс (Collapsed Subprocess): добавление элемента на диаграмму, изменение типа (из Task в Subprocess), работу с маркером «+», внутреннюю модель процесса, переключение между свёрнутым и развёрнутым видом.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xWAEAfLwFJ8?si=-kDP4ABkL_e_TgKZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+Продемонстрировали, как работать с симуляцией работы токена в свёрнутом подпроцессе:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2zgkY7_v174?si=oPwW3W6NN9ScV0hY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
