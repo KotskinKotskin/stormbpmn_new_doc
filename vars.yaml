@@ -8,6 +8,7 @@ include: ./vars/section_team.yml
 include: ./vars/bp_tree.yml
 include: ./vars/map.yml
 include: ./vars/table.yml
+include: ./vars/bpmn.yml
 
 approval_editor:
   buttons:
@@ -73,12 +74,6 @@ universal:
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
   dropdown: '<i class="pi pi-angle-down"></i>'
-
-
-bpmn:
-  call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
-  end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
-  task: '<span class="bpmn-icon-task-none"></span> **Задача**'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'

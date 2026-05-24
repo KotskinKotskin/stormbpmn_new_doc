@@ -1,0 +1,8 @@
+# Этот YML содержит переменные с BPMN иконками, которые подключаются через CDN CSS отсюда: https://github.com/bpmn-io/bpmn-font/blob/main/dist/css/bpmn.css
+# Паттерн подключения такой: bpmn-icon-название-элемента-BPMN
+
+bpmn:
+  call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
+  end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
+  task: '<span class="bpmn-icon-task-none"></span> **Задача**'
+  subprocess_collapsed: '<span class="bpmn-icon-subprocess-collapsed"></span> **Свёрнутый подпроцесс**'

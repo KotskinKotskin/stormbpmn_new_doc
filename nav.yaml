@@ -11,8 +11,10 @@
   - О документации: 
     - main/about_doc/index.md
     - Коммит в документацию: main/about_doc/commitment/index.md
-Начинающим пользователям: beginners/index.md
-Аналитикам: 
+Начинающим пользователям: 
+  - beginners/index.md
+  - Свёрнутый подпроцесс: beginners/subprocesses/index.md
+Аналитикам:
   - analytics/index.md
   - Работа с таблицей бизнес-процессов: analytics/bp_table/index.md
 Архитекторам:
