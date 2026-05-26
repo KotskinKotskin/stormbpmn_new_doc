@@ -1,0 +1,12 @@
+team:
+  icon: '<i class="pi pi-users"></i> **Команда**'
+  bp_reg: 
+    icon: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
+    bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
+    dict: '<i class="pi pi-book"></i> **Справочник**'
+    create_dict: '<i class="pi pi-plus"></i> **Создать справочник**'
+  team_settings:
+    icon: '<i class="pi pi-user-edit"></i> **Настройки команды**'
+    general_settings: '<i class="pi pi-cog"></i> **Общие настройки**'
+    small_mistake: '<i class="pi pi-info-circle" style = "color: rgb(96, 165, 250)"></i>'
+    attention: '<i class="pi pi-exclamation-triangle" style = "color: rgb(239, 68, 68)"></i>'

@@ -9,6 +9,8 @@ include: ./vars/bp_tree.yml
 include: ./vars/map.yml
 include: ./vars/table.yml
 include: ./vars/bpmn.yml
+include: ./vars/team.yml
+include: ./vars/general_settings.yml
 
 approval_editor:
   buttons:
@@ -23,13 +25,7 @@ architecture:
   elements: '<i class="pi pi-table"></i> **Элементы**'
 
 
-team:
-  icon: '<i class="pi pi-users"></i> **Команда**'
-  bp_reg: 
-    icon: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
-    bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
-    dict: '<i class="pi pi-book"></i> **Справочник**'
-    create_dict: '<i class="pi pi-plus"></i> **Создать справочник**'
+
 
 
 role:
@@ -74,6 +70,8 @@ universal:
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
   dropdown: '<i class="pi pi-angle-down"></i>'
+  edit: '<i class="pi pi-pencil"></i>'
+  marker: '<i class="pi pi-map-marker"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'

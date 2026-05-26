@@ -1,0 +1,3 @@
+general_settings:
+  check_list: '<i class="pi pi-list-check"></i> **Правила проверки диаграмм**'
+  quality: '<i class="pi pi-check-circle" style = "color: rgb(99, 102, 241)"></i> **Качество процессов**'
