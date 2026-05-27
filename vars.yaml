@@ -11,6 +11,7 @@ include: ./vars/table.yml
 include: ./vars/bpmn.yml
 include: ./vars/team.yml
 include: ./vars/general_settings.yml
+include: ./vars/folders.yml
 
 approval_editor:
   buttons:
@@ -71,7 +72,9 @@ universal:
   delete: '<i class="pi pi-trash"></i>'
   dropdown: '<i class="pi pi-angle-down"></i>'
   edit: '<i class="pi pi-pencil"></i>'
+  edit_2: '<i class="pi pi-pen-to-square"></i>'
   marker: '<i class="pi pi-map-marker"></i>'
+  folder: '<i class="pi pi-folder"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'

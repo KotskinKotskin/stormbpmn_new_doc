@@ -20,3 +20,9 @@ bp_reg:
   table: '<i class="pi pi-list"></i> **Таблица**'
   status: '<i class="pi pi-sitemap"></i> **Статусы**'
   custom_fields: '<i class="pi pi-sliders-h"></i> **Пользовательские поля**'
+
+bs_models:
+  bs_m: '<i class="pi pi-briefcase"></i> **Модели бизнес-процессов**'
+  create: '<i class="pi pi-plus"></i> **Создать**'
+  models_list: '<i class="pi pi-list"></i> **Все модели**'
+  folders: '<i class="pi pi-folder"></i> **Папки**'
