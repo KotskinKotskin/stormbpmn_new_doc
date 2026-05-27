@@ -14,6 +14,7 @@
 Начинающим пользователям: 
   - beginners/index.md
   - Свёрнутый подпроцесс: beginners/subprocesses/index.md
+  - Загрузка/импорт BPMN-моделей: beginners/upload_bpmn/index.md
 Аналитикам:
   - analytics/index.md
   - Работа с таблицей бизнес-процессов: analytics/bp_table/index.md
@@ -28,7 +29,7 @@
   - Структурированное хранение бизнес-процессов: admins/folders/index.md
 Согласующим:
   - approvals/index.md
-  - Согласование процесса: approvals/approve/index.md
+  - Согласование процесса: approvals/approve/index.md 
 Всем:
   - all/index.md
   - Отправка процесса на согласование: all/approval_request/index.md
