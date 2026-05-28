@@ -14,6 +14,9 @@ process_editor:
       errors: '<i class="pi pi-exclamation-triangle"></i> **Ошибки**'
       tokken: '<i class="pi pi-play-circle"></i> **Включить симуляцию токена**'
       doc: '<i class="pi pi-question-circle"></i> **Показать справку**'
+      extra: '<i class="pi pi-ellipsis-h"></i> **Ещё**'
+      make_private: '<i class="pi pi-eye-slash"></i> **Сделать приватной**'
+      make_public: '<i class="pi pi-eye"></i> **Сделать публичной**'
     sections:
       messages: '<i class="pi p-overlay-badge"></i> **Уведомления**'
       overlays:
