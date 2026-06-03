@@ -11,8 +11,11 @@
   - О документации: 
     - main/about_doc/index.md
     - Коммит в документацию: main/about_doc/commitment/index.md
-Начинающим пользователям: beginners/index.md
-Аналитикам: 
+Начинающим пользователям: 
+  - beginners/index.md
+  - Свёрнутый подпроцесс: beginners/subprocesses/index.md
+  - Загрузка/импорт BPMN-моделей: beginners/upload_bpmn/index.md
+Аналитикам:
   - analytics/index.md
   - Работа с таблицей бизнес-процессов: analytics/bp_table/index.md
 Архитекторам:
@@ -23,10 +26,14 @@
 Администраторам:
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md
+  - Структурированное хранение бизнес-процессов: admins/folders/index.md
 Согласующим:
   - approvals/index.md
-  - Согласование процесса: approvals/approve/index.md
+  - Согласование процесса: approvals/approve/index.md 
 Всем:
   - all/index.md
   - Отправка процесса на согласование: all/approval_request/index.md
   - Работа с оверлеями: all/overlays/index.md
+  - Работа с рейтингом качества процесса: all/overview/index.md
+  - Горячие клавиши: all/hotkeys/index.md
+  - Управление видимостью диаграммы: all/status/index.md 

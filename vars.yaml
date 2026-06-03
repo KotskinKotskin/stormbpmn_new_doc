@@ -8,6 +8,10 @@ include: ./vars/section_team.yml
 include: ./vars/bp_tree.yml
 include: ./vars/map.yml
 include: ./vars/table.yml
+include: ./vars/bpmn.yml
+include: ./vars/team.yml
+include: ./vars/general_settings.yml
+include: ./vars/folders.yml
 
 approval_editor:
   buttons:
@@ -22,13 +26,7 @@ architecture:
   elements: '<i class="pi pi-table"></i> **Элементы**'
 
 
-team:
-  icon: '<i class="pi pi-users"></i> **Команда**'
-  bp_reg: 
-    icon: '<i class="pi pi-sitemap"></i> **Реестр бизнес-процессов**'
-    bp_tree: '<i class="pi pi-sitemap"></i> **Дерево / Каталог**'
-    dict: '<i class="pi pi-book"></i> **Справочник**'
-    create_dict: '<i class="pi pi-plus"></i> **Создать справочник**'
+
 
 
 role:
@@ -73,12 +71,10 @@ universal:
   show_more: '<i class="pi pi-ellipsis-v"></i>'
   delete: '<i class="pi pi-trash"></i>'
   dropdown: '<i class="pi pi-angle-down"></i>'
-
-
-bpmn:
-  call_activity: '<span class="bpmn-icon-call-activity"></span> **Call Activity**'
-  end_event: '<span class="bpmn-icon-end-event-none"></span> **Конечное событие**'
-  task: '<span class="bpmn-icon-task-none"></span> **Задача**'
+  edit: '<i class="pi pi-pencil"></i>'
+  edit_2: '<i class="pi pi-pen-to-square"></i>'
+  marker: '<i class="pi pi-map-marker"></i>'
+  folder: '<i class="pi pi-folder"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'
