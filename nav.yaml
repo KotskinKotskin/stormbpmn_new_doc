@@ -27,6 +27,7 @@
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md
   - Структурированное хранение бизнес-процессов: admins/folders/index.md
+  - Управление правами групп и участников: admins/team_permissions/index.md
 Согласующим:
   - approvals/index.md
   - Согласование процесса: approvals/approve/index.md 

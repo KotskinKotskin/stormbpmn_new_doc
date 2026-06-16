@@ -10,3 +10,8 @@ team:
     general_settings: '<i class="pi pi-cog"></i> **Общие настройки**'
     small_mistake: '<i class="pi pi-info-circle" style = "color: rgb(96, 165, 250)"></i>'
     attention: '<i class="pi pi-exclamation-triangle" style = "color: rgb(239, 68, 68)"></i>'
+    groups: '<i class="pi pi-shield"></i> **Группы и привилегии**'
+  
+  groups:
+    permitted: '<span style="background: #ef4444; border-radius: 6px; color: white;"> Запрещено </span>'
+    allow: '<span style="background: #22c55e; border-radius: 6px; color: white;"> Разрешено </span>'
