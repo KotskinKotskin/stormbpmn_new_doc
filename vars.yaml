@@ -12,6 +12,7 @@ include: ./vars/bpmn.yml
 include: ./vars/team.yml
 include: ./vars/general_settings.yml
 include: ./vars/folders.yml
+include: ./vars/setup_app.yml
 
 approval_editor:
   buttons:
@@ -75,6 +76,8 @@ universal:
   edit_2: '<i class="pi pi-pen-to-square"></i>'
   marker: '<i class="pi pi-map-marker"></i>'
   folder: '<i class="pi pi-folder"></i>'
+  extra: '<i class="pi pi-ellipsis-h"></i>'
+  download: '<i class="pi pi-download"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'

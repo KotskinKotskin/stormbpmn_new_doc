@@ -31,7 +31,8 @@
   - Управление правами групп и участников: admins/team_permissions/index.md
 Согласующим:
   - approvals/index.md
-  - Согласование процесса: approvals/approve/index.md 
+  - Согласование процесса: approvals/approve/index.md
+  - Согласование регламентов: approvals/reglaments/index.md
 Всем:
   - all/index.md
   - Отправка процесса на согласование: all/approval_request/index.md

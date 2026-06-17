@@ -1,0 +1,3 @@
+setup_app:
+  icon: '<i class="pi pi-wrench"></i> **Настройки приложения**'
+  reglaments_templates: '<i class="pi pi-copy"></i> **Шаблоны документов**'
