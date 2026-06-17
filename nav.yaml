@@ -18,6 +18,7 @@
 Аналитикам:
   - analytics/index.md
   - Работа с таблицей бизнес-процессов: analytics/bp_table/index.md
+  - Симуляция токена в модели процесса на задачах с прикрепленными событиями: analytics/token_sim_attach_action/index.md
 Архитекторам:
   - architects/index.md
   - Работа с элементами архитектуры: architects/architecture_elements/index.md

@@ -44,3 +44,7 @@ process_editor:
     delete_approval_request: 
       buttons:
         delete: '**Удалить**'
+  
+  token:
+    pause: <i class="fa-solid fa-pause"></i>
+    play: <i class="fa-solid fa-play"></i>
