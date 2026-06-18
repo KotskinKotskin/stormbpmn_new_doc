@@ -29,137 +29,133 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 Когда структура регламента будет продумана, можно переходить к технической части работы — разметки шаблона с помощью **SpEL**. Удобнее делать разметку в MarkDown, после — конвертировать в DOCX. Кратко опишем свойства разметки **SpEL** и приведём используемые теги. Теги в **SpEL** обозначаются с помощью парных фигурных скобочек и названия тега между ними: `{{  название тега  }}`. Существуют также теги экстракторы, которые предоставляют доступ к информации основного тега, если тег содержит массив данных, например: 
 
-::: v-pre
-
 ```
-{{ participantsTable }} - таблица участников
-    [typeStr]  - тип участника
+<code v-pre>{{ participantsTable }}</code> - таблица участников
+    <code v-pre>[typeStr]</code>  - тип участника
 ```
 
 Также есть и специальные теги, которые содержат объекты. Например:
 
 ```
-{{ @processDiagram }} - картинка схемы (требует ручного изменения под масштаб страницы после выгрузки)
+<code v-pre>{{ @processDiagram }}</code> - картинка схемы (требует ручного изменения под масштаб страницы после выгрузки)
 ```
 
 Полный список тегов для регламента процесса с разделением по типам выглядит так:
 
 1. Теги общей информации:
     ```
-    {{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word
-    {{ name }} - Имя процесса
-    {{ versionNumber }} - номер последней версии
-    {{ versionDate }} - дата последней версии
-    {{ authorName }} - ФИО автора (из профиля автора)
-    {{ authorEmail }} - email автора
-    {{ onlineVersionUrl }} - ссылка на версию процесса в онлайне
-    {{ processDescription }} - описание процесса
+    <code v-pre>{{ TOC }}</code> - содержимое, будет работать только при открытии файла на Windows в Word
+    <code v-pre>{{ name }}</code> - Имя процесса
+    <code v-pre>{{ versionNumber }}</code> - номер последней версии
+    <code v-pre>{{ versionDate }}</code> - дата последней версии
+    <code v-pre>{{ authorName }}</code> - ФИО автора (из профиля автора)
+    <code v-pre>{{ authorEmail }}</code> - email автора
+    <code v-pre>{{ onlineVersionUrl }}</code> - ссылка на версию процесса в онлайне
+    <code v-pre>{{ processDescription }}</code> - описание процесса
     ```
 
 1. Табличные теги:
 
     - Таблица участников:
         ```
-        {{ participantsTable }}
-            [typeStr]  - тип участника
-            [person.email] - почта
-            [person.firstName] - имя
-            [person.lastName] - фамилия
-            [person.patronymic] - отчество
-            [person.phone] - телефон
+        <code v-pre>{{ participantsTable }}</code>
+            <code v-pre>[typeStr]</code>  - тип участника
+            <code v-pre>[person.email]</code> - почта
+            <code v-pre>[person.firstName]</code> - имя
+            <code v-pre>[person.lastName]</code> - фамилия
+            <code v-pre>[person.patronymic]</code> - отчество
+            <code v-pre>[person.phone]</code> - телефон
         ```
     
     - Таблица исполнителей процессов:
         ```
-        {{ assigneesListTable }}
-            [name] - название исполнителя
-            [type] - тип исполнителя 
-            [count] - количество задач
+        <code v-pre>{{ assigneesListTable }}</code>
+            <code v-pre>[name]</code> - название исполнителя
+            <code v-pre>[type]</code> - тип исполнителя 
+            <code v-pre>[count]</code> - количество задач
         ```
     
     - Таблица связей процесса:
         ```
-        {{ processCollaboration }}
-            [type] - тип  связи (мессадж, коллактивити)
-            [fromDiagramName] - название диаграммы, откуда идет связь
-            [fromItemName] - название элемента диаграммы, откуда идет связь
-            [toDiagramName] - название диаграммы, куда идет связь
-            [toItemName] - название элемента диаграммы, куда идет связь
+        <code v-pre>{{ processCollaboration }}</code>
+            <code v-pre>[type]</code> - тип  связи (мессадж, коллактивити)
+            <code v-pre>[fromDiagramName]</code> - название диаграммы, откуда идет связь
+            <code v-pre>[fromItemName]</code> - название элемента диаграммы, откуда идет связь
+            <code v-pre>[toDiagramName]</code> - название диаграммы, куда идет связь
+            <code v-pre>[toItemName]</code> - название элемента диаграммы, куда идет связь
         ```
     
     - Таблица элементов архитектуры процесса (без повторений):
         ```
-        {{ processAssets }}
-            [assetType] -тип элемента архитектуры
-            [assetTypeStr] - тип элемента архитектуры на русском
-            [assetName] - название элемента архитектуры
-            [+assetDescription] - описание элемента архитектуры
-            [assetLink] -внешняя ссылка
-            [assetLinkReg] - красивая кликабельная ссылка, где под именем ссылка
+        <code v-pre>{{ processAssets }}</code>
+            <code v-pre>[assetType]</code> -тип элемента архитектуры
+            <code v-pre>[assetTypeStr]</code> - тип элемента архитектуры на русском
+            <code v-pre>[assetName]</code> - название элемента архитектуры
+            <code v-pre>[+assetDescription]</code> - описание элемента архитектуры
+            <code v-pre>[assetLink]</code> -внешняя ссылка
+            <code v-pre>[assetLinkReg]</code> - красивая кликабельная ссылка, где под именем ссылка
         ```
     
     - Таблица элементов архитектуры процесса в привязке к задачам:
         ```
-        {{ processAssetsToActivity }}
-            [assetType] -тип элемента архитектуры
-            [assetTypeStr] - тип элемента архитектуры на русском
-            [assetName] - название элемента архитектуры
-            [+assetDescription] - описание элемента архитектуры
-            [fromItemName]- элемент, к которому прикреплен элемент архитектуры
-            [assetLink] - внешняя ссылка строкой
-            [assetLinkReg] - внешняя ссылка с положенной ссылкой в ворде
+        <code v-pre>{{ processAssetsToActivity }}</code>
+            <code v-pre>[assetType]</code> -тип элемента архитектуры
+            <code v-pre>[assetTypeStr]</code> - тип элемента архитектуры на русском
+            <code v-pre>[assetName]</code> - название элемента архитектуры
+            <code v-pre>[+assetDescription]</code> - описание элемента архитектуры
+            <code v-pre>[fromItemName]</code>- элемент, к которому прикреплен элемент архитектуры
+            <code v-pre>[assetLink]</code> - внешняя ссылка строкой
+            <code v-pre>[assetLinkReg]</code> - внешняя ссылка с положенной ссылкой в ворде
         ```
     
     - Таблица согласования процесса:
         ```
-        {{ processApprovals }}
-            [createdOnStr] - дата создания согласования
-            [approvalTimeStr] - дата принятия решения согласования
-            [approverEmail] - емейл согласующего
-            [status] - статус согласования
-            [comment] - комментарий согласования
-            [diagramVersion] - версия, по которой принято решение
+        <code v-pre>{{ processApprovals }}</code>
+            <code v-pre>[createdOnStr]</code> - дата создания согласования
+            <code v-pre>[approvalTimeStr]</code> - дата принятия решения согласования
+            <code v-pre>[approverEmail]</code> - емейл согласующего
+            <code v-pre>[status]</code> - статус согласования
+            <code v-pre>[comment]</code> - комментарий согласования
+            <code v-pre>[diagramVersion]</code> - версия, по которой принято решение
      
        ```
 1. Массивы тегов:
 
     - Массив описания задач:
         ```
-        {{ ?assigneesListDescription }} - начало массива
-            {{ activityName }} - название элемента диаграммы (задачи)
-            {{ elementType }} - тип элемента (событие, шлюз, задача)
-            {{ durationString  }} - строка длительности задачи
-            {{ activityPoolName }} - пул задачи
-            {{ assigneeName }} - название исполнителя
-            {{ +activityDescription }} - описание действия
-            {{ elementList }} - элементы архитектуры внутри задачи (строкой)
-            {{ ?assetList }} - элементы архитектуры, связанные с задачей, массивом (начало)
-                {{ assetType }} -тип элемента архитектуры
-                {{ assetTypeStr }} - тип элемента архитектуры на русском
-                {{ assetName }} - название элемента архитектуры
-                {{ +assetDescription }} - описание элемента архитектуры
-                {{ assetLink }} -внешняя ссылка
-                {{ assetLinkReg }} - красивая кликабельная ссылка, где под именем ссылка
-            {{ /assetList }} - окончание массива элементы архитектуры, связанные с задачей
-        {{ /assigneesListDescription }} - окончание массива описания задач
+        <code v-pre>{{ ?assigneesListDescription }}</code> - начало массива
+            <code v-pre>{{ activityName }}</code> - название элемента диаграммы (задачи)
+            <code v-pre>{{ elementType }}</code> - тип элемента (событие, шлюз, задача)
+            <code v-pre>{{ durationString  }}</code> - строка длительности задачи
+            <code v-pre>{{ activityPoolName }}</code> - пул задачи
+            <code v-pre>{{ assigneeName }}</code> - название исполнителя
+            <code v-pre>{{ +activityDescription }}</code> - описание действия
+            <code v-pre>{{ elementList }}</code> - элементы архитектуры внутри задачи (строкой)
+            <code v-pre>{{ ?assetList }}</code> - элементы архитектуры, связанные с задачей, массивом (начало)
+                <code v-pre>{{ assetType }}</code> -тип элемента архитектуры
+                <code v-pre>{{ assetTypeStr }}</code> - тип элемента архитектуры на русском
+                <code v-pre>{{ assetName }}</code> - название элемента архитектуры
+                <code v-pre>{{ +assetDescription }}</code> - описание элемента архитектуры
+                <code v-pre>{{ assetLink }}</code> -внешняя ссылка
+                <code v-pre>{{ assetLinkReg }}</code> - красивая кликабельная ссылка, где под именем ссылка
+            <code v-pre>{{ /assetList }}</code> - окончание массива элементы архитектуры, связанные с задачей
+        <code v-pre>{{ /assigneesListDescription }}</code> - окончание массива описания задач
         ```
     - Массив пулов с описанием задач в каждом из них:
         ```
-        {{ ?assigneesListDescriptionByPool }} - начало массива пулов
-            {{ first }} - название пула
-            {{ ?second }} - начало массива задач в пуле
+        <code v-pre>{{ ?assigneesListDescriptionByPool }}</code> - начало массива пулов
+            <code v-pre>{{ first }}</code> - название пула
+            <code v-pre>{{ ?second }}</code> - начало массива задач в пуле
                 Внутри него те же хэштеги описания задач, что описаны выше:
-                {{ activityName }} - название элемента диаграммы
+                <code v-pre>{{ activityName }}</code> - название элемента диаграммы
                 ...
-            {{ /second }} - окончание массива задач в пуле
-        {{ /assigneesListDescriptionByPool }} - окончание массива пулов
+            <code v-pre>{{ /second }}</code> - окончание массива задач в пуле
+        <code v-pre>{{ /assigneesListDescriptionByPool }}</code> - окончание массива пулов
         ```
 
 1. Теги объектов:
 
-    - Картинка схемы (требует ручного изменения под масштаб страницы после выгрузки): `{{ @processDiagram }}`.
-
-:::
+    - Картинка схемы (требует ручного изменения под масштаб страницы после выгрузки): `<code v-pre>{{ @processDiagram }}</code>`.
 
 ## Загрузка/выгрузка шаблонов
 
