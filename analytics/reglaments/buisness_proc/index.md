@@ -159,7 +159,7 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 ## Загрузка/выгрузка шаблонов
 
-После того как шаблон будет подготовлен, его нужно загрузить через раздел &#123;&#123; setup_app.icon &#125;&#125; &#123;&#123; universal.right_arrow &#125;&#125; &#123;&#123; setup_app.reglaments_templates &#125;&#125;:
+После того как шаблон будет подготовлен, его нужно загрузить через раздел {{ setup_app.icon }} {{ universal.right_arrow }} {{ setup_app.reglaments_templates }}:
 
 ![](./img/upload_doc_template_step_01.png)
 
