@@ -29,51 +29,51 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 Когда структура регламента будет продумана, можно переходить к технической части работы — разметки шаблона с помощью **SpEL**. Удобнее делать разметку в MarkDown, после — конвертировать в DOCX. Кратко опишем свойства разметки **SpEL** и приведём используемые теги. Теги в **SpEL** обозначаются с помощью парных фигурных скобочек и названия тега между ними: `{{  название тега  }}`. Существуют также теги экстракторы, которые предоставляют доступ к информации основного тега, если тег содержит массив данных, например: 
 
-```
-<code v-pre>{{ participantsTable }}</code> - таблица участников
-    <code v-pre>[typeStr]</code>  - тип участника
-```
+<code v-pre>
+{{ participantsTable }} - таблица участников
+    [typeStr] - тип участника
+</code>
 
 Также есть и специальные теги, которые содержат объекты. Например:
 
-```
-<code v-pre>{{ @processDiagram }}</code> - картинка схемы (требует ручного изменения под масштаб страницы после выгрузки)
-```
+<code v-pre>
+{{ @processDiagram }} - картинка схемы (требует ручного изменения под масштаб страницы после выгрузки)
+</code>
 
 Полный список тегов для регламента процесса с разделением по типам выглядит так:
 
 1. Теги общей информации:
-    ```
-    <code v-pre>{{ TOC }}</code> - содержимое, будет работать только при открытии файла на Windows в Word
-    <code v-pre>{{ name }}</code> - Имя процесса
-    <code v-pre>{{ versionNumber }}</code> - номер последней версии
-    <code v-pre>{{ versionDate }}</code> - дата последней версии
-    <code v-pre>{{ authorName }}</code> - ФИО автора (из профиля автора)
-    <code v-pre>{{ authorEmail }}</code> - email автора
-    <code v-pre>{{ onlineVersionUrl }}</code> - ссылка на версию процесса в онлайне
-    <code v-pre>{{ processDescription }}</code> - описание процесса
-    ```
+    <code v-pre>
+    {{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word
+    {{ name }} - Имя процесса
+    {{ versionNumber }} - номер последней версии
+    {{ versionDate }} - дата последней версии
+    {{ authorName }} - ФИО автора (из профиля автора)
+    {{ authorEmail }} - email автора
+    {{ onlineVersionUrl }} - ссылка на версию процесса в онлайне
+    {{ processDescription }} - описание процесса
+    </code>
 
 1. Табличные теги:
 
     - Таблица участников:
-        ```
-        <code v-pre>{{ participantsTable }}</code>
-            <code v-pre>[typeStr]</code>  - тип участника
-            <code v-pre>[person.email]</code> - почта
-            <code v-pre>[person.firstName]</code> - имя
-            <code v-pre>[person.lastName]</code> - фамилия
-            <code v-pre>[person.patronymic]</code> - отчество
-            <code v-pre>[person.phone]</code> - телефон
-        ```
+        <code v-pre>
+        {{ participantsTable }}</code>
+            [typeStr]  - тип участника
+            [person.email] - почта
+            [person.firstName] - имя
+            [person.lastName] - фамилия
+            [person.patronymic] - отчество
+            [person.phone] - телефон
+        </code>
     
     - Таблица исполнителей процессов:
-        ```
-        <code v-pre>{{ assigneesListTable }}</code>
-            <code v-pre>[name]</code> - название исполнителя
-            <code v-pre>[type]</code> - тип исполнителя 
-            <code v-pre>[count]</code> - количество задач
-        ```
+        <code v-pre>
+        {{ assigneesListTable }}</code>
+            [name] - название исполнителя
+            [type] - тип исполнителя 
+            [count]> - количество задач
+        </code
     
     - Таблица связей процесса:
         ```
