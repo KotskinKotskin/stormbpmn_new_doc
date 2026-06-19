@@ -58,7 +58,7 @@ title: 'Регламент бизнес-процесса: создание ша�
 
     - Таблица участников:
         <code v-pre>
-        {{ participantsTable }}</code>
+        {{ participantsTable }}
             [typeStr]  - тип участника
             [person.email] - почта
             [person.firstName] - имя
@@ -69,7 +69,7 @@ title: 'Регламент бизнес-процесса: создание ша�
     
     - Таблица исполнителей процессов:
         <code v-pre>
-        {{ assigneesListTable }}</code>
+        {{ assigneesListTable }}
             [name] - название исполнителя
             [type] - тип исполнителя 
             [count]> - количество задач
