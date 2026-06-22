@@ -31,9 +31,9 @@ markdown:
 
 Когда структура регламента будет продумана, можно переходить к технической части работы — разметки шаблона с помощью **SpEL**. Удобнее делать разметку в MarkDown, после — конвертировать в DOCX. Кратко опишем свойства разметки **SpEL** и приведём используемые теги. Теги в **SpEL** обозначаются с помощью парных фигурных скобочек и названия тега между ними: `{{  название тега  }}`. Существуют также теги экстракторы, которые предоставляют доступ к информации основного тега, если тег содержит массив данных, например: 
 
-```
-{{ spel_tags.tables.participantsTable }}
-    {{ spel_tags.tables.typeStr }}
+```text
+<span v-pre>{{ spel_tags.tables.participantsTable }}</span>
+<span v-pre>    {{ spel_tags.tables.typeStr }}</span>
 ```
 
 
@@ -41,15 +41,15 @@ markdown:
 
 ### Теги общей информации
 
-```md:no-v-pre
-{{ spel_tags.main.toc }}
-{{ spel_tags.main.name }}
-{{ spel_tags.main.versionNumber }}
-{{ spel_tags.main.versionDate }}
-{{ spel_tags.main.authorName }}
-{{ spel_tags.main.authorEmail }}
-{{ spel_tags.main.onlineVersionUrl }}
-{{ spel_tags.main.processDescription }}
+```text
+<span v-pre>{{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word</span>
+<span v-pre>{{ spel_tags.main.name }}</span>
+<span v-pre>{{ spel_tags.main.versionNumber }}</span>
+<span v-pre>{{ spel_tags.main.versionDate }}</span>
+<span v-pre>{{ spel_tags.main.authorName }}</span>
+<span v-pre>{{ spel_tags.main.authorEmail }}</span>
+<span v-pre>{{ spel_tags.main.onlineVersionUrl }}</span>
+<span v-pre>{{ spel_tags.main.processDescription }}</span>
 ```
 
 ### Табличные теги
