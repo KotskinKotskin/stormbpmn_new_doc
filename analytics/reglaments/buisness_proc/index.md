@@ -40,16 +40,18 @@ markdown:
 
 ### Теги общей информации
 
+<span v-pre>
 ```text
-{{ tags.breakets_open }} TOC {{ tags.breakets_close }} - содержимое, будет работать только при открытии файла на Windows в Word</span>
-<span v-pre>{{ spel_tags.main.name }}</span>
-<span v-pre>{{ spel_tags.main.versionNumber }}</span>
-<span v-pre>{{ spel_tags.main.versionDate }}</span>
-<span v-pre>{{ spel_tags.main.authorName }}</span>
-<span v-pre>{{ spel_tags.main.authorEmail }}</span>
-<span v-pre>{{ spel_tags.main.onlineVersionUrl }}</span>
-<span v-pre>{{ spel_tags.main.processDescription }}</span>
+{{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word
+{{ spel_tags.main.name }}
+{{ spel_tags.main.versionNumber }}
+{{ spel_tags.main.versionDate }}
+{{ spel_tags.main.authorName }}
+{{ spel_tags.main.authorEmail }}
+{{ spel_tags.main.onlineVersionUrl }}
+{{ spel_tags.main.processDescription }}
 ```
+</span>
 
 ### Табличные теги
 
