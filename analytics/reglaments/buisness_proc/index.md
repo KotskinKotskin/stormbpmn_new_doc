@@ -32,8 +32,7 @@ markdown:
 Когда структура регламента будет продумана, можно переходить к технической части работы — разметки шаблона с помощью **SpEL**. Удобнее делать разметку в MarkDown, после — конвертировать в DOCX. Кратко опишем свойства разметки **SpEL** и приведём используемые теги. Теги в **SpEL** обозначаются с помощью парных фигурных скобочек и названия тега между ними: `{{  название тега  }}`. Существуют также теги экстракторы, которые предоставляют доступ к информации основного тега, если тег содержит массив данных, например: 
 
 ```text
-<span v-pre>{{ spel_tags.tables.participantsTable }}</span>
-<span v-pre>    {{ spel_tags.tables.typeStr }}</span>
+{{ tags.breakets_open }} TOC {{ tags.breakets_close }} -- это ...
 ```
 
 
@@ -42,7 +41,7 @@ markdown:
 ### Теги общей информации
 
 ```text
-<span v-pre>{{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word</span>
+{{ tags.breakets_open }} TOC {{ tags.breakets_close }} - содержимое, будет работать только при открытии файла на Windows в Word</span>
 <span v-pre>{{ spel_tags.main.name }}</span>
 <span v-pre>{{ spel_tags.main.versionNumber }}</span>
 <span v-pre>{{ spel_tags.main.versionDate }}</span>
