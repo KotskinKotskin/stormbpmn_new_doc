@@ -41,7 +41,7 @@ markdown:
 
 ### Теги общей информации
 
-```
+```md:no-v-pre
 {{ spel_tags.main.toc }}
 {{ spel_tags.main.name }}
 {{ spel_tags.main.versionNumber }}
@@ -56,8 +56,7 @@ markdown:
 
 1. Таблица участников:
 
-<div v-pre>
-<pre><code>
+```md:no-v-pre
 {{ participantsTable }}
     [typeStr]  - тип участника
     [person.email] - почта
@@ -65,8 +64,7 @@ markdown:
     [person.lastName] - фамилия
     [person.patronymic] - отчество
     [person.phone] - телефон
-</code></pre>
-</div>
+```
 
 1. Таблица исполнителей процессов:
 
