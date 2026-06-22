@@ -1,10 +1,5 @@
 ---
 title: 'Регламент бизнес-процесса: создание шаблона, его загрузка и выгрузка готового регламента'
-mdEnhance:
-  codeTabs: false
-  tabs: false
-  hint: false
-  mark: false
 ---
 
 # Регламент бизнес-процесса: создание шаблона, его загрузка и выгрузка готового регламента
@@ -52,7 +47,7 @@ mdEnhance:
 ### Теги общей информации
 
 <div v-pre>
-<pre><code>
+<pre><code style = "bg-color:#ecf4fa">
 &#123;&#123; TOC &#125;&#125; - содержимое, будет работать только при открытии файла на Windows в Word
 &#123;&#123; name &#125;&#125; - Имя процесса
 &#123;&#123; versionNumber &#125;&#125; - номер последней версии
@@ -64,22 +59,12 @@ mdEnhance:
 </code></pre>
 </div>
 
-```text
-&#123;&#123; TOC &#125;&#125; - содержимое, будет работать только при открытии файла на Windows в Word
-&#123;&#123; name &#125;&#125; - Имя процесса
-&#123;&#123; versionNumber &#125;&#125; - номер последней версии
-&#123;&#123; versionDate &#125;&#125; - дата последней версии
-&#123;&#123; authorName &#125;&#125; - ФИО автора (из профиля автора)
-&#123;&#123; authorEmail &#125;&#125; - email автора
-&#123;&#123; onlineVersionUrl &#125;&#125; - ссылка на версию процесса в онлайне
-&#123;&#123; processDescription &#125;&#125; - описание процесса
-```
-
 ### Табличные теги
 
 1. Таблица участников:
 
-```text
+<div v-pre>
+<pre><code>
 {{ participantsTable }}
     [typeStr]  - тип участника
     [person.email] - почта
@@ -87,82 +72,83 @@ mdEnhance:
     [person.lastName] - фамилия
     [person.patronymic] - отчество
     [person.phone] - телефон
-```
+</code></pre>
+</div>
 
 1. Таблица исполнителей процессов:
 
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ assigneesListTable }}
     [name] - название исполнителя
     [type] - тип исполнителя 
     [count]> - количество задач
-
-</code>
+</code></pre>
+</div>
     
 1. Таблица связей процесса:
 
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ processCollaboration }}
     [type] - тип  связи (мессадж, коллактивити)
     [fromDiagramName] - название диаграммы, откуда идет связь
     [fromItemName] - название элемента диаграммы, откуда идет связь
     [toDiagramName] - название диаграммы, куда идет связь
     [toItemName] - название элемента диаграммы, куда идет связь
-
-</code>
+</code></pre>
+</div>
 
     
 1. Таблица элементов архитектуры процесса (без повторений):
 
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ processAssets }}
-    <code v-pre>[assetType] - тип элемента архитектуры
-    <code v-pre>[assetTypeStr] - тип элемента архитектуры на русском
-    <code v-pre>[assetName] - название элемента архитектуры
-    <code v-pre>[+assetDescription] - описание элемента архитектуры
-    <code v-pre>[assetLink] - внешняя ссылка
-    <code v-pre>[assetLinkReg] - красивая кликабельная ссылка, где под именем ссылка
-    
-</code>
+    [assetType] - тип элемента архитектуры
+    [assetTypeStr] - тип элемента архитектуры на русском
+    [assetName] - название элемента архитектуры
+    [+assetDescription] - описание элемента архитектуры
+    [assetLink] - внешняя ссылка
+    [assetLinkReg] - красивая кликабельная ссылка, где под именем ссылка
+</code></pre>
+</div>
     
 1. Таблица элементов архитектуры процесса в привязке к задачам:
         
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ processAssetsToActivity }}
-    <code v-pre>[assetType] - тип элемента архитектуры
-    <code v-pre>[assetTypeStr] - тип элемента архитектуры на русском
-    <code v-pre>[assetName] - название элемента архитектуры
-    <code v-pre>[+assetDescription] - описание элемента архитектуры
-    <code v-pre>[fromItemName] - элемент, к которому прикреплен элемент архитектуры
-    <code v-pre>[assetLink] - внешняя ссылка строкой
-    <code v-pre>[assetLinkReg] - внешняя ссылка с положенной ссылкой в ворде
-
-</code>
+    [assetType] - тип элемента архитектуры
+    [assetTypeStr] - тип элемента архитектуры на русском
+    [assetName] - название элемента архитектуры
+    [+assetDescription] - описание элемента архитектуры
+    [fromItemName] - элемент, к которому прикреплен элемент архитектуры
+    [assetLink] - внешняя ссылка строкой
+    [assetLinkReg] - внешняя ссылка с положенной ссылкой в ворде
+</code></pre>
+</div>
     
 1. Таблица согласования процесса:
         
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ processApprovals }}
-    <code v-pre>[createdOnStr] - дата создания согласования
-    <code v-pre>[approvalTimeStr] - дата принятия решения согласования
-    <code v-pre>[approverEmail] - емейл согласующего
-    <code v-pre>[status] - статус согласования
-    <code v-pre>[comment] - комментарий согласования
-    <code v-pre>[diagramVersion] - версия, по которой принято решение
-    
-</code>
+    [createdOnStr] - дата создания согласования
+    [approvalTimeStr] - дата принятия решения согласования
+    [approverEmail] - емейл согласующего
+    [status] - статус согласования
+    [comment] - комментарий согласования
+    [diagramVersion] - версия, по которой принято решение
+</code></pre>
+</div>
        
 ### Массивы тегов
 
 1. Массив описания задач:
         
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ ?assigneesListDescription }} - начало массива
     {{ activityName }} - название элемента диаграммы (задачи)
     {{ elementType }} - тип элемента (событие, шлюз, задача)
@@ -180,13 +166,13 @@ mdEnhance:
         {{ assetLinkReg }} - красивая кликабельная ссылка, где под именем ссылка
     {{ /assetList }} - окончание массива элементы архитектуры, связанные с задачей
 {{ /assigneesListDescription }} - окончание массива описания задач
-
-</code>
+</code></pre>
+</div>
 
 1. Массив пулов с описанием задач в каждом из них:
         
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ ?assigneesListDescriptionByPool }} - начало массива пулов
     {{ first }} - название пула
     {{ ?second }} - начало массива задач в пуле
@@ -195,19 +181,18 @@ mdEnhance:
         ...
     {{ /second }} - окончание массива задач в пуле
 {{ /assigneesListDescriptionByPool }} - окончание массива пулов
-
-</code>
-
+</code></pre>
+</div>
 
 ### Теги объектов
 
 Картинка схемы (требует ручного изменения под масштаб страницы после выгрузки): 
 
-<code v-pre>
-
+<div v-pre>
+<pre><code>
 {{ @processDiagram }}
-
-</code>
+</code></pre>
+</div>
 
 ## Загрузка/выгрузка шаблонов
 
