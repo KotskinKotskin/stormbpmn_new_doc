@@ -43,14 +43,11 @@ markdown:
 1. Таблица участников:
 
 
-```
-\{\{ participantsTable \}\}
-    [typeStr]  - тип участника
-    [person.email] - почта
-    [person.firstName] - имя
-    [person.lastName] - фамилия
-    [person.patronymic] - отчество
-    [person.phone] - телефон
+```json
+{
+"что-то":"{{ participantsTable }}",
+"тип участника": "[typeStr]"
+}
 ```
 
 1. Таблица исполнителей процессов:
