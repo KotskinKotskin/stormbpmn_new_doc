@@ -83,3 +83,19 @@ git:
   pencil: '<i class="fa-solid fa-pencil"></i>'
   fork: '<i class="fa-solid fa-code-fork"></i> **Fork**'
   pr: '<i class="fa-solid fa-code-pull-request"></i> **Pull requests**'
+
+
+# Это нужно для обхода парсинга тегов по умолчанию. Экранирование и ::: не сработали.
+spel_tags:
+  main: 
+    toc: '{{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word'
+    name: '{{ name }} - Имя процесса'
+    versionNumber: '{{ versionNumber }} - номер последней версии'
+    versionDate: '{{ versionDate }} - дата последней версии'
+    authorName: '{{ authorName }} - ФИО автора (из профиля автора)'
+    authorEmail: '{{ authorEmail }} - email автора'
+    onlineVersionUrl: '{{ onlineVersionUrl }} - ссылка на версию процесса в онлайне'
+    processDescription: '{{ processDescription }} - описание процесса'
+  tables:
+    participantsTable: '{{ participantsTable }} - таблица участников'
+    typeStr: '[typeStr] - тип участника'
