@@ -40,18 +40,9 @@ markdown:
 
 ### Теги общей информации
 
-<span v-pre>
-```text
-{{ TOC }} - содержимое, будет работать только при открытии файла на Windows в Word
-{{ spel_tags.main.name }}
-{{ spel_tags.main.versionNumber }}
-{{ spel_tags.main.versionDate }}
-{{ spel_tags.main.authorName }}
-{{ spel_tags.main.authorEmail }}
-{{ spel_tags.main.onlineVersionUrl }}
-{{ spel_tags.main.processDescription }}
-```
-</span>
+
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vTnxwe456DwRCiJvuDrwlmbF_euBp2KK-gpt8AUv9n-6zUBWF_MA-uKLVIZNkRzRm-_HXDilLL6i1NB/pub?embedded=true"></iframe>
+
 
 ### Табличные теги
 
