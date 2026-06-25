@@ -75,8 +75,19 @@ universal:
   edit_2: '<i class="pi pi-pen-to-square"></i>'
   marker: '<i class="pi pi-map-marker"></i>'
   folder: '<i class="pi pi-folder"></i>'
+  ai: '<i class="pi pi-sparkles"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'
   fork: '<i class="fa-solid fa-code-fork"></i> **Fork**'
   pr: '<i class="fa-solid fa-code-pull-request"></i> **Pull requests**'
+
+main:
+  head_panel:
+    models: '<i class="pi pi-list"></i> **Модели**'
+  bpmn: '<i class="pi pi-box"></i> **BPMN**'
+  plantuml: '<i class="pi pi-code"></i> **PlantUML**'
+
+plantuml:
+  histoty: '<i class="pi pi-history"></i> **История**'
+  del_history: '<i class="pi pi-trash"></i> **Очистить историю**'
