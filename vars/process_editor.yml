@@ -22,6 +22,9 @@ process_editor:
       overlays:
         overlays_show: '<i class="pi pi-check-square"></i> **Изменить видимость всех оверлеев**'
         overlays_hide: '<i class="pi pi-check-square"></i> **Изменить состояние свернутости всех оверлеев**'
+    extra:
+      num_tasks: '<i class="pi pi-angle-down"></i> **Нумеровать только задачи**'
+      num_all: '<i class="pi pi-angle-double-down"></i> **Нумеровать всё**'
   save_process_modal:
     buttons:
       plus: '<i class="pi pi-plus"></i>'
