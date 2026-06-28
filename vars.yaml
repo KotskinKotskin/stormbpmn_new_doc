@@ -106,3 +106,6 @@ uml:
   share: '<i class="pi pi-share-alt"></i> **Поделиться**'
   copy_link: '<i class="pi pi-copy"></i> **Копировать ссылку**'
   comments: '<i class="pi pi-comments"></i> **Комментарии**'
+
+acc:
+  main_button: '<i class="pi pi-user"></i>'
