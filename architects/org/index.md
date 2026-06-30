@@ -96,7 +96,7 @@ tags:
 
 ## Привязка ролей к организационной структуре
 
-**Роль** — это исполнитель конкретной задачи, а не должность. Одна роль может подходить для нескольких должностей: например, "Инициатор закупки товаров" может быть офис-менеджер или бухгалтер. Роли управляются через раздел {{ team.icon }} {{ universal.right_arrow }} {{ team.roles }}. Подробнее о том, что такое **Роль** и как она работает читайте в разделе [FAQ](../../main/faq/index.md), [Роли](../../main/faq/index.md#roles).
+**Роль** — это исполнитель конкретной задачи, а не должность. Одна роль может подходить для нескольких должностей: например, "Инициатор закупки товаров" может быть офис-менеджер или бухгалтер. Роли управляются через раздел {{ team.icon }} {{ universal.right_arrow }} {{ team.roles.icon }}. Подробнее о том, что такое **Роль** и как она работает читайте в разделе [FAQ](../../main/faq/index.md), [Роли](../../main/faq/index.md#roles).
 
 Для привязки **Роли** к узлу организационной структуры выполните следующие шаги:  
 
@@ -109,3 +109,16 @@ tags:
     ![](./img/add_role_to_node/add_role_to_org_node_step_02.png)
 
 1. Нажмите на кнопку **Назначить** и потом на кнопку **Сохранить**.
+
+## Дополнительные материалы
+
+**[Презентация](https://www.youtube.com/watch?v=LN8LTrSjckQ&t=3586)** функционаности Оргструктуры на вебинаре:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LN8LTrSjckQ?si=k9uRxRYqE57GCpSi&amp;start=3587" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+**[Видео](https://youtu.be/o1Gx5N17xWQ)** с примером, как изменить подчиненность в оргструктуре:
+
+- Передать группу (отдел, подразделение) в подчинение другому руководителю.
+- Передать должность в другую группу (отдел, подразделение).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/o1Gx5N17xWQ?si=So-L9Sbkfu5L0utR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
