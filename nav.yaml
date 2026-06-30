@@ -23,6 +23,7 @@
   - Работа с элементами архитектуры: architects/architecture_elements/index.md
   - Создание, изменение, удаление бизнес-процессов: architects/work_with_bp_tree/index.md
   - Работа с картой бизнес-процессов: architects/work_with_bp_map/index.md
+  - Работа с оргструктурой: architects/org/index.md
 Администраторам:
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md

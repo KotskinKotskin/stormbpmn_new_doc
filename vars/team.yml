@@ -10,3 +10,5 @@ team:
     general_settings: '<i class="pi pi-cog"></i> **Общие настройки**'
     small_mistake: '<i class="pi pi-info-circle" style = "color: rgb(96, 165, 250)"></i>'
     attention: '<i class="pi pi-exclamation-triangle" style = "color: rgb(239, 68, 68)"></i>'
+  roles:
+    icon: '<i class="pi pi-user-edit"></i> **Роли**'
