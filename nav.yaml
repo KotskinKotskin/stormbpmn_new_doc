@@ -18,6 +18,9 @@
 Аналитикам:
   - analytics/index.md
   - Работа с таблицей бизнес-процессов: analytics/bp_table/index.md
+  - Симуляция токена в модели процесса на задачах с прикрепленными событиями: analytics/token_sim_attach_action/index.md
+  - Регламент бизнес-процесса: analytics/reglaments/buisness_proc/index.md
+  - Регламент роли: analytics/reglaments/roles/index.md
 Архитекторам:
   - architects/index.md
   - Работа с элементами архитектуры: architects/architecture_elements/index.md
@@ -28,9 +31,11 @@
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md
   - Структурированное хранение бизнес-процессов: admins/folders/index.md
+  - Управление правами групп и участников: admins/team_permissions/index.md
 Согласующим:
   - approvals/index.md
-  - Согласование процесса: approvals/approve/index.md 
+  - Согласование процесса: approvals/approve/index.md
+  - Согласование регламентов: approvals/reglaments/index.md
 Всем:
   - all/index.md
   - Отправка процесса на согласование: all/approval_request/index.md
@@ -38,5 +43,6 @@
   - Работа с рейтингом качества процесса: all/overview/index.md
   - Горячие клавиши: all/hotkeys/index.md
   - Управление видимостью диаграммы: all/status/index.md
+  - 'Регламенты: общие сведения': all/reglaments/main_info/index.md
   - Создание и изменение диаграмм с помощью AI-помощника: all/ai/index.md
   - Работа с редактором UML: all/uml/index.md

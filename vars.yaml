@@ -12,6 +12,7 @@ include: ./vars/bpmn.yml
 include: ./vars/team.yml
 include: ./vars/general_settings.yml
 include: ./vars/folders.yml
+include: ./vars/setup_app.yml
 include: ./vars/org.yml
 
 approval_editor:
