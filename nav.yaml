@@ -23,6 +23,7 @@
   - Работа с элементами архитектуры: architects/architecture_elements/index.md
   - Создание, изменение, удаление бизнес-процессов: architects/work_with_bp_tree/index.md
   - Работа с картой бизнес-процессов: architects/work_with_bp_map/index.md
+  - Работа с оргструктурой: architects/org/index.md
 Администраторам:
   - admins/index.md
   - Работа с версионированием процессов: admins/version/index.md
@@ -36,4 +37,6 @@
   - Работа с оверлеями: all/overlays/index.md
   - Работа с рейтингом качества процесса: all/overview/index.md
   - Горячие клавиши: all/hotkeys/index.md
-  - Управление видимостью диаграммы: all/status/index.md 
+  - Управление видимостью диаграммы: all/status/index.md
+  - Создание и изменение диаграмм с помощью AI-помощника: all/ai/index.md
+  - Работа с редактором UML: all/uml/index.md

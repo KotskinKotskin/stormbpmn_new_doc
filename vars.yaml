@@ -12,6 +12,7 @@ include: ./vars/bpmn.yml
 include: ./vars/team.yml
 include: ./vars/general_settings.yml
 include: ./vars/folders.yml
+include: ./vars/org.yml
 
 approval_editor:
   buttons:
@@ -75,8 +76,37 @@ universal:
   edit_2: '<i class="pi pi-pen-to-square"></i>'
   marker: '<i class="pi pi-map-marker"></i>'
   folder: '<i class="pi pi-folder"></i>'
+  ai: '<i class="pi pi-sparkles"></i>'
+  extra: '<i class="pi pi-ellipsis-h"></i>'
+  download: '<i class="pi pi-download"></i>'
 
 git:
   pencil: '<i class="fa-solid fa-pencil"></i>'
   fork: '<i class="fa-solid fa-code-fork"></i> **Fork**'
   pr: '<i class="fa-solid fa-code-pull-request"></i> **Pull requests**'
+
+main:
+  head_panel:
+    models: '<i class="pi pi-list"></i> **Модели**'
+  bpmn: '<i class="pi pi-box"></i> **BPMN**'
+  plantuml: '<i class="pi pi-code"></i> **PlantUML**'
+
+uml:
+  histoty: '<i class="pi pi-history"></i> **История**'
+  del_history: '<i class="pi pi-trash"></i> **Очистить историю**'
+  templates:
+    icon: '<i class="pi pi-plus"></i> **Создать по шаблону**'
+    class: '<i class="pi pi-code"></i> **Класс**'
+    sequence: '<i class="pi pi-arrow-right-arrow-left"></i> **Последовательность**'
+    case: '<i class="pi pi-users"></i> **Прецедент**'
+    logic: '<i class="pi-step-forward"></i> **Активность**'
+    component: '<i class="pi pi-box"></i> **Компонент**'
+  save: '<i class="pi pi-save"></i> **Сохранить как версию**'
+  preview_change_position: '<i class="pi pi-arrows-alt"></i> **Переключить на вертикальное разделение**'
+  skip_zoom: '<i class="pi pi-expand"></i> **Сбросить масштаб**'
+  share: '<i class="pi pi-share-alt"></i> **Поделиться**'
+  copy_link: '<i class="pi pi-copy"></i> **Копировать ссылку**'
+  comments: '<i class="pi pi-comments"></i> **Комментарии**'
+
+acc:
+  main_button: '<i class="pi pi-user"></i>'
