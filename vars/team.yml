@@ -15,3 +15,5 @@ team:
   groups:
     permitted: '<span style="background: #ef4444; border-radius: 6px; color: white; padding: 2px">Запрещено</span>'
     allow: '<span style="background: #22c55e; border-radius: 6px; color: white; padding: 2px">Разрешено</span>'
+  roles:
+    icon: '<i class="pi pi-user-edit"></i> **Роли**'

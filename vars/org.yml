@@ -1,0 +1,8 @@
+org:
+  icon: '<i class="pi pi-building"></i> **Организационная структура**'
+  boss: '<i class="pi pi-star"></i> **Руководитель**'
+  position: '<i class="pi pi-user"></i> **Должность**'
+  group: '<i class="pi pi-building"></i> **Группа**'
+  scheme: '<i class="pi pi-sitemap"></i> **Схема**'
+  staff: '<i class="pi pi-users"></i> **Сотрудники**'
+  edit_node: '<i class="pi pi-pencil"></i> **Редактировать узел**'
