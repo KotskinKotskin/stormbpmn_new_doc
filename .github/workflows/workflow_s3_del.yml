@@ -330,6 +330,7 @@ jobs:
 
           cfg["config"]["doc_input"] = str(docs)
 
+          vp = cfg["adapers"]["vuepress_hope"]
           vp["doc_output"] = str(ws / "output" / "vuepress_hope")
           vp["site_dir"] = str(ws / "site" / "vuepress")
           vp["base"] = f"/{os.environ['PREVIEW_ID']}/"
