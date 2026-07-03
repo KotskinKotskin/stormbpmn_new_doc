@@ -316,27 +316,31 @@ jobs:
 
           cfg["config"].pop("S3", None)
 
+          vp = cfg["adapers"]["vuepress_hope"]
+          vp["media"]["media_storage_output"] = str(docs / "media")
+          vp["media"]["media_base_url"] = ""
+
+          mk = cfg["adapers"].get("mkdocs")
+          if mk:
+              if mk.get("media"):
+                  mk["media"]["media_storage_output"] = str(docs / "media")
+                  mk["media"]["media_base_url"] = ""
+
           cfg = expand_obj(cfg)
 
           cfg["config"]["doc_input"] = str(docs)
 
-          vp = cfg["adapers"]["vuepress_hope"]
           vp["doc_output"] = str(ws / "output" / "vuepress_hope")
           vp["site_dir"] = str(ws / "site" / "vuepress")
           vp["base"] = f"/{os.environ['PREVIEW_ID']}/"
           vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
           vp["nav"] = str(docs / "nav.yaml")
           vp["vars"] = str(docs / "vars.yaml")
-          vp["media"]["media_storage_output"] = str(docs / "media")
-          vp["media"]["media_base_url"] = ""
 
           mk = cfg["adapers"].get("mkdocs")
           if mk:
               mk["doc_output"] = str(ws / "output" / "mkdocs")
               mk["site_dir"] = str(ws / "site" / "mkdocs")
-              if mk.get("media"):
-                  mk["media"]["media_storage_output"] = str(docs / "media")
-                  mk["media"]["media_base_url"] = ""
 
           with dst.open("w", encoding="utf-8") as f:
               yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
