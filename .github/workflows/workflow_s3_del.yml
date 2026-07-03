@@ -317,14 +317,14 @@ jobs:
           cfg["config"].pop("S3", None)
 
           vp = cfg["adapers"]["vuepress_hope"]
-          vp["media"]["media_storage_output"] = str(docs / "media")
-          vp["media"]["media_base_url"] = ""
+          vp["media"]["media_storage_output"] = str(vuepress / "src" / ".vuepress" / "public" / "media")
+          vp["media"]["media_base_url"] = "/media"
 
           mk = cfg["adapers"].get("mkdocs")
           if mk:
               if mk.get("media"):
-                  mk["media"]["media_storage_output"] = str(docs / "media")
-                  mk["media"]["media_base_url"] = ""
+                  mk["media"]["media_storage_output"] = str(vuepress / "src" / ".vuepress" / "public" / "media")
+                  mk["media"]["media_base_url"] = "/media"
 
           cfg = expand_obj(cfg)
 
