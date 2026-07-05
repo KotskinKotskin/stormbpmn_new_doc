@@ -3,6 +3,7 @@ title: Структурированное хранение бизнес-проц
 description: 'Как организовать структурированное хранение бизнес-процессов в BPMN: создание папок и вложенных папок, распределение диаграмм, использование тегов и навигация по структуре.'
 tags:
     - Совместная работа над процессами - работа в команде
+alias: struct-biz-proc
 ---
 
 # Структурированное хранение бизнес-процессов
@@ -21,17 +22,17 @@ tags:
 
 1. Перейдите в {{ section_team.buttons.team_switcher }} {{ universal.right_arrow }} {{ bs_models.bs_m }} {{ universal.right_arrow }} {{ bs_models.folders }}:
 
-    ![folders_expore](./img/folders_expore.png)
+    ![folders_expore](/media/screenshots/app/folder/{{ alias }}/folders_expore.png)
 1. Создайте папку с помощью кнопки {{ universal.plus }} **Создать новую папку** в верхней левой части секции навигации по структуре директорий:
 
-    ![folders_create_folder](./img/folders_create_folder.png)
+    ![folders_create_folder](/media/screenshots/app/folder/{{ alias }}/folders_create_folder.png)
 
 1. Введите название папки и нажмите кнопку **Сохранить**:
-    ![folders_create_folder_set_name](./img/folders_create_folder_set_name.png)
+    ![folders_create_folder_set_name](/media/screenshots/app/folder/{{ alias }}/folders_create_folder_set_name.png)
 
 Если нужно создать вложенную папку — перейдите в родительскую папку и кликните по кнопке {{ universal.plus }} **Создать дочернюю папку** на панели управления папками в правой секции окна управления папками:
 
-![folders_create_subfolder](./img/folders_create_subfolder.png)
+![folders_create_subfolder](/media/screenshots/app/folder/{{ alias }}/folders_create_subfolder.png)
 
 Над папками можно выполнять следующие действия:
 
@@ -46,7 +47,7 @@ tags:
 
 1. Откройте существующую диаграмму бизнес-процесса или создайте новую диаграмму в редакторе диаграмм.
 1. Кликните по кнопке {{ process_editor.upper_toolbar.buttons.save_as_version }} на верхней панели управления:
-    ![editor_save_as_version](./img/editor_save_as_version.png)
+    ![editor_save_as_version](/media/screenshots/app/diagram/{{ alias }}/editor_save_as_version.png)
 
 1. В модальном окне **Сохранение модели**:
 
@@ -57,4 +58,4 @@ tags:
 
 После сохранения диаграммы соответствующий ей бизнес-процесс появится в указанной папке:
 
-![folders_save_process](./img/folders_save_process.png)
+![folders_save_process](/media/screenshots/app/folder/{{ alias }}/folders_save_process.png)
