@@ -1,16 +1,16 @@
 name: VuePress Preview S3-Del (PR)
 
-'on':
-  pull_request:
-    types: [opened, synchronize, reopened]
-  issue_comment:
-    types: [created]
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: Pull Request number to build preview for
-        required: true
-        type: string
+# 'on':
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+#   issue_comment:
+#     types: [created]
+#   workflow_dispatch:
+#     inputs:
+#       pr_number:
+#         description: Pull Request number to build preview for
+#         required: true
+#         type: string
 
 permissions:
   contents: read
