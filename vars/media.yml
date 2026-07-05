@@ -1,3 +1,8 @@
 media:
   screenshots:
+    folder: media/screenshots/app/folder
+    access_groups: media/screenshots/app/access-group
+    diagram: media/screenshots/app/diagram
+  psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
+
