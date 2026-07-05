@@ -23,11 +23,13 @@ alias: struct-biz-proc
 1. Перейдите в {{ section_team.buttons.team_switcher }} {{ universal.right_arrow }} {{ bs_models.bs_m }} {{ universal.right_arrow }} {{ bs_models.folders }}:
 
     ![folders_expore](/media/screenshots/app/folder/{{ alias }}/folders_expore.png)
+
 1. Создайте папку с помощью кнопки {{ universal.plus }} **Создать новую папку** в верхней левой части секции навигации по структуре директорий:
 
     ![folders_create_folder](/media/screenshots/app/folder/{{ alias }}/folders_create_folder.png)
 
 1. Введите название папки и нажмите кнопку **Сохранить**:
+
     ![folders_create_folder_set_name](/media/screenshots/app/folder/{{ alias }}/folders_create_folder_set_name.png)
 
 Если нужно создать вложенную папку — перейдите в родительскую папку и кликните по кнопке {{ universal.plus }} **Создать дочернюю папку** на панели управления папками в правой секции окна управления папками:
