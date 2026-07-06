@@ -9,4 +9,5 @@ media:
     proc_versioning: proc_versioning
     folder_creating: folder_creating
     access_groups_managment: access_groups_managment
+    save_as_version: save_as_version
 

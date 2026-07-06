@@ -48,7 +48,7 @@ tags:
 
 1. Откройте существующую диаграмму бизнес-процесса или создайте новую диаграмму в редакторе диаграмм.
 1. Кликните по кнопке {{ process_editor.upper_toolbar.buttons.save_as_version }} на верхней панели управления:
-    ![editor_save_as_version](/{{ media.screenshots.diagram }}/{{ media.actions.folder_creating }}/editor_save_as_version.png)
+    ![editor_save_as_version](/{{ media.screenshots.diagram }}/{{ media.actions.save_as_version }}/editor_save_as_version.png)
 
 1. В модальном окне **Сохранение модели**:
 
