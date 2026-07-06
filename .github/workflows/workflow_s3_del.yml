@@ -295,13 +295,14 @@ jobs:
             with media_vars_path.open("r", encoding="utf-8") as f:
               media_cfg = yaml.safe_load(f) or {}
 
-            screenshots = media_cfg.get("media", {}).get("screenshots", {})
+            media_section = media_cfg.get("media", {})
             changed = False
-            if isinstance(screenshots, dict):
-              for key, value in list(screenshots.items()):
-                if isinstance(value, str) and value.startswith("/root/stormbpmn_project/src_storage/"):
-                  screenshots[key] = "https://storage.yandexcloud.net/stormbpmn-psd-src/" + Path(value).name
-                  changed = True
+            for section_name, section in media_section.items():
+              if isinstance(section, dict):
+                for key, value in list(section.items()):
+                  if isinstance(value, str) and value.startswith("/root/stormbpmn_project/src_storage/"):
+                    section[key] = "https://storage.yandexcloud.net/stormbpmn-psd-src/" + Path(value).name
+                    changed = True
 
             if changed:
               with media_vars_path.open("w", encoding="utf-8") as f:
