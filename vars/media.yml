@@ -5,4 +5,8 @@ media:
     diagram: media/screenshots/app/diagram
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
+  actions:
+    proc_versioning: proc_versioning
+    folder_creating: folder_creating
+    access_groups_managment: access_groups_managment
 

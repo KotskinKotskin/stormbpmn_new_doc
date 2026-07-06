@@ -82,7 +82,7 @@ title: FAQ по Stormbpmn
 
     1. Откройте диаграмму в редакторе и нажмите на кнопку {{ process_editor.upper_toolbar.buttons.save_as_version }} в верхней панели инструментов:
 
-        ![save_as_version_click_button](../../admins/version/img/save_as_version_click_button.png)
+        ![save_as_version_click_button]({{media.screenshots.diagram}}/{{media.actions.proc_versioning}}/save_as_version_click_button.png)
 
     2. В открывшемся модальном окне **Сохранение модели** из выпадающего списка **Название папки** выберите нужную папку и нажмите кнопку **Сохранить как версию**:
 

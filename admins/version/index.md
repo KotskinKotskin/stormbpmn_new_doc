@@ -5,7 +5,7 @@ description: Рассказываем как работать с версион�
   работает автосохранение версий.
 tags:
 - Спецфичи редактора BPMN
-alias: proc_versioning
+media.actions.proc_versioning: proc_versioning
 ---
 
 ➡️ (_templates/warnings/perm_plan_role.md)
@@ -19,11 +19,11 @@ alias: proc_versioning
 
 Находясь в редакторе процесса, нажмите на кнопку {{ process_editor.upper_toolbar.buttons.save_as_version }}:
 
-![save_as_version_click_button](/{{ media.screenshots.diagram }}/{{ alias }}/save_as_version_click_button.png)
+![save_as_version_click_button](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/save_as_version_click_button.png)
 
 В открывшемся модальном окне **Сохранение модели** введите следующие:
 
-![save_process_with_version](/{{ media.screenshots.diagram }}/{{ alias }}/save_process_with_version.png)
+![save_process_with_version](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/save_process_with_version.png)
 
 - **Название** (обязательно) — процесс будет сохранён в общем каталоге процессов и унаследует всю историю изменений.
 - **Теги** (опционально) — дополнительная логическая разметка процесса, по которой можно быстро ориентироваться в каталогах.
@@ -40,7 +40,7 @@ alias: proc_versioning
 
 Автосохранённые диаграммы по умолчанию не отображаются в истории версионирования процесса. Чтобы увидеть автосохранённые версии процесса нужно установить чекбокс {{ process_versions.checkboxes.show_autosave }}:
 
-![show_autosave](/{{ media.screenshots.diagram }}/{{ alias }}/show_autosave.png)
+![show_autosave](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/show_autosave.png)
 
 ## Восстановление из определенной версии процесса
 
@@ -50,15 +50,15 @@ alias: proc_versioning
 
     - Нажмите на кнопку {{ process_editor.upper_toolbar.buttons.show_all_versions}}:
 
-        ![cover_from_version](/{{ media.screenshots.diagram }}/{{ alias }}/cover_from_version.png)
+        ![cover_from_version](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/cover_from_version.png)
 
     - В модальном окне **Версии процесса** выберите нужную вам версию процесса и нажмите кнопку {{ process_versions.buttons.view_version}}:
 
-        ![show_autosave_clean](/{{ media.screenshots.diagram }}/{{ alias }}/show_autosave_clean.png)
+        ![show_autosave_clean](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/show_autosave_clean.png)
 
     - Для восстановления из выбранной версии — в окне просмотра процесса нажмите кнопку {{ view_process.buttons.cover_from_version }}:
 
-        ![view_process_click_cover_from_version](/{{ media.screenshots.diagram }}/{{ alias }}/view_process_click_cover_from_version.png)
+        ![view_process_click_cover_from_version](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/view_process_click_cover_from_version.png)
 
         После нажатия на кнопку {{ view_process.buttons.cover_from_version }} — процесс будет восстановлен, откроется редактор процессов, а восстановленная версия станет текущей (последней).
 
@@ -69,11 +69,11 @@ alias: proc_versioning
     * Из выпадающего списка дополнительных действий выберите {{ section_team.buttons.all_versions}}.
     * В модальном окне **Версии процесса** выберите нужную вам версию процесса и нажмите кнопку {{ process_versions.buttons.view_version}}:
 
-        ![show_autosave_clean](/{{ media.screenshots.diagram }}/{{ alias }}/show_autosave_clean.png)
+        ![show_autosave_clean](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/show_autosave_clean.png)
 
     * Для восстановления из выбранной версии — в окне просмотра процесса нажмите кнопку {{ view_process.buttons.cover_from_version }}:
 
-        ![view_process_click_cover_from_version](/{{ media.screenshots.diagram }}/{{ alias }}/view_process_click_cover_from_version.png)
+        ![view_process_click_cover_from_version](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/view_process_click_cover_from_version.png)
 
         После нажатия на кнопку {{ view_process.buttons.cover_from_version }} — процесс будет восстановлен, откроется редактор процессов, а восстановленная версия станет текущей (последней).
 
@@ -88,15 +88,15 @@ alias: proc_versioning
 
 - Нажмите на кнопку {{ process_editor.upper_toolbar.buttons.show_all_versions}}:
 
-    ![cover_from_version](/{{ media.screenshots.diagram }}/{{ alias }}/cover_from_version.png)
+    ![cover_from_version](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/cover_from_version.png)
 
 - В модальном окне **Версии процесса** выберите нужную вам версию процесса и нажмите кнопку {{ process_versions.buttons.view_version_diff}}:
 
-    ![show_versions_diff](/{{ media.screenshots.diagram }}/{{ alias }}/show_versions_diff.png)
+    ![show_versions_diff](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/show_versions_diff.png)
 
 - Окно **Сравнение версий** разделено на две секции: левая секция отражает версию, из которой процесс будет восстановлен, а правая секция отражает текущую версию процесса:
     
-    ![show_diff_version_review](/{{ media.screenshots.diagram }}/{{ alias }}/show_diff_version_review.png)
+    ![show_diff_version_review](/{{ media.screenshots.diagram }}/{{ media.actions.proc_versioning }}/show_diff_version_review.png)
 
     На диаграмме справа (текущая версия) цветами (значения цветов указаны в подсказке в левом нижнем углу экрана) отмечены изменения относительно версии диаграммы из которой будет восстановлен процесс.
 
