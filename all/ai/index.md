@@ -38,7 +38,7 @@ AI-помощник может создавать последующие шаг�
 
 1. Выделите активный элемент, от которого хотите построить следующий шаг, и кликните по кнопке {{ universal.ai }} **Подставить следующий элемент с помощью AI**:
 
-    ![]({{ media.screenshots.all_models }}/{{ media.actions.    ai_create_next_step_diagramm }}/ai_create_next_step_step_01.png)
+    ![]({{ media.screenshots.all_models }}/{{ media.actions.ai_create_next_step_diagramm }}/ai_create_next_step_step_01.png)
 
 1. Внесите правки в созданный с помощью AI шаг, если требуется.
 
