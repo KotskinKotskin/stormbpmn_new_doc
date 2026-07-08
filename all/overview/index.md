@@ -35,12 +35,12 @@ tags:
 
 Правила проверки качества диаграмм можно настроить в {{ team.icon }} {{ universal.right_arrow }} {{ team.team_settings.icon }} {{ universal.right_arrow }} {{ team.team_settings.general_settings }}, секция {{ general_settings.check_list }}:
 
-![overview_checklist_settings]({{ media.screenshots.team_settings }}/{{ media.check_diagram_settings }}/overview_checklist_settings.png)
+![overview_checklist_settings]({{ media.screenshots.team_settings }}/{{ media.actions.check_diagram_settings }}/overview_checklist_settings.png)
 
 
 **Секция** {{ general_settings.quality }} позволяет задать минимальные требования к диаграммам команды. Например, можно настроить минимальную среднюю оценку, которую требует ваша команда. При нарушении этого показателя члены команды постоянно будут видеть уведомление о низком качестве процессов:
 
-![overview_quality]({{ media.screenshots.team_settings }}/{{ media.check_diagram_settings }}/overview_quality.png)
+![overview_quality]({{ media.screenshots.team_settings }}/{{ media.actions.check_diagram_settings }}/overview_quality.png)
 
 **Секция** {{ general_settings.check_list }} содержит правила уведомлений при нахождении ошибок в процессах. Существуют следующие уведомления:
 
@@ -58,4 +58,4 @@ tags:
 
 Правила проверок можно менять по желанию. Можно изменить: заголовок, описание, критичность уведомления, а также включить или выключить его. Для редактирования правила — достаточно нажать на {{ universal.edit }} в правом крайнем столбце:
 
-![overview_edit_attention]({{ media.screenshots.team_settings }}/{{ media.check_diagram_settings }}/overview_edit_attention.png)
+![overview_edit_attention]({{ media.screenshots.team_settings }}/{{ media.actions.check_diagram_settings }}/overview_edit_attention.png)
