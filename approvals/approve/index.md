@@ -12,7 +12,7 @@ tags:
 
 - Письмо на электронную почту:
 
-    ![approval_letter](../../all/approval_request/img/approval_letter.png)
+    ![approval_letter]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approval_letter.png)
 
     При переходе по ссылке вы попадёте в проект, в котором вас попросили быть согласующим.
 
