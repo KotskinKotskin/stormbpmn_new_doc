@@ -5,6 +5,7 @@ media:
     diagram: media/screenshots/app/diagram
     all_models: media/screenshots/app/all_models
     profile: media/screenshots/app/profile
+    team_settings: media/screenshots/app/team_settings
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -19,4 +20,7 @@ media:
     proc_to_approve: proc_to_approve
     reference: reference
     overlay_def_views: overlay_def_views
+    edit_process_overview: edit_process_overview
+    check_diagram_settings: check_diagram_settings
+    make_public: make_public
 

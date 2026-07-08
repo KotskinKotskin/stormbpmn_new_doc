@@ -13,4 +13,4 @@ tags:
 
 1. Перейдите в основное окно редактора диаграмм.
 1. Кликните по кнопке {{ process_editor.upper_toolbar.buttons.extra }} в верхней панели управления и из выпадающего списка выберите пункт {{ process_editor.upper_toolbar.buttons.make_private }} или {{ process_editor.upper_toolbar.buttons.make_public }} в зависимости от задачи:
-    ![editor_change_diagramm_status](./img/editor_change_diagramm_status.png)
+    ![editor_change_diagramm_status]({{ media.screenshots.diagram }}/{{media.actions.make_public}}/editor_change_diagramm_status.png)
