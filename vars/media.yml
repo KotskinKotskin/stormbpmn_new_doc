@@ -3,6 +3,8 @@ media:
     folder: media/screenshots/app/folder
     access_groups: media/screenshots/app/access-group
     diagram: media/screenshots/app/diagram
+    all_models: media/screenshots/app/all_models
+    profile: media/screenshots/app/profile
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -10,4 +12,11 @@ media:
     folder_creating: folder_creating
     access_groups_managment: access_groups_managment
     save_as_version: save_as_version
+    ai_create_diagramm: ai_create_diagramm
+    ai_create_next_step_diagramm: ai_create_next_step_diagramm
+    ai_create_description: ai_create_description
+    ai_create_plantuml: ai_create_plantuml
+    proc_to_approve: proc_to_approve
+    reference: reference
+    overlay_def_views: overlay_def_views
 

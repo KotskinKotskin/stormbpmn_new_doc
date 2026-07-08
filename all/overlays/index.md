@@ -41,7 +41,7 @@ version: 2
 
 1. Перейдите в раздел **Настройки** и выберите оверлеи, которые будут отображаться по умолчанию во всех диаграммах:
 
-    ![overlay_def_views](./img/overlay_def_views.png)
+    ![overlay_def_views]({{ media.screenshots.profile }}/{{ media.actions.overlay_def_views }}/overlay_def_views.png)
 
 1. Кликните по кнопке **Сохранить**, чтобы настройки видимости оверлеев применились.
 

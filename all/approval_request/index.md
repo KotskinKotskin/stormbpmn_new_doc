@@ -2,8 +2,6 @@
 title: Отправка процесса на согласование
 description: 'Показываем наглядно процесс согласования диаграммы с ревьюерами: отправка
   уведомлений, изменение статуса диаграммы, согласование, завершение процесса ревью.'
-status: new
-version: 2
 tags:
 - Согласование и обсуждение
 ---
@@ -20,42 +18,42 @@ tags:
 - Перейдите в раздел **Редактор процессов**.
 - Нажмите на кнопку {{ process_editor.right_toolbar.buttons.send_on_approve_open_menu }} на правой боковой панели управления:
 
-    ![send_on_approve](./img/send_on_approve.png)
+    ![send_on_approve]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/send_on_approve.png)
 
 - В открывшемся модальном меню **Согласования**, введите электронную почту согласующего в поле ввода почты, и нажмите кнопку {{ process_editor.right_toolbar.buttons.send_on_approve }} для отправки приглашения:
 
-    ![send_on_approve_click_button](./img/send_on_approve_click_button.png)
+    ![send_on_approve_click_button]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/send_on_approve_click_button.png)
 
 - Если нужно отправить приглашение нескольким пользователям: введите адрес почты в поле ввода электронной почты и нажмите кнопку {{ process_editor.right_toolbar.buttons.add_more_approvals }}, затем введите другой адрес:
 
-    ![add_more_approvals](./img/add_more_approvals.png)
+    ![add_more_approvals]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/add_more_approvals.png)
 
     После ввода адресов для отправки нажмите кнопку {{ process_editor.right_toolbar.buttons.send_on_approve }}.
 
 Система отправит приглашения согласующим и выведит в интерфейс сообщения с отчётом об отправке:
 
-![approvel_notice](./img/approvel_notice.png)
+![approvel_notice]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approvel_notice.png)
 
 Согласующий получит письмо на почту со следующим содержимым:
 
-![approval_letter](./img/approval_letter.png)
+![approval_letter]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approval_letter.png)
 
 **Если приглашение на согласование было отправлено ошибочно** или более не актуально, его можно отменить:
 
 - Нажмите на кнопку {{ process_editor.right_toolbar.buttons.delete_approval_send}} в сообщении о приглашении:
 
-    ![approvel_notice](./img/approvel_notice.png)
+    ![approvel_notice]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approvel_notice.png)
 
 - После нажатия на {{ process_editor.right_toolbar.buttons.delete_approval_send}} система попросит подтвердить удаление запроса на согласование:
 
-    ![delete_approval_request](./img/delete_approval_request.png)
+    ![delete_approval_request]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/delete_approval_request.png)
 
     Нажмите на кнопку {{ process_editor.modals.delete_approval_request.buttons.delete }}, чтобы удалить запрос.
 
 После согласования процесса ревьюерами в меню {{ process_editor.upper_toolbar.sections.messages }} появятся сообщения о статусе согласования, на правой боковой панели также изменится статус согласования и функция изменения статуса процесса вновь станет доступной:
 
-![approval_final](./img/approval_final.png)
+![approval_final]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approval_final.png)
 
 Теперь можно дальше двигаться по процессу и переводить статус диаграммы в следующее состояние - **Готов**:
 
-![process_ready](./img/process_ready.png)
+![process_ready]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/process_ready.png)

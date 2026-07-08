@@ -37,5 +37,5 @@ tags:
 
 Посмотреть полный и актуальный список горячих клавиш можно в справке. Чтобы посмотреть справку, кликните по кнопке {{ process_editor.upper_toolbar.buttons.doc }} в верхнем правом углу основного окна редактора BPMN-схем:
 
-![editor_show_doc](./img/editor_show_doc.png)
+![editor_show_doc]({{ media.screenshots.diagram }}/{{ media.actions.reference }}/editor_show_doc.png)
 
