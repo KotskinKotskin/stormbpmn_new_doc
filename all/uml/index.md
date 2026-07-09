@@ -58,11 +58,11 @@ tags:
 
 - **Отправка приглашения людям с доступом** — укажите e-mail адреса людей, у которых есть доступы к командному {{ product_name }}, задайте уровень прав (просмотр или редактирование диаграммы) и нажмите кнопку **Предоставить доступ**:
 
-    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/share/uml_share_step_01.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_share_step_01.png)
 
 - **Сделать диаграмму публичной** — создать публичную ссылку, чтобы любой человек в интернете смог посмотреть процесс по ссылке и подать прошение на участие в совместной разработке. Скопируйте ссылку кликом по кнопке {{ uml.copy_link }} и завершите процесс публикации ссылки в интернете нажатием на кнопку **Предоставить доступ**:
 
-    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/share/uml_share_step_02.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_share_step_02.png)
 
 Также для более эффективной совместной работы или просто для фиксации важных идей можно воспользоваться комментариями. Секция {{ uml.comments }} находится в правой боковой панели:
 
@@ -74,11 +74,11 @@ UML-диаграмму можно выгрузить как изображени
 
 1. Кликните по {{ universal.extra }} на верхней панели управления и из выпадающего списка выберите {{ universal.download }}:
 
-    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/download_as_image/uml_download_as_image_step_01.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_download_as_image_step_01.png)
 
 1. Выберите нужный вам формат для выгрузки диаграммы как изображения:
 
-    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/download_as_image/uml_download_as_image_step_02.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_download_as_image_step_02.png)
 
     - svg-формат отлично подходит для презентаций, отчётов и других промо-материалов и интернет-публикаций, так как он легко масштабируется без потери качества.
     - png-формат хорошо подойдёт для публикаций или отчётов небольших размеров, так как png — это растровый формат рисунка и он теряет качество при масштабировании.
