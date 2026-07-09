@@ -1,11 +1,13 @@
 media:
   screenshots:
+    main: media/screenshots/app/main
     folder: media/screenshots/app/folder
     access_groups: media/screenshots/app/access-group
     diagram: media/screenshots/app/diagram
     all_models: media/screenshots/app/all_models
     profile: media/screenshots/app/profile
     team_settings: media/screenshots/app/team_settings
+    uml: media/screenshots/app/uml
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -23,4 +25,6 @@ media:
     edit_process_overview: edit_process_overview
     check_diagram_settings: check_diagram_settings
     make_public: make_public
+    create_uml: create_uml
+    uml_create_and_work: create_and_work
 
