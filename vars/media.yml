@@ -9,6 +9,8 @@ media:
     team_settings: media/screenshots/app/team_settings
     uml: media/screenshots/app/uml
     app_settings: media/screenshots/app/app_settings
+    personal: media/screenshots/app/personal
+
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -31,4 +33,8 @@ media:
     upload_doc_template: upload_doc_template
     download_reglament: download_reglament
     token_sim_attach_action: token_sim_attach_action
+    add_comment: add_comment
+    approve: approve
+    navigate_to_all_models: navigate_to_all_models
+    reglament_export: reglament_export
 
