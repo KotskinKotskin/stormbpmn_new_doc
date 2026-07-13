@@ -10,7 +10,9 @@ media:
     uml: media/screenshots/app/uml
     app_settings: media/screenshots/app/app_settings
     personal: media/screenshots/app/personal
-
+    assets: media/screenshots/app/assets
+    org_structure: media/screenshots/app/org_structure
+    employees: media/screenshots/app/employees
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -37,4 +39,15 @@ media:
     approve: approve
     navigate_to_all_models: navigate_to_all_models
     reglament_export: reglament_export
+    work_with_arc_elements: work_with_arc_elements
+    create_arc_el: create_arc_el
+    share_proc: share_proc
+    navigate_to_org_str: navigate_to_org_str
+    extra: extra
+    scheme: scheme
+    add_group: add_group
+    org_structure_create: create
+    add_staff_to_node: add_staff_to_node
+    employees_add_staff: add_staff
+    add_role_to_node: add_role_to_node
 

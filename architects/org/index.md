@@ -30,32 +30,32 @@ tags:
 
 Оргструктура создаётся в {{ team.icon }} {{ universal.right_arrow }} {{ org.icon }} {{ universal.right_arrow }} {{ org.scheme }}:
 
-![](./img/org_structure.png)
+![]({{ media.screenshots.org_structure }}/{{ extra }}/org_structure.png)
 
 Методологически раздел {{ org.scheme }} не может быть пустым. По умолчанию при первом заходе в него в нём будет находиться минимальная оргструктура: **Руководитель** + **Группа**:
 
-![](./img/org_scheme_def.png)
+![]({{ media.screenshots.org_structure }}/{{ scheme }}/org_scheme_def.png)
 
 Изменяя дефолтную оргструктуру можно получить собственную оргструктуру, отвечающую вашим требованиям и представлениям. Вот как это можно сделать:
 
 1. Переименуйте главного **Руководителя** по своему усмотрению, дважды кликнув на его должность.
 1. Переименуйте существующую **Группу** или добавьте ещё одну **Группу**. Для этого кликните по карточке **Руководителя**, которому в подчинение хотите добавить **Группу**, и в появившемся меню действий наведите на {{ universal.plus }} и выберите **Добавить группу в подчинение**:
 
-    ![](./img/org_structure_add_group.png)
+    ![]({{ media.screenshots.org_structure }}/{{ add_group }}/org_structure_add_group.png)
 
 После переименования должности и добавления двух **Групп** наша диаграмма выглядит так:
 
-![](./img/org_structure_create_step_01.png)
+![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_01.png)
 
 Теперь добавьте **Руководителей** отделам. Для этого кликните по карточке с отделом и в появившемся меню действий наведите на {{ universal.plus }} и выберите **Добавить руководителя и группу в подчинение**:
 
-![](./img/org_structure_create_step_02.png)
+![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_02.png)
 
 После добавления **Руководителей** и новых групп им в подчинение, добавьте **Должностей** в подчинение. Это делается аналогичным образом с добавлением **Руководителей** и **Групп** через меню по клику по карточке.
 
 В итоге, наша диаграмма теперь выглядит так:
 
-![](./img/org_structure_create_step_03.png)
+![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_03.png)
 
 Но сейчас в диаграмме есть только организационная составляющая: названия должностей и структурных единиц без конкретных исполнителей и бизнес-процессов. Исправим это и привяжем конкретных людей к должностям.
 
@@ -65,14 +65,14 @@ tags:
 
 1. Перейдите в {{ team.icon }} {{ universal.right_arrow }} {{ org.icon }} {{ universal.right_arrow }} {{ org.staff }}:
 
-    ![](./img/staff/create_staff_acc_step_01.png)
+    ![]({{ media.screenshots.employees }}/{{ media.actions.add_staff }}/create_staff_acc_step_01.png)
 
 1. Кликните по кнопке {{ universal.plus }} **Создать сотрудника** в правом верхнем углу и заполните поля карточки:
 
 - Фамилия и Имя сотрудника обязательны для заполнения.
 - Отчество, Телефон, Email и фото — опциональные поля, они не отражаются в диаграммах.
 
-![](./img/staff/create_staff_acc_step_02.png)
+![]({{ media.screenshots.employees }}/{{ media.actions.add_staff }}/create_staff_acc_step_02.png)
 
 После создания и сохранения карточек сотрудников их можно привязывать к организационной структуре. 
 
@@ -80,15 +80,15 @@ tags:
 
 1. Перейдите в {{ team.icon }} {{ universal.right_arrow }} {{ org.icon }} {{ universal.right_arrow }} {{ org.scheme }}:
 
-    ![](./img/org_structure.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.navigate_to_org_str}}/org_structure.png)
 
 1. Кликните по карточке **Начальника** или **Должности**, к которой хотите привязать сотрудника, и нажмите на {{ org.edit_node }}:
 
-    ![](./img/add_staff_to_node/add_staff_to_org_node_step_01.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.add_staff_to_node }}/add_staff_to_org_node_step_01.png)
 
 1. Кликните по вкладке **Сотрудники**, выберите нужного сотрудника из выпадающего списка и нажмите кнопку **Назначить**:
 
-    ![](./img/add_staff_to_node/add_staff_to_org_node_step_02.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.add_staff_to_node }}/add_staff_to_org_node_step_02.png)
 
 1. Сохраните изменения в карточке узла нажатием на кнопку **Сохранить**.
 
@@ -102,11 +102,11 @@ tags:
 
 1. Кликните по карточке на диаграмме, выберите {{ org.edit_node }}:
 
-    ![](./img/add_role_to_node/add_role_to_org_node_step_01.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.add_role_to_node }}/add_role_to_org_node_step_01.png)
 
 1. Перейдите в секцию **Роли в моделях BPMN** и выберите нужную вам роль из выпадающего списка:
 
-    ![](./img/add_role_to_node/add_role_to_org_node_step_02.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.add_role_to_node }}/add_role_to_org_node_step_02.png)
 
 1. Нажмите на кнопку **Назначить** и потом на кнопку **Сохранить**.
 
