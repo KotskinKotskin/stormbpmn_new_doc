@@ -75,45 +75,45 @@ title: 'Регламент роли: создание шаблона, его з�
 
 После того как шаблон будет подготовлен, его нужно загрузить через раздел {{ setup_app.icon }} {{ universal.right_arrow }} {{ setup_app.reglaments_templates }}:
 
-![](../buisness_proc/img/upload_doc_template_step_01.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_01.png)
 
 1. Кликните по кнопке **Загрузить свой шаблон** в правом верхнем углу.
 1. Задайте имя шаблона:
 
-    ![](../buisness_proc/img/upload_doc_template_step_02.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_02.png)
 
 1. Выберите тип шаблона — **Для роли**:
 
-    ![](./img/upload_doc_template_step_03.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_03.png)
 
 1. Загрузите шаблон и нажмите кнопку **Сохранить шаблон**:
 
-    ![](../buisness_proc/img/upload_doc_template_step_04.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_04.png)
 
 После загрузки шаблона он будет показан в списке загруженных шаблонов:
 
-![](../buisness_proc/img/upload_doc_template_step_05.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_05.png)
 
 ### Выгрузка регламента роли по шаблону
 
 1. Перейдите в раздел {{ team.icon }} {{ universal.right_arrow }} {{ section_team.layouts.roles }}:
 
-    ![](./img/download_reglament_step_01.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.download_reglament }}/download_reglament_step_01.png)
 
 1. Выберите нужную вам роль (мы выбрали роль директора для демонстрации):
 
-    ![](./img/download_reglament_step_02.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.download_reglament }}/download_reglament_step_02.png)
 
 1. В карточке роли перейдите во вкладку **Регламенты**:
 
-    ![](./img/download_reglament_step_03.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.download_reglament }}/download_reglament_step_03.png)
 
 1. Выберите нужный вам шаблон регламента роли из списка доступных шаблонов:
 
-    ![](./img/download_reglament_step_04.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.download_reglament }}/download_reglament_step_04.png)
 
 1. Кликните по кнопке **Скачать регламент**:
 
-    ![](./img/download_reglament_step_05.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.download_reglament }}/download_reglament_step_05.png)
 
 Откройте выгруженный регламент удобным для вас приложением, работающим с DOCX, и проверьте, что все теги отработали верно и разметка не съехала. Если какой-то тег не сработал — проверьте его название и синтаксис. 

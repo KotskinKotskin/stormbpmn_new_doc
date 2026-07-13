@@ -152,24 +152,24 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 После того как шаблон будет подготовлен, его нужно загрузить через раздел {{ setup_app.icon }} {{ universal.right_arrow }} {{ setup_app.reglaments_templates }}:
 
-![](./img/upload_doc_template_step_01.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_01.png)
 
 1. Кликните по кнопке **Загрузить свой шаблон** в правом верхнем углу.
 1. Задайте имя шаблона:
 
-    ![](./img/upload_doc_template_step_02.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_02.png)
 
 1. Выберите тип шаблона — **Для процесса**:
 
-    ![](./img/upload_doc_template_step_03.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_03.png)
 
 1. Загрузите шаблон и нажмите кнопку **Сохранить шаблон**:
 
-    ![](./img/upload_doc_template_step_04.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_04.png)
 
 После загрузки шаблона, он будет показан в списке загруженных шаблонов:
 
-![](./img/upload_doc_template_step_05.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_05.png)
 
 ### Выгрузка регламента по шаблону
 
