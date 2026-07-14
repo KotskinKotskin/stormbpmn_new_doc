@@ -20,7 +20,7 @@ tags:
 
 По умолчанию при входе в раздел {{ team.bp_reg.bp_tree }} открывается вкладка {{ bp_tree.tree }}, в которой обычно и начинают создание процесса:
 
-![bp_tree_main](./img/bp_tree_main.png)
+![bp_tree_main]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_main.png)
 
 Сначала полезно продумать структуру процесса: какие у него есть этапы, подпроцессы, связи и логика выполнения. После этого его можно оформить в виде карточки процесса в реестре. 
 
@@ -43,7 +43,7 @@ tags:
 
 Например, создадим процесс заключения договора с новым клиентом. Это может выглядеть так:
 
-![new_process](./img/new_process.png)
+![new_process]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/new_process.png)
 
 - **Название**: Заключение договора с новым клиентом
 - **Родительский бизнес-процесс**: родительского процесса нет, потому что мы создаем верхнеуровневый процесс.
@@ -52,7 +52,7 @@ tags:
 - **Переиспользуемый процесс**: нет, процесс уникальный и принадлежит только отделу продаж.
 - **Связанные модели BPMN**: если диаграмма процесса уже есть, ее можно сразу привязать к карточке. Если диаграммы еще нет, поле можно временно оставить пустым. В нашем примере модель уже создана.
 
-![bound_diagramm](./img/bound_diagramm.png)
+![bound_diagramm]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bound_diagramm.png)
 
 ### Создание/добавление дочернего процесса
 
@@ -60,13 +60,13 @@ tags:
 
 1. Кликните на {{ universal.show_more }} справа от названия бизнес-процесса и выберите {{ bp_tree.create_sub_process }}:
 
-    ![create_sub_process](./img/create_sub_process.png)
+    ![create_sub_process]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/create_sub_process.png)
 
 1. Откроется модальное окно **Создание бизнес-процесса** — поля в нем заполняются так же, как и при создании бизнес-процесса верхнего уровня.
 
 После добавления дочерних процессов иерархия может выглядеть так:
 
-![bp_tree_ierarchi_example](./img/bp_tree_ierarchi_example.png)
+![bp_tree_ierarchi_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_ierarchi_example.png)
 
 
 Каждому процессу вне зависимости от вложенности соответствует своя карточка процесса со своими свойствами и привязкой к BPMN-диаграмме. Вложенность и порядок дочерних процессов можно менять перетаскиванием их мышью.
@@ -77,23 +77,23 @@ tags:
 
     Чтобы процесс можно было переиспользовать, нужно разрешить эту опцию в свойствах процесса: {{ universal.show_more }} справа от названия процесса {{ universal.right_arrow }} {{ bp_tree.edit }} {{ universal.right_arrow }} активировать тумблер **Переиспользуемый процесс**:
 
-    ![reusable_process_activation](./img/reusable_process_activation.png)
+    ![reusable_process_activation]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/reusable_process_activation.png)
 
 Часто бывает, что разные процессы содержат логически одинаковые подпроцессы. В таком случае удобно переиспользовать процессы, а не создавать их снова. Вот как это можно сделать:
 
 1. Выберите процесс, в который хотите включить переиспользуемый подпроцесс, нажмите на {{ universal.show_more }} справа от названия процесса и из выпадающего списка выберите пункт {{ bp_tree.link_process }}:
 
-    ![add_reusable_process](./img/add_reusable_process.png)
+    ![add_reusable_process]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/add_reusable_process.png)
 
 1. В открывшемся модальном окне **Добавить переиспользуемый процесс** выберите из выпадающего списка **Выберите процесс** нужный вам процесс:
 
-    ![choose_shared_process](./img/choose_shared_process.png)
+    ![choose_shared_process]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/choose_shared_process.png)
 
 1. Нажмите кнопку **Добавить**.
 
 Переиспользуемый процесс будет включен в новую иерархию:
 
-![final_include_reusable_process](./img/final_include_reusable_process.png)
+![final_include_reusable_process]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/final_include_reusable_process.png)
 
 !!! note "Прямая и обратная зависимость свойств переиспользуемых процессов"
 
@@ -103,7 +103,7 @@ tags:
 
 После создания процесса в правой части экрана появится карточка процесса:
 
-![process_card](./img/process_card.png)
+![process_card]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/process_card.png)
 
 Разберем интерфейс карточки процесса подробнее:
 
@@ -114,15 +114,15 @@ tags:
     - Даты создания и обновления карточки процесса.
     - Инструменты редактирования и удаления карточки процесса.
 
-    ![process_card_upper_toolbar](./img/process_card_upper_toolbar.png)
+    ![process_card_upper_toolbar]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/process_card_upper_toolbar.png)
 
 - Тело карточки процесса, которое включает название процесса, владельца, связанные BPMN-модели и описание.
 
-    ![process_card_body](./img/process_card_body.png)
+    ![process_card_body]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/process_card_body.png)
 
 - Нижнее меню карточки бизнес-процесса, в котором доступны вкладки {{ bp_tree.metrics }}, {{ bp_tree.options }}, {{ bp_tree.documents }}, {{ bp_tree.bpmn_models }}, {{ bp_tree.reglament }}, {{ bp_tree.log }}.
 
-    ![process_card_footer](./img/process_card_footer.png)
+    ![process_card_footer]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/process_card_footer.png)
 
 Бизнес-процесс может содержать не только базовое описание, но и набор дополнительных данных для управления, анализа и сопровождения. Рассмотрим эти вкладки подробнее.
 
@@ -132,27 +132,27 @@ tags:
 
 - {{ bp_tree.metrics }} — вкладка с показателями процесса. Здесь можно добавлять, искать, редактировать и удалять метрики, по которым оценивается эффективность процесса: длительность, стоимость, количество ошибок, конверсия, LTV, скорость потока, число сделок. Эти показатели помогают сравнивать состояние процесса в разные периоды и находить узкие места.
 
-    ![bp_metrics_example](./img/bp_metrics_example.png)
+    ![bp_metrics_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_metrics_example.png)
 
 - {{ bp_tree.options }} — вкладка с параметрами процесса. Она нужна для хранения пользовательских атрибутов и контекста процесса: уровень риска, приоритет, критичность, продукт, проект, плановая дата запуска. Параметры можно создавать, выбирать из ранее созданных и редактировать, чтобы адаптировать карточки процессов под специфику вашей компании.
 
-    ![bp_options_example](./img/bp_options_example.png)
+    ![bp_options_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_options_example.png)
 
 - {{ bp_tree.documents }} — вкладка с документами процесса. Здесь удобно хранить входные, внутренние и выходные документы, связанные с процессом: регламенты, инструкции, положения, методики, шаблоны, формы и подтверждающие файлы. Это помогает сохранить в одном месте не только схему, но и ее документальный контекст.
 
-    ![bp_tree_docs_example](./img/bp_tree_docs_example.png)
+    ![bp_tree_docs_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_docs_example.png)
 
 - {{ bp_tree.bpmn_models }} — вкладка со связанными BPMN-моделями. Одна карточка процесса может быть связана сразу с несколькими диаграммами, например с текущей моделью, архивной версией или целевой TO-BE-схемой. Это позволяет вести процесс как единую сущность, даже если его графическое описание меняется со временем.
 
-    ![bp_tree_bpmn_example](./img/bp_tree_bpmn_example.png)
+    ![bp_tree_bpmn_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_bpmn_example.png)
 
 - {{ bp_tree.reglament }} — вкладка для формирования регламента процесса. Она собирает сведения из карточки процесса и связанных моделей, чтобы выгрузить их в текстовый регламент в формате `.DOCX`.
 
-    ![bp_tree_reglament_example](./img/bp_tree_reglament_example.png)
+    ![bp_tree_reglament_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_reglament_example.png)
 
 - {{ bp_tree.log }} — вкладка с историей изменений карточки процесса. Помогает отследить, какие параметры, показатели или состояния процесса менялись с течением времени.
 
-    ![bp_tree_log_example](./img/bp_tree_log_example.png)
+    ![bp_tree_log_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/bp_tree_log_example.png)
 
 
 Добавление параметров, показателей и документов к карточке процесса не просто делает описание полнее. Оно помогает превратить процесс в рабочий управленческий объект: понятный для исполнителей, прозрачный для владельца и удобный для анализа, улучшения и регламентации.
@@ -167,18 +167,18 @@ tags:
     - **Название папки** — задайте название папки, которая будет содержать близкие по логике бизнес-процессы.
     - **Родительская папка** — укажите родительскую папку, если хотите включить создаваемую папку внутрь другой папки. Оставьте поле пустым, чтобы создать верхнеуровневую папку.
 
-    ![create_folder](./img/create_folder.png)
+    ![create_folder]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/create_folder.png)
 
 1. Нажмите кнопку **Сохранить**.
 
 После создания папки в нее можно добавлять бизнес-процессы. Для этого кликните на {{ universal.show_more }} справа от названия папки и выберите {{ bp_tree.add_process_to_folder }} из выпадающего списка:
 
-![add_process_to_folder](./img/add_process_to_folder.png)
+![add_process_to_folder]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/add_process_to_folder.png)
 
 Теперь из списка можно выбрать процессы, которые вы хотите поместить в папку:
 
-![choose_proc_to_add_folder](./img/choose_proc_to_add_folder.png)
+![choose_proc_to_add_folder]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/choose_proc_to_add_folder.png)
 
 После добавления бизнес-процессов в папку они будут отображаться списком внутри папки и таблицей слева, где указаны название процесса, дата и время создания и обновления, а также информация о том, кто его создал или обновил:
 
-![proc_review](./img/proc_review.png)
+![proc_review]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_tree }}/proc_review.png)

@@ -13,6 +13,8 @@ media:
     assets: media/screenshots/app/assets
     org_structure: media/screenshots/app/org_structure
     employees: media/screenshots/app/employees
+    registry: media/screenshots/app/registry
+
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
@@ -50,4 +52,5 @@ media:
     add_staff_to_node: add_staff_to_node
     employees_add_staff: add_staff
     add_role_to_node: add_role_to_node
+    work_with_bp_tree: work_with_bp_tree
 
