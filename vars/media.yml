@@ -53,4 +53,9 @@ media:
     employees_add_staff: add_staff
     add_role_to_node: add_role_to_node
     work_with_bp_tree: work_with_bp_tree
+    subproc_collapsed: subproc_collapsed
+    create_subprocess_collapse: create_subprocess_collapse
+    tokken_simulate: tokken_simulate
+    upload_bpmn: upload_bpmn
+
 
