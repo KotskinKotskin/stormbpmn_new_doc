@@ -38,7 +38,7 @@ title: Коммит в документацию
 
 Если вы заметили какую-то неточность или ошибку в документации — ее можно поправить прямо в репозитории с помощью встроенного инструмента — {{ git.pencil }} (карандаш для редактирования файлов). Нажмите на {{ git.pencil }}, внесите правку в документ и нажмите на кнопку **Commit changes**:
 
-![git_commit_changes](./img/git_commit_changes.png)
+![git_commit_changes]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_commit_changes.png)
 
 В открывшемся окне **Propose changes**:
 
@@ -48,7 +48,7 @@ title: Коммит в документацию
 1. Название новой ветви должно отражать суть внесенных изменений. Например: patch, fix, edit.
 1. Нажмите кнопку **Propose changes**.
 
-![git_propose_changes](./img/git_propose_changes.png)
+![git_propose_changes]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_propose_changes.png)
 
 После нажатия на кнопку **Propose changes** откроется окно подготовки PR (Pull Request):
 
@@ -56,15 +56,15 @@ title: Коммит в документацию
 - Текстовый блок **Add a description** также будет заполнен автоматически, если до этого было заполнено поле **Extended description**.
 - Кнопка **Create pull request** создаст новую ветвь и запрос на внесение изменений в основную ветвь репозитория.
 
-![git_pr_prepare](./img/git_pr_prepare.png)
+![git_pr_prepare]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_pr_prepare.png)
 
 После оформления PR, сборка документации для предпросмотра будет выполнена автоматически. Если сборка прошла успешно — в комментарии появится ссылка на собранную документацию:
 
-![build_ready](./img/build_ready.png)
+![build_ready]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/build_ready.png)
 
 После проверки сборки документации нужно призвать ревьюера в **PR**, так как без его согласия и ревью применить правки нельзя — ветка **main** защищена от бесконтрольного вливания изменений. Для призыва ревьюера нажмите на пункт **Reviewers** справа вверху от первого комментария и выберите из списка любого ревьюера:
 
-![reviewer_call](./img/reviewer_call.png)
+![reviewer_call]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/reviewer_call.png)
 
 Ревьюер будет оповещен и проверит **PR**. После этого **PR** вольют в основной репозиторий.
 
@@ -76,13 +76,13 @@ title: Коммит в документацию
 
 1. Кликните по кнопке {{ git.fork }} и выберите пункт **Create a new fork** из выпадающего списка:
 
-    ![git_fork_repo](./img/git_fork_repo.png)
+    ![git_fork_repo]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_fork_repo.png)
 
     Будет сделан fork репозитория в ваше GitHub-пространство.
 
 1. Кликните по зеленой кнопке **<> Code** и в появившемся меню нажмите на кнопку **копировать** справа от поля с URL репозитория:
 
-    ![git_clone](./img/git_clone.png)
+    ![git_clone]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_clone.png)
 
 1. Перейдите в терминал своей ОС или IDE, перейдите в директорию, в которую хотите скопировать репозиторий, и введите команду: `git clone <Ctr+v>`. Будет создана одноименная с репозиторием директория, где будет находиться содержимое репозитория.
 
@@ -99,7 +99,7 @@ title: Коммит в документацию
 
 Перейдите в репозиторий {{ repo_url }}, нажмите на кнопку {{ git.pr }} в верхней панели инструментов и кликните по своему **PR** в списке пул-реквестов:
 
-![git_choose_pr](./img/git_choose_pr.png)
+![git_choose_pr]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_choose_pr.png)
 
 Откроется окно подготовки **PR** (Pull Request):
 
@@ -107,15 +107,15 @@ title: Коммит в документацию
 - Текстовый блок **Add a description** должен содержать список выполненных работ по документации.
 - Кнопка **Create pull request** создаст запрос на внесение изменений в основную ветвь репозитория.
 
-![git_pr_prepare](./img/git_pr_prepare.png)
+![git_pr_prepare]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/git_pr_prepare.png)
 
 После создания PR, автоматически запустится сборка документации для предварительного просмотра. Если сборка прошла успешно — в комментарии появится ссылка на собранную документацию:
 
-![build_ready](./img/build_ready.png)
+![build_ready]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/build_ready.png)
 
 После проверки сборки документации нужно призвать ревьюера в **PR**, так как без его согласия и ревью применить правки нельзя — ветка **main** защищена от бесконтрольного вливания изменений. Для призыва ревьюера нажмите на пункт **Reviewers** справа вверху от первого комментария и выберите из списка любого ревьюера:
 
-![reviewer_call](./img/reviewer_call.png)
+![reviewer_call]({{ media.screenshots.git }}/{{ media.actions.git_commitment }}/reviewer_call.png)
 
 Ревьюер будет оповещен и проверит **PR**. После этого **PR** вольют в основной репозиторий.
 
