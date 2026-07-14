@@ -16,7 +16,7 @@ tags:
 
 {{ org.icon }} — это просто иерархическое представление управленческой структуры и связей между ролями, задачами и процессами. Такая связь может однозначно ответить, что именно делает конкретная должность или даже сотрудник в бизнес-процессах:
 
-![]({{ media.screenshots.org_structure }}/{{ extra }}/bound.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.extra }}/bound.png)
 
 Несмотря на то, что {{ org.icon }} — это не жесткая структура, она всё равно строится, основываясь на следующих ограничениях и правилах:
 
@@ -30,32 +30,32 @@ tags:
 
 Оргструктура создаётся в {{ team.icon }} {{ universal.right_arrow }} {{ org.icon }} {{ universal.right_arrow }} {{ org.scheme }}:
 
-![]({{ media.screenshots.org_structure }}/{{ navigate_to_org_str }}/org_structure.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.navigate_to_org_str }}/org_structure.png)
 
 Методологически раздел {{ org.scheme }} не может быть пустым. По умолчанию при первом заходе в него в нём будет находиться минимальная оргструктура: **Руководитель** + **Группа**:
 
-![]({{ media.screenshots.org_structure }}/{{ scheme }}/org_scheme_def.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.scheme }}/org_scheme_def.png)
 
 Изменяя дефолтную оргструктуру можно получить собственную оргструктуру, отвечающую вашим требованиям и представлениям. Вот как это можно сделать:
 
 1. Переименуйте главного **Руководителя** по своему усмотрению, дважды кликнув на его должность.
 1. Переименуйте существующую **Группу** или добавьте ещё одну **Группу**. Для этого кликните по карточке **Руководителя**, которому в подчинение хотите добавить **Группу**, и в появившемся меню действий наведите на {{ universal.plus }} и выберите **Добавить группу в подчинение**:
 
-    ![]({{ media.screenshots.org_structure }}/{{ add_group }}/org_structure_add_group.png)
+    ![]({{ media.screenshots.org_structure }}/{{ media.actions.add_group }}/org_structure_add_group.png)
 
 После переименования должности и добавления двух **Групп** наша диаграмма выглядит так:
 
-![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_01.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.org_structure_create }}/org_structure_create_step_01.png)
 
 Теперь добавьте **Руководителей** отделам. Для этого кликните по карточке с отделом и в появившемся меню действий наведите на {{ universal.plus }} и выберите **Добавить руководителя и группу в подчинение**:
 
-![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_02.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.org_structure_create }}/org_structure_create_step_02.png)
 
 После добавления **Руководителей** и новых групп им в подчинение, добавьте **Должностей** в подчинение. Это делается аналогичным образом с добавлением **Руководителей** и **Групп** через меню по клику по карточке.
 
 В итоге, наша диаграмма теперь выглядит так:
 
-![]({{ media.screenshots.org_structure }}/{{ org_structure_create }}/org_structure_create_step_03.png)
+![]({{ media.screenshots.org_structure }}/{{ media.actions.org_structure_create }}/org_structure_create_step_03.png)
 
 Но сейчас в диаграмме есть только организационная составляющая: названия должностей и структурных единиц без конкретных исполнителей и бизнес-процессов. Исправим это и привяжем конкретных людей к должностям.
 
