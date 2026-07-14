@@ -65,14 +65,14 @@ tags:
 
 1. Перейдите в {{ team.icon }} {{ universal.right_arrow }} {{ org.icon }} {{ universal.right_arrow }} {{ org.staff }}:
 
-    ![]({{ media.screenshots.employees }}/{{ media.actions.add_staff }}/create_staff_acc_step_01.png)
+    ![]({{ media.screenshots.employees }}/{{ media.actions.employees_add_staff }}/create_staff_acc_step_01.png)
 
 1. Кликните по кнопке {{ universal.plus }} **Создать сотрудника** в правом верхнем углу и заполните поля карточки:
 
 - Фамилия и Имя сотрудника обязательны для заполнения.
 - Отчество, Телефон, Email и фото — опциональные поля, они не отражаются в диаграммах.
 
-![]({{ media.screenshots.employees }}/{{ media.actions.add_staff }}/create_staff_acc_step_02.png)
+![]({{ media.screenshots.employees }}/{{ media.actions.employees_add_staff }}/create_staff_acc_step_02.png)
 
 После создания и сохранения карточек сотрудников их можно привязывать к организационной структуре. 
 
