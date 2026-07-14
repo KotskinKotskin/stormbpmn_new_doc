@@ -15,6 +15,7 @@ media:
     employees: media/screenshots/app/employees
     registry: media/screenshots/app/registry
     git: media/screenshots/git
+    doc: media/screenshots/doc
 
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
@@ -58,5 +59,7 @@ media:
     create_subprocess_collapse: create_subprocess_collapse
     tokken_simulate: tokken_simulate
     upload_bpmn: upload_bpmn
+    git_commitment: commitment
+    doc_doc_structure: doc_structure
 
 
