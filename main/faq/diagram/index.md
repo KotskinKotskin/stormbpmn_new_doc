@@ -84,7 +84,7 @@
     - {{ process_editor.upper_toolbar.extra.num_tasks }} — нумеровать только задачи в пулах. Это удобно, когда пул большой и нужно видеть только то, что нужно.
     - {{ process_editor.upper_toolbar.extra.num_all }} — нумеровать все элементы диаграммы, включая пулы. Этот вариант нумерации обычно используют для работы с регламентами.
 
-    ![]({{ media.screenshots.diagram }}/{{ media.actions.num_elements }}/diagramm_num_elements.png)
+    ![]({{ media.screenshots.diagram }}/{{ media.actions.diagram_num_elements }}/diagramm_num_elements.png)
 
     **Нумерация элементов внутри пула**
 
@@ -118,7 +118,7 @@
 
     Эта ошибка возникает, если не указать исходящий поток сообщений, ведущий в другой процесс, например так:
 
-    ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/fix_error_44.png)
+    ![]({{ media.screenshots.diagram }}/{{ media.actions.diagram_fix_error_44 }}/fix_error_44.png)
 
     Важно, чтобы исходящий поток сообщений приходил в конкретный активный элемент (стартовое событие или задача) в другом процессе или в свернутый подпроцесс.
 
@@ -126,11 +126,11 @@
     
     1. Перейдите в раздел {{ team.icon }} {{ universal.right_arrow }} {{ team.team_settings.icon }} {{ universal.right_arrow }} {{ team.team_settings.general_settings }}:
 
-        ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/switch_off_err_44.png)
+        ![]({{ media.screenshots.diagram }}/{{ media.actions.diagram_fix_error_44 }}/switch_off_err_44.png)
 
     1. Проскрольте страницу до раздела **Правила проверки диаграмм**, найдите строку 44: `Событие отправки без исходящего потока сообщений` и измените статус уведомления с `Вкл` на `Выкл`:
 
-        ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/switch_off_err_44_step_02.png)
+        ![]({{ media.screenshots.diagram }}/{{ media.actions.diagram_fix_error_44 }}/switch_off_err_44_step_02.png)
 
     Подробный видео-туториал по исправлению ошибки:
 
