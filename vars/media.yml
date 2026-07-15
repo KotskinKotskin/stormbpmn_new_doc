@@ -14,8 +14,10 @@ media:
     org_structure: media/screenshots/app/org_structure
     employees: media/screenshots/app/employees
     registry: media/screenshots/app/registry
+    custom_fields: media/screenshots/app/custom_fields
     git: media/screenshots/git
     doc: media/screenshots/doc
+     
 
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
@@ -64,5 +66,14 @@ media:
     doc_doc_structure: doc_structure
     acc_change_password: change_password                   # media.screenshots.profile
     work_with_xlsx: work_with_xlsx                         # media.screenshots.registry
+    cf_create: create                                      # media.screenshots.custom_fields
+    diagram_change_color: change_color                     # media.screenshots.diagram
+    diagram_add_notice_to_element: add_notice_to_element   # media.screenshots.diagram
+    create_default_stream: create_default_stream           # media.screenshots.diagram
+    diagram_subprocess: subprocess                         # media.screenshots.diagram
+    add_role_to_task: add_role_to_task                     # media.screenshots.diagram
+    work_with_space: work_with_space                       # media.screenshots.diagram
+    diagram_num_elements: num_elements                     # media.screenshots.diagram
+    diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
 
 

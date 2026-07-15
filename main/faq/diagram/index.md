@@ -4,7 +4,7 @@
 
     Кликните по элементу диаграммы, цвет которого хотите изменить, а затем кликните на кнопку {{ process_editor.upper_toolbar.buttons.choose_color }} в верхней панели управления и выберите желаемый цвет заливки элемента:
 
-    ![choose_color](./img/choose_color.png)
+    ![choose_color]({{ media.screenshots.diagram }}/{{ media.actions.diagram_change_color }}/choose_color.png)
 
     Для изменения цвета заднего фона диаграммы — кликните по фону диаграммы и повторите действия, описанные выше.
 
@@ -12,11 +12,11 @@
 
     Кликните по элементу диаграммы, справа вверху от элемента появится кнопка {{ process_editor.canvas.elements.add_notice }}. Кликните по кнопке и в появившееся поле введите комментарий. Поддерживается многострочный ввод и возможность прикрепить файл:
 
-    ![add_notice_to_element_extra_content](./img/add_notice_to_element_extra_content.png)
+    ![add_notice_to_element_extra_content]({{ media.screenshots.diagram }}/{{ media.actions.diagram_add_notice_to_element }}/add_notice_to_element_extra_content.png)
 
     Комментарии, оставленные на элементах, дублируются списком виджетов в правой панели управления в разделе {{ process_editor.right_toolbar.buttons.notices }}:
 
-    ![right_panel_notices_widget](./img/right_panel_notices_widget.png)
+    ![right_panel_notices_widget]({{ media.screenshots.diagram }}/{{ media.actions.diagram_add_notice_to_element }}/right_panel_notices_widget.png)
 
     Виджеты комментариев удобно отражают статус комментария, его важность, принадлежность к элементу на схеме:
 
@@ -29,7 +29,7 @@
 
     По правилам BPMN-нотации при использовании логической развилки один из выходных потоков должен быть отмечен как поток управления «в остальных случаях» (RU-версия). Для этого кликните на нужный выходной поток — откроется меню дополнительных настроек. Кликните по изображению гаечного ключа и выберите пункт: **Поток управления «в остальных случаях»**:
 
-    ![create_default_stream](./img/create_default_stream.png)
+    ![create_default_stream]({{ media.screenshots.diagram }}/{{ media.actions.create_default_stream }}/create_default_stream.png)
 
     {{ universal.youtube }} [видео](https://youtu.be/Qa6EVKrsn40) с примером.
 
@@ -41,25 +41,25 @@
     
     1. Перетащите на диаграмму из левой панели элементов элемент **Развёрнутый подпроцесс**:
 
-        ![subprocess](./img/subprocess.png)
+        ![subprocess]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/subprocess.png)
 
     2. Кликните по элементу **Развёрнутый подпроцесс** и из выпадающего меню выберите опцию {{ universal.wrench }} **Изменить элемент**:
 
-        ![modify_subprocess](./img/modify_subprocess.png)  
+        ![modify_subprocess]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/modify_subprocess.png)  
 
     3. В меню дополнительных опций изменения процесса выберите пункт **Подпроцесс по событию**:
 
-        ![subprocess_optional](./img/subprocess_optional.png)
+        ![subprocess_optional]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/subprocess_optional.png)
 
 ℹ️🔽 "Назначить нескольким задачам одновременно одну роль и/или элемент архитектуры"
 
     1. В редакторе диаграмм кликните по {{ process_editor.right_toolbar.archetecture }} правого тулбара — откроется меню добавления ролей и элементов архитектуры к «активным» элементам диаграммы:
 
-        ![el_structure](./img/el_structure.png)  
+        ![el_structure]({{ media.screenshots.diagram }}/{{ media.actions.add_role_to_task }}/el_structure.png)  
 
     2. Кликните с зажатой клавишей Shift по элементам диаграммы, обозначающим процесс или действие, и выберите **Роль** и/или **Элемент архитектуры**, которые хотите присвоить выбранным элементам:
 
-        ![select_role_or_ibfrastructure_el](./img/select_role_or_ibfrastructure_el.png)
+        ![select_role_or_ibfrastructure_el]({{ media.screenshots.diagram }}/{{ media.actions.add_role_to_task }}/select_role_or_ibfrastructure_el.png)
     
     Если у вас еще нет нужной роли или элемента архитектуры — вы можете их создать, нажав на кнопку {{ universal.plus }} справа от роли или элемента архитектуры.
 
@@ -67,11 +67,11 @@
 
     {{ bpmn.space_tool }} — это инструмент организации пространства внутри пула диаграммы. Он находится на левой боковой панели инструментов:
 
-    ![space_tool](./img/space_tool.png)
+    ![space_tool]({{ media.screenshots.diagram }}/{{ media.actions.work_with_space }}/space_tool.png)
 
     С его помощью можно организовывать пространство внутри пула. Например, можно расширить пул вправо с автоматическим переносом части элементов. Для этого выберите {{ bpmn.space_tool }}, кликните нужную вам часть пула и потяните её вправо:
 
-    ![space_tool_slide_right](./img/space_tool_slide_right.png)
+    ![space_tool_slide_right]({{ media.screenshots.diagram }}/{{ media.actions.work_with_space }}/space_tool_slide_right.png)
 
     Идея {{ bpmn.space_tool }} в том, что инструмент двигает пространство вместе с элементами диаграммы, что позволяет зонировать пространство и удобно размещать элементы диаграммы в пуле.
 
@@ -84,7 +84,7 @@
     - {{ process_editor.upper_toolbar.extra.num_tasks }} — нумеровать только задачи в пулах. Это удобно, когда пул большой и нужно видеть только то, что нужно.
     - {{ process_editor.upper_toolbar.extra.num_all }} — нумеровать все элементы диаграммы, включая пулы. Этот вариант нумерации обычно используют для работы с регламентами.
 
-    ![](./img/diagramm_num_elements.png)
+    ![]({{ media.screenshots.diagram }}/{{ media.actions.num_elements }}/diagramm_num_elements.png)
 
     **Нумерация элементов внутри пула**
 
@@ -118,7 +118,7 @@
 
     Эта ошибка возникает, если не указать исходящий поток сообщений, ведущий в другой процесс, например так:
 
-    ![](./img/fix_error_44.png)
+    ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/fix_error_44.png)
 
     Важно, чтобы исходящий поток сообщений приходил в конкретный активный элемент (стартовое событие или задача) в другом процессе или в свернутый подпроцесс.
 
@@ -126,11 +126,11 @@
     
     1. Перейдите в раздел {{ team.icon }} {{ universal.right_arrow }} {{ team.team_settings.icon }} {{ universal.right_arrow }} {{ team.team_settings.general_settings }}:
 
-        ![](./img/switch_off_err_44.png)
+        ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/switch_off_err_44.png)
 
     1. Проскрольте страницу до раздела **Правила проверки диаграмм**, найдите строку 44: `Событие отправки без исходящего потока сообщений` и измените статус уведомления с `Вкл` на `Выкл`:
 
-        ![](./img/switch_off_err_44_step_02.png)
+        ![]({{ media.screenshots.diagram }}/{{ media.actions.fix_error_44 }}/switch_off_err_44_step_02.png)
 
     Подробный видео-туториал по исправлению ошибки:
 
