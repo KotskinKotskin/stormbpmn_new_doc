@@ -41,15 +41,15 @@
     
     1. Перетащите на диаграмму из левой панели элементов элемент **Развёрнутый подпроцесс**:
 
-        ![subprocess]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/subprocess.png)
+        ![subprocess]({{ media.screenshots.diagram }}/{{ media.actions.diagram_subprocess }}/subprocess.png)
 
     2. Кликните по элементу **Развёрнутый подпроцесс** и из выпадающего меню выберите опцию {{ universal.wrench }} **Изменить элемент**:
 
-        ![modify_subprocess]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/modify_subprocess.png)  
+        ![modify_subprocess]({{ media.screenshots.diagram }}/{{ media.actions.diagram_subprocess }}/modify_subprocess.png)  
 
     3. В меню дополнительных опций изменения процесса выберите пункт **Подпроцесс по событию**:
 
-        ![subprocess_optional]({{ media.screenshots.diagram }}/{{ media.actions.subprocess }}/subprocess_optional.png)
+        ![subprocess_optional]({{ media.screenshots.diagram }}/{{ media.actions.diagram_subprocess }}/subprocess_optional.png)
 
 ℹ️🔽 "Назначить нескольким задачам одновременно одну роль и/или элемент архитектуры"
 
