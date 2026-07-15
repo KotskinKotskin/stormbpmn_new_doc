@@ -6,15 +6,15 @@ title: Работа с таблицей бизнес-процессов
 
 {{ bp_reg.table }} — это табличный вид {{ bp_reg.bp_reg }} с возможностью фильтрации, сортировки и поиска. {{ bp_reg.table }} помогает быстро находить нужный процесс благодаря плоской, табличной структуре и фильтрам:
 
-![bp_table_def](../../main/faq/bp_table/img/bp_table_def.png)
+![bp_table_def]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_def.png)
 
 Колонки в {{ bp_reg.table }} — это дефолтные и пользовательские параметры и показатели бизнес-процесса. Колонки можно добавлять в таблицу и скрывать. Чтобы скрыть ненужную колонку — кликните на {{ table.hide_column }}:
 
-![bp_table_hide_column](../../main/faq/bp_table/img/bp_table_hide_column.png)
+![bp_table_hide_column]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_hide_column.png)
 
 Для добавления колонки в таблицу — перейдите к последней колонке таблицы и нажмите на кнопку {{ universal.plus }} и выберите нужный вам параметр для добавления как колонки в таблицу:
 
-![bp_table_add_column](../../main/faq/bp_table/img/bp_table_add_column.png)
+![bp_table_add_column]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_add_column.png)
 
 Менять таблицу можно не только путём добавления или удаления колонок, а ещё с помощью фильтров. **Фильтры** (кнопку {{ table.filter }} справа от строки поиска) позволяют отображать только нужный контент по определенным условиям, которые задаются через наборы параметров фильтрации:
 
@@ -24,7 +24,7 @@ title: Работа с таблицей бизнес-процессов
 
 Чтобы добавить правило фильтрации — заполните **Поле фильтрации**, **Оператор сравнения**, **Значение** и фильтр сформируется автоматически. Например:
 
-![bp_table_add_filter](../../main/faq/bp_table/img/bp_table_add_filter.png)
+![bp_table_add_filter]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_add_filter.png)
 
 Правил фильтрации может быть несколько. Также поддерживаются групповые условия фильтрации. Однако бывают ситуации, когда нужно анализировать несколько экземпляров таблиц с одинаковыми наборами данных, но с разными фильтрами.
 
@@ -36,10 +36,10 @@ title: Работа с таблицей бизнес-процессов
 - {{ table.download }} — скачать список процессов в формате `.xlsx`.
 - {{ universal.delete }} **Удалить** — удалить вкладку.
 
-![bp_table_tab](../../main/faq/bp_table/img/bp_table_tab.png)
+![bp_table_tab]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_tab.png)
 
 Для создания новой вкладки нажмите на кнопку {{ universal.plus }} справа от существующей вкладки и задайте **Название вкладки**, а также выберите **Шаблоны команды**, если они есть:
 
-![bp_table_tab_create](../../main/faq/bp_table/img/bp_table_tab_create.png)
+![bp_table_tab_create]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_tab_create.png)
 
 С уверенностью можно сказать, что {{ bp_reg.table }} предоставляет широкий и мощный набор аналитических инструментов для анализа бизнес-процессов в табличном представлении.
