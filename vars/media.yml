@@ -54,12 +54,15 @@ media:
     add_staff_to_node: add_staff_to_node
     employees_add_staff: add_staff
     add_role_to_node: add_role_to_node
-    work_with_bp_tree: work_with_bp_tree
-    subproc_collapsed: subproc_collapsed
-    create_subprocess_collapse: create_subprocess_collapse
-    tokken_simulate: tokken_simulate
+    work_with_bp_tree: work_with_bp_tree                   # media.screenshots.registry
+    work_with_bp_table: work_with_bp_tree                  # media.screenshots.registry
+    subproc_collapsed: subproc_collapsed                   # media.screenshots.diagram
+    create_subprocess_collapse: create_subprocess_collapse # media.screenshots.diagram
+    tokken_simulate: tokken_simulate                       # media.screenshots.diagram
     upload_bpmn: upload_bpmn
-    git_commitment: commitment
+    git_commitment: commitment                             # media.screenshots.git
     doc_doc_structure: doc_structure
+    acc_change_password: change_password                   # media.screenshots.profile
+    work_with_xlsx: work_with_xlsx                         # media.screenshots.registry
 
 

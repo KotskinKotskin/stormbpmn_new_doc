@@ -31,7 +31,7 @@
 
     Также можно создать каталог **Процессы на улучшение** и поместить туда, например, процесс **Подготовка договора** для пересмотра и улучшения:
 
-    ![bp_tree_catalog](./img/bp_tree_catalog.png)
+    ![bp_tree_catalog]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/bp_tree_catalog.png)
 
     Структура папок может быть плоской — все папки на одном уровне, нет вложенных папок, или иерархической — есть вложенные папки. При этом один и тот же процесс может встречаться несколько раз в одной структуре.
 
@@ -41,7 +41,7 @@
 
     1. Скачайте образец файла с помощью {{ bp_tree.download_xlsx }}:
 
-        ![xlsx_download_example](./img/xlsx_download_example.png)
+        ![xlsx_download_example]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/xlsx_download_example.png)
 
     1. Откройте xlsx-файл, перейдите на вкладку **Процессы** и заполните таблицу исходя из следующей логики:
 
@@ -74,18 +74,18 @@
     1. Данные в остальные вкладки можно не вносить.
     1. Сохраните изменения в файле и импортируйте xlsx-файл с помощью инструмента {{ bp_tree.upload_xlsx }}:
 
-        ![xlsx_import_file](./img/xlsx_import_file.png)
+        ![xlsx_import_file]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/xlsx_import_file.png)
 
     1. Выберите файл для импорта.
     1. Ознакомьтесь с отчётом механизма импорта процессов:
 
-        ![xlsx_import_attention](./img/xlsx_import_attention.png)
+        ![xlsx_import_attention]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/xlsx_import_attention.png)
     
     1. Подтвердите импорт процессов из файла, нажав кнопку **Начать импорт**.
     1. Ознакомьтесь с отчётом об импорте процессов:
 
-        ![xlsx_import_success](./img/xlsx_import_success.png)
+        ![xlsx_import_success]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/xlsx_import_success.png)
     
     После импорта в разделе {{ team.bp_reg.bp_tree }} появятся импортированные процессы:
 
-    ![xlsx_import_result](./img/xlsx_import_result.png)
+    ![xlsx_import_result]({{ media.screenshots.registry }}/{{ media.actions.work_with_xlsx }}/xlsx_import_result.png)

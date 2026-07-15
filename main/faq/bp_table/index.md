@@ -7,19 +7,18 @@
     
     {{ bp_reg.table }} помогает быстро находить нужный процесс благодаря плоской, табличной структуре и фильтрам:
 
-    ![bp_table_def](./img/bp_table_def.png)
+    ![bp_table_def]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_def.png)
 
 
 ℹ️🔽 "Колонки в {{ bp_reg.table }}"
 
     Колонки в {{ bp_reg.table }} — это дефолтные и пользовательские параметры и показатели бизнес-процесса. Колонки можно добавлять в таблицу и скрывать. Чтобы скрыть ненужную колонку — кликните на {{ table.hide_column }}:
 
-    ![bp_table_hide_column](./img/bp_table_hide_column.png)
-
+    ![bp_table_hide_column]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_hide_column.png)
 
     Для добавления колонки в таблицу — перейдите к последней колонке таблицы и нажмите на кнопку {{ universal.plus }} и выберите нужный вам параметр для добавления как колонки в таблицу:
 
-    ![bp_table_add_column](./img/bp_table_add_column.png)
+    ![bp_table_add_column]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_add_column.png)
 
 
 ℹ️🔽 "Фильтрация значений столбцов по полям"
@@ -32,7 +31,7 @@
 
     Чтобы добавить правило фильтрации — заполните **Поле фильтрации**, **Оператор сравнения**, **Значение** и фильтр сформируется автоматически. Например:
 
-    ![bp_table_add_filter](./img/bp_table_add_filter.png)
+    ![bp_table_add_filter]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_add_filter.png)
 
     Правил фильтрации может быть несколько. Также поддерживаются групповые условия фильтрации.
 
@@ -47,8 +46,8 @@
     - {{ table.download }} — скачать список процессов в формате `.xlsx`.
     - {{ universal.delete }} **Удалить** — удалить вкладку.
 
-    ![bp_table_tab](./img/bp_table_tab.png)
+    ![bp_table_tab]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_tab.png)
 
     Для создания новой вкладки нажмите на кнопку {{ universal.plus }} справа от существующей вкладки и задайте **Название вкладки**, а также выберите **Шаблоны команды**, если они есть:
 
-    ![bp_table_tab_create](./img/bp_table_tab_create.png)
+    ![bp_table_tab_create]({{ media.screenshots.registry }}/{{ media.actions.work_with_bp_table }}/bp_table_tab_create.png)
