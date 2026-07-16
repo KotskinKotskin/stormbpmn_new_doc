@@ -4,7 +4,7 @@
 
     {{ bp_reg.status }} — это объекты и показатели управления жизненным циклом карточки процесса. Они отражают информацию о текущем состоянии процесса:
 
-    ![status_example]({{ media.screenshots.diagram }}/{{ media.actions.diagram_status_example }}/status_example.png)
+    ![status_example]({{ media.screenshots.registry }}/{{ media.actions.registry_status_example }}/status_example.png)
 
 ℹ️🔽 "Создание статуса бизнес-процесса"
 

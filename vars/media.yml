@@ -78,7 +78,7 @@ media:
     diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
     status_create: status_create                           # media.screenshots.status
     status_edit: status_edit                               # media.screenshots.status
-    diagram_status_example: status_example                 # media.screenshots.diagram
+    registry_status_example: status_example                 # media.screenshots.registry
 
 
 
