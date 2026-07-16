@@ -15,6 +15,7 @@ media:
     employees: media/screenshots/app/employees
     registry: media/screenshots/app/registry
     custom_fields: media/screenshots/app/custom_fields
+    status: media/screenshots/app/status
     git: media/screenshots/git
     doc: media/screenshots/doc
      
@@ -75,5 +76,9 @@ media:
     work_with_space: work_with_space                       # media.screenshots.diagram
     diagram_num_elements: num_elements                     # media.screenshots.diagram
     diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
+    status_create: status_create                           # media.screenshots.status
+    status_edit: status_edit                               # media.screenshots.status
+    diagram_status_example: status_example                 # media.screenshots.diagram
+
 
 
