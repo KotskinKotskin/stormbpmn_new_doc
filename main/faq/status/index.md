@@ -14,7 +14,7 @@
 
 ℹ️🔽 "Редактирование и удаление статуса бизнес-процесса"
 
-    Справа от названия статуса в разделе {{ bp_reg.status }} есть кнопки {{ media.actions.bp_tree.edit }} и {{ universal.delete }} **Удалить**:
+    Справа от названия статуса в разделе {{ bp_reg.status }} есть кнопки {{ bp_tree.edit }} и {{ universal.delete }} **Удалить**:
 
     ![status_edit_del]({{ media.screenshots.status }}/{{ media.actions.status_edit }}/status_edit_del.png)
 
