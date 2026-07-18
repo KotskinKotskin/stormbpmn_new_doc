@@ -155,6 +155,12 @@ jobs:
               "          }\n"
               "        }\n"
               "        console.error(renderErr);\n"
+              "        if (process.env.GITHUB_ACTIONS === 'true') {\n"
+              "          const _msg = String(renderErr && renderErr.message ? renderErr.message : renderErr).replace(/\\n/g, '%0A').replace(/\\r/g, '%0D');\n"
+              "          const _file = page.filePathRelative || page.filePath || '';\n"
+              "          const _params = _file ? ` file=${_file}` : '';\n"
+              "          console.log(`::error${_params}::[render-error] ${_msg} (route: ${page.path})`);\n"
+              "        }\n"
               "        throw renderErr;\n"
               "      }\n"
           )
