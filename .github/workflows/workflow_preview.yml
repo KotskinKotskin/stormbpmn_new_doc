@@ -22,13 +22,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  # ponytail: gate для preview — валидация автора коммента и resolve PR number
+  # Делается до вызова reusable build, чтобы не стартовать тяжёлую сборку зря
+  gate:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' && github.event.action != 'closed') ||
       (github.event.issue.pull_request && startsWith(github.event.comment.body, '/vuepress build dev'))
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 5
+    outputs:
+      pr_number: ${{ steps.pr.outputs.number }}
+      preview_id: ${{ steps.meta.outputs.preview_id }}
+      preview_url: ${{ steps.meta.outputs.preview_url }}
+      base_path: ${{ steps.meta.outputs.base_path }}
+      media_base_url: ${{ steps.meta.outputs.media_base_url }}
 
     steps:
       - name: Validate comment author (issue_comment)
@@ -74,363 +82,61 @@ jobs:
               content: 'eyes'
             });
 
-      - name: Checkout docs (default branch)
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.repository.default_branch }}
-          path: stormbpmn_project/stormbpmn_new_doc
-          fetch-depth: 0
-
-      - name: Squash-merge PR into checked out docs
-        working-directory: stormbpmn_project/stormbpmn_new_doc
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin "pull/${{ steps.pr.outputs.number }}/head:pr-head"
-          if ! git merge --squash --no-commit pr-head; then
-            echo "Squash merge conflict for PR #${{ steps.pr.outputs.number }}"
-            exit 1
-          fi
-          git status --short
-
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          python-version: '3.12'
-          enable-cache: true
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Create working directories
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$GITHUB_WORKSPACE/out_test_storage"
-          mkdir -p "$GITHUB_WORKSPACE/output/vuepress_hope"
-          mkdir -p "$GITHUB_WORKSPACE/site/vuepress"
-
-      - name: Checkout VuePress Hope
-        uses: actions/checkout@v4
-        with:
-          repository: Pseudolukian/vuepress_hope
-          path: stormbpmn_project/stormbpmn_vuepress_hope
-
-      - name: Normalize VuePress public media path
-        shell: bash
-        run: |
-          set -euo pipefail
-          MEDIA_PATH="$GITHUB_WORKSPACE/stormbpmn_project/stormbpmn_vuepress_hope/src/.vuepress/public/media"
-          if [[ -L "$MEDIA_PATH" ]]; then
-            rm "$MEDIA_PATH"
-          fi
-          mkdir -p "$MEDIA_PATH"
-
-      - name: Install VuePress dependencies
-        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm install
-
-      - name: Patch VuePress bundler render-error logging
-        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path("node_modules/@vuepress/bundler-vite/dist/index.js")
-          src = p.read_text(encoding="utf-8")
-
-          old = (
-              "      await renderPage({\n"
-              "        app,\n"
-              "        page,\n"
-              "        vueApp,\n"
-              "        vueRouter,\n"
-              "        renderToString,\n"
-              "        ssrTemplate,\n"
-              "        output: clientOutput.output,\n"
-              "        outputEntryChunk: clientEntryChunk,\n"
-              "        outputCssAsset: clientCssAsset\n"
-              "      });\n"
-          )
-          new = (
-              "      try {\n"
-              "        await renderPage({\n"
-              "          app,\n"
-              "          page,\n"
-              "          vueApp,\n"
-              "          vueRouter,\n"
-              "          renderToString,\n"
-              "          ssrTemplate,\n"
-              "          output: clientOutput.output,\n"
-              "          outputEntryChunk: clientEntryChunk,\n"
-              "          outputCssAsset: clientCssAsset\n"
-              "        });\n"
-              "      } catch (renderErr) {\n"
-              "        console.error(`\\n[render-error] Failed to render page:\\n  route:  ${page.path}\\n  source: ${page.filePathRelative || page.filePath || '(unknown)'}\\n`);\n"
-              "        if (page.content) {\n"
-              "          const _re = /\\{\\{\\s*((?!\\$|page\\.meta)[\\w]+(?:\\.[\\w]+)*)\\s*\\}\\}/;\n"
-              "          const _lines = page.content.split('\\n');\n"
-              "          const _hits = [];\n"
-              "          for (let _i = 0; _i < _lines.length; _i++) {\n"
-              "            if (_lines[_i].match(_re)) {\n"
-              "              _hits.push('  L' + (_i + 1) + ': ' + _lines[_i].trim().slice(0, 200));\n"
-              "              if (_hits.length >= 20) break;\n"
-              "            }\n"
-              "          }\n"
-              "          if (_hits.length) {\n"
-              "            console.error('[render-error] Unresolved {{ }} expressions in source:');\n"
-              "            _hits.forEach(function(h) { console.error(h); });\n"
-              "          }\n"
-              "        }\n"
-              "        console.error(renderErr);\n"
-              "        throw renderErr;\n"
-              "      }\n"
-          )
-
-          if new in src:
-              print("bundler-vite render-error patch already applied")
-          elif old in src:
-              p.write_text(src.replace(old, new, 1), encoding="utf-8")
-              print("bundler-vite render-error patch applied")
-          else:
-              raise SystemExit("Expected renderPage block not found in bundler-vite/dist/index.js")
-          PY
-
-      - name: VuePress lifecheck
-        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
-        shell: bash
-        run: |
-          set -euo pipefail
-          npx vuepress-vite --version
-
-      - name: Checkout UMDA
-        uses: actions/checkout@v4
-        with:
-          repository: Pseudolukian/umda
-          ref: fix_structure_logic
-          path: stormbpmn_project/umda
-
-      - name: Patch UMDA PSD markdown regex
-        working-directory: stormbpmn_project/umda
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path("md_handler/md_handler.py")
-          src = p.read_text(encoding="utf-8")
-
-          old = "_PSD_LINK_RE = re.compile(r'(!\\[(.+?)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
-          new = "_PSD_LINK_RE = re.compile(r'(!\\[([^\\]]*(?:\\[[^\\]]*\\][^\\]]*)*)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
-
-          if new in src:
-              print("UMDA regex already patched")
-          elif old in src:
-              p.write_text(src.replace(old, new, 1), encoding="utf-8")
-              print("UMDA regex patched")
-          else:
-              raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
-          PY
-
-      - name: Install UMDA dependencies
-        working-directory: stormbpmn_project/umda
-        shell: bash
-        run: |
-          set -euo pipefail
-          uv venv .umda
-          source .umda/bin/activate
-          uv pip install -r requarements.txt
-
-      - name: UMDA lifecheck
-        working-directory: stormbpmn_project/umda
-        shell: bash
-        run: |
-          set -euo pipefail
-          source .umda/bin/activate
-          python - <<'PY'
-          import os
-          from pathlib import Path
-          from psd_handler.psd_handler import PSDHandler
-          from data_models.psd_config import PSDConfig
-
-          out_dir = Path(os.environ["GITHUB_WORKSPACE"]) / "out_test_storage"
-          out_dir.mkdir(parents=True, exist_ok=True)
-          psd_handler = PSDHandler(output_dir=str(out_dir))
-          result = psd_handler.render(PSDConfig(
-              psd_path="https://storage.yandexcloud.net/stormbpmn-psd-src/diagram.psd",
-              base_layer="Account",
-              Frames=["Account_btn", "Account_email"],
-              Focuses=["Account"],
-              Crops=[]
-          ))
-          psd_handler.terminate()
-          print(f"Saved: {result}")
-          PY
-
-          if [[ -z "$(find "$GITHUB_WORKSPACE/out_test_storage" -type f -print -quit)" ]]; then
-            echo "UMDA lifecheck failed: out_test_storage is empty"
-            exit 1
-          fi
-
       - name: Build preview metadata
-        id: preview_meta
+        id: meta
         shell: bash
         run: |
           set -euo pipefail
           # ponytail: stable per-PR id → повторные сборки перезаписывают ту же папку в gh-pages
-          PREVIEW_ID="pr-${{ steps.pr.outputs.number }}"
+          PR_NUMBER="${{ steps.pr.outputs.number }}"
+          PREVIEW_ID="pr-${PR_NUMBER}"
           OWNER="${GITHUB_REPOSITORY%%/*}"
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           OWNER_LC="${OWNER,,}"
           PREVIEW_URL="https://${OWNER_LC}.github.io/${REPO_NAME}/${PREVIEW_ID}/"
+          BASE_PATH="/${REPO_NAME}/${PREVIEW_ID}/"
+          # ponytail: полный https URL с /media в конце — Vite/Rollup пропускает
+          # http(s) ссылки как есть; img_replacer отдаёт rel_path без media/ префикса
+          MEDIA_BASE_URL="https://${OWNER_LC}.github.io/${REPO_NAME}/${PREVIEW_ID}/media"
 
           echo "preview_id=${PREVIEW_ID}" >> "$GITHUB_OUTPUT"
           echo "preview_url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
+          echo "base_path=${BASE_PATH}" >> "$GITHUB_OUTPUT"
+          echo "media_base_url=${MEDIA_BASE_URL}" >> "$GITHUB_OUTPUT"
 
-      - name: Prepare CI umda.yml
-        working-directory: stormbpmn_project/umda
+  build:
+    needs: gate
+    uses: ./.github/workflows/workflow_build.yml
+    with:
+      pr_number: ${{ needs.gate.outputs.pr_number }}
+      base_path: ${{ needs.gate.outputs.base_path }}
+      media_base_url: ${{ needs.gate.outputs.media_base_url }}
+      artifact_name: preview-bundle
+
+  deploy:
+    needs: [gate, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR_NUMBER: ${{ needs.gate.outputs.pr_number }}
+
+    steps:
+      - name: Download site bundle artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: preview-bundle
+          path: ${{ github.workspace }}
+
+      - name: Unpack bundle
         shell: bash
-        env:
-          PREVIEW_ID: ${{ steps.preview_meta.outputs.preview_id }}
         run: |
           set -euo pipefail
-          .umda/bin/python - <<'PY'
-          import os
-          import re
-          from pathlib import Path
-          import yaml
-
-          ENV_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
-
-          def expand_env(s: str) -> str:
-            def repl(match):
-              name = match.group(1)
-              default = match.group(2)
-              value = os.getenv(name)
-              if value:
-                return value
-              if default is not None:
-                return default
-              raise RuntimeError(f"Missing env var for ci.umda.yml: {name}")
-            return ENV_RE.sub(repl, s)
-
-          def expand_obj(obj):
-            if isinstance(obj, dict):
-              return {k: expand_obj(v) for k, v in obj.items()}
-            if isinstance(obj, list):
-              return [expand_obj(v) for v in obj]
-            if isinstance(obj, str):
-              return expand_env(obj)
-            return obj
-
-          ws = Path(os.environ["GITHUB_WORKSPACE"])
-          docs = ws / "stormbpmn_project" / "stormbpmn_new_doc"
-          vuepress = ws / "stormbpmn_project" / "stormbpmn_vuepress_hope"
-
-          # In CI there is no /root/stormbpmn_project/src_storage.
-          # Rewrite local PSD routes to public source URLs so UMDA can render.
-          media_vars_path = docs / "vars" / "media.yml"
-          if media_vars_path.exists():
-            with media_vars_path.open("r", encoding="utf-8") as f:
-              media_cfg = yaml.safe_load(f) or {}
-
-            media_section = media_cfg.get("media", {})
-            changed = False
-            for section_name, section in media_section.items():
-              if isinstance(section, dict):
-                for key, value in list(section.items()):
-                  if isinstance(value, str) and value.startswith("/root/stormbpmn_project/src_storage/"):
-                    section[key] = "https://storage.yandexcloud.net/stormbpmn-psd-src/" + Path(value).name
-                    changed = True
-
-            if changed:
-              with media_vars_path.open("w", encoding="utf-8") as f:
-                yaml.safe_dump(media_cfg, f, allow_unicode=False, sort_keys=False)
-              print(f"Normalized media vars for CI: {media_vars_path}")
-
-          src = docs / "umda.yml"
-          dst = docs / "umda.yml"
-
-          with src.open("r", encoding="utf-8") as f:
-            cfg = yaml.safe_load(f)
-
-          cfg = expand_obj(cfg)
-
-          # ponytail: S3 секция больше не используется — медиа едет в бандл gh-pages
-          cfg.get("config", {}).pop("S3", None)
-          cfg.get("config", {}).pop("s3", None)
-
-          cfg["config"]["doc_input"] = str(docs)
-
-          repo_full = os.environ["GITHUB_REPOSITORY"]  # owner/repo
-          repo_name = repo_full.split("/", 1)[1]
-          owner_lc = repo_full.split("/", 1)[0].lower()
-          preview_id = os.environ["PREVIEW_ID"]
-          # ponytail: полный https URL с /media в конце — Vite/Rollup пропускает
-          # http(s) ссылки как есть; img_replacer отдаёт rel_path без media/ префикса
-          # (он уже здесь), psd_replacer — тоже без media/ префикса
-          media_base_url = f"https://{owner_lc}.github.io/{repo_name}/{preview_id}/media".rstrip("/")
-          media_storage_output = str(vuepress / "src" / ".vuepress" / "public" / "media")
-
-          vp = cfg["adapers"]["vuepress_hope"]
-          vp["doc_output"] = str(ws / "output" / "vuepress_hope")
-          vp["site_dir"] = str(ws / "site" / "vuepress")
-          vp["base"] = f"/{repo_name}/{preview_id}/"
-          vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
-          vp["nav"] = str(docs / "nav.yaml")
-          vp["vars"] = str(docs / "vars.yaml")
-          vp["media"]["media_storage_output"] = media_storage_output
-          vp["media"]["media_base_url"] = media_base_url
-
-          mk = cfg["adapers"].get("mkdocs")
-          if mk:
-              mk["doc_output"] = str(ws / "output" / "mkdocs")
-              mk["site_dir"] = str(ws / "site" / "mkdocs")
-              if mk.get("media"):
-                  mk["media"]["media_storage_output"] = media_storage_output
-                  mk["media"]["media_base_url"] = media_base_url
-
-          with dst.open("w", encoding="utf-8") as f:
-            yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
-
-          print(f"Prepared {dst}")
-          PY
-
-      - name: Build docs with UMDA + VuePress
-        working-directory: stormbpmn_project/umda
-        shell: bash
-        env:
-          UMDA_YML: ${{ github.workspace }}/stormbpmn_project/stormbpmn_new_doc/umda.yml
-          DEBUG: vuepress:bundler-vite/build
-        run: |
-          set -euo pipefail
-          source .umda/bin/activate
-          bash vuepress_hope_build.sh
-
-          if [[ -z "$(find "$GITHUB_WORKSPACE/site/vuepress" -type f -print -quit)" ]]; then
-            echo "Build failed: site directory is empty"
-            exit 1
-          fi
+          mkdir -p "$GITHUB_WORKSPACE/site/vuepress"
+          cd "$GITHUB_WORKSPACE/site/vuepress"
+          unzip -qo "$GITHUB_WORKSPACE/stormbpmn-doc.zip"
 
       - name: Deploy to gh-pages
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ steps.pr.outputs.number }}
         shell: bash
         run: |
           set -euo pipefail
@@ -476,14 +182,21 @@ jobs:
           echo "ERROR: Failed to push after 3 attempts"
           exit 1
 
+  comment:
+    needs: [gate, deploy]
+    if: github.event_name == 'issue_comment' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
       - name: Comment PR with preview URL
-        if: github.event_name == 'issue_comment' || github.event_name == 'pull_request'
         uses: actions/github-script@v7
         env:
-          PREVIEW_URL: ${{ steps.preview_meta.outputs.preview_url }}
+          PREVIEW_URL: ${{ needs.gate.outputs.preview_url }}
+          PR_NUMBER: ${{ needs.gate.outputs.pr_number }}
         with:
           script: |
-            const prNumber = context.issue.number;
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
             let prTitle = '';
             try {
               const pr = await github.rest.pulls.get({

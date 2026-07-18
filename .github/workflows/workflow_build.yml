@@ -1,0 +1,381 @@
+name: Reusable VuePress Build
+
+'on':
+  workflow_call:
+    inputs:
+      pr_number:
+        description: PR number to squash-merge into main before build; empty = build main as-is
+        required: false
+        type: string
+        default: ''
+      base_path:
+        description: VuePress base path (with trailing slash), e.g. /repo/pr-123/ or /
+        required: true
+        type: string
+      media_base_url:
+        description: Full media base URL (no trailing slash), e.g. https://owner.github.io/repo/pr-123/media or /media
+        required: true
+        type: string
+      artifact_name:
+        description: Name for the uploaded site bundle artifact
+        required: false
+        type: string
+        default: site-bundle
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout docs (default branch)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          path: stormbpmn_project/stormbpmn_new_doc
+          fetch-depth: 0
+
+      - name: Squash-merge PR into checked out docs
+        if: inputs.pr_number != ''
+        working-directory: stormbpmn_project/stormbpmn_new_doc
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin "pull/${{ inputs.pr_number }}/head:pr-head"
+          if ! git merge --squash --no-commit pr-head; then
+            echo "Squash merge conflict for PR #${{ inputs.pr_number }}"
+            exit 1
+          fi
+          git status --short
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: '3.12'
+          enable-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Create working directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/out_test_storage"
+          mkdir -p "$GITHUB_WORKSPACE/output/vuepress_hope"
+          mkdir -p "$GITHUB_WORKSPACE/site/vuepress"
+
+      - name: Checkout VuePress Hope
+        uses: actions/checkout@v4
+        with:
+          repository: Pseudolukian/vuepress_hope
+          path: stormbpmn_project/stormbpmn_vuepress_hope
+
+      - name: Normalize VuePress public media path
+        shell: bash
+        run: |
+          set -euo pipefail
+          MEDIA_PATH="$GITHUB_WORKSPACE/stormbpmn_project/stormbpmn_vuepress_hope/src/.vuepress/public/media"
+          if [[ -L "$MEDIA_PATH" ]]; then
+            rm "$MEDIA_PATH"
+          fi
+          mkdir -p "$MEDIA_PATH"
+
+      - name: Install VuePress dependencies
+        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install
+
+      - name: Patch VuePress bundler render-error logging
+        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("node_modules/@vuepress/bundler-vite/dist/index.js")
+          src = p.read_text(encoding="utf-8")
+
+          old = (
+              "      await renderPage({\n"
+              "        app,\n"
+              "        page,\n"
+              "        vueApp,\n"
+              "        vueRouter,\n"
+              "        renderToString,\n"
+              "        ssrTemplate,\n"
+              "        output: clientOutput.output,\n"
+              "        outputEntryChunk: clientEntryChunk,\n"
+              "        outputCssAsset: clientCssAsset\n"
+              "      });\n"
+          )
+          new = (
+              "      try {\n"
+              "        await renderPage({\n"
+              "          app,\n"
+              "          page,\n"
+              "          vueApp,\n"
+              "          vueRouter,\n"
+              "          renderToString,\n"
+              "          ssrTemplate,\n"
+              "          output: clientOutput.output,\n"
+              "          outputEntryChunk: clientEntryChunk,\n"
+              "          outputCssAsset: clientCssAsset\n"
+              "        });\n"
+              "      } catch (renderErr) {\n"
+              "        console.error(`\\n[render-error] Failed to render page:\\n  route:  ${page.path}\\n  source: ${page.filePathRelative || page.filePath || '(unknown)'}\\n`);\n"
+              "        if (page.content) {\n"
+              "          const _re = /\\{\\{\\s*((?!\\$|page\\.meta)[\\w]+(?:\\.[\\w]+)*)\\s*\\}\\}/;\n"
+              "          const _lines = page.content.split('\\n');\n"
+              "          const _hits = [];\n"
+              "          for (let _i = 0; _i < _lines.length; _i++) {\n"
+              "            if (_lines[_i].match(_re)) {\n"
+              "              _hits.push('  L' + (_i + 1) + ': ' + _lines[_i].trim().slice(0, 200));\n"
+              "              if (_hits.length >= 20) break;\n"
+              "            }\n"
+              "          }\n"
+              "          if (_hits.length) {\n"
+              "            console.error('[render-error] Unresolved {{ }} expressions in source:');\n"
+              "            _hits.forEach(function(h) { console.error(h); });\n"
+              "          }\n"
+              "        }\n"
+              "        console.error(renderErr);\n"
+              "        throw renderErr;\n"
+              "      }\n"
+          )
+
+          if new in src:
+              print("bundler-vite render-error patch already applied")
+          elif old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("bundler-vite render-error patch applied")
+          else:
+              raise SystemExit("Expected renderPage block not found in bundler-vite/dist/index.js")
+          PY
+
+      - name: VuePress lifecheck
+        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx vuepress-vite --version
+
+      - name: Checkout UMDA
+        uses: actions/checkout@v4
+        with:
+          repository: Pseudolukian/umda
+          ref: fix_structure_logic
+          path: stormbpmn_project/umda
+
+      - name: Patch UMDA PSD markdown regex
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("md_handler/md_handler.py")
+          src = p.read_text(encoding="utf-8")
+
+          old = "_PSD_LINK_RE = re.compile(r'(!\\[(.+?)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
+          new = "_PSD_LINK_RE = re.compile(r'(!\\[([^\\]]*(?:\\[[^\\]]*\\][^\\]]*)*)\\]\\(\\{\\{\\s*([\\w.]+)\\s*\\}\\}\\))')"
+
+          if new in src:
+              print("UMDA regex already patched")
+          elif old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("UMDA regex patched")
+          else:
+              raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
+          PY
+
+      - name: Install UMDA dependencies
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv venv .umda
+          source .umda/bin/activate
+          uv pip install -r requarements.txt
+
+      - name: UMDA lifecheck
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          source .umda/bin/activate
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from psd_handler.psd_handler import PSDHandler
+          from data_models.psd_config import PSDConfig
+
+          out_dir = Path(os.environ["GITHUB_WORKSPACE"]) / "out_test_storage"
+          out_dir.mkdir(parents=True, exist_ok=True)
+          psd_handler = PSDHandler(output_dir=str(out_dir))
+          result = psd_handler.render(PSDConfig(
+              psd_path="https://storage.yandexcloud.net/stormbpmn-psd-src/diagram.psd",
+              base_layer="Account",
+              Frames=["Account_btn", "Account_email"],
+              Focuses=["Account"],
+              Crops=[]
+          ))
+          psd_handler.terminate()
+          print(f"Saved: {result}")
+          PY
+
+          if [[ -z "$(find "$GITHUB_WORKSPACE/out_test_storage" -type f -print -quit)" ]]; then
+            echo "UMDA lifecheck failed: out_test_storage is empty"
+            exit 1
+          fi
+
+      - name: Prepare CI umda.yml
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        env:
+          BASE_PATH: ${{ inputs.base_path }}
+          MEDIA_BASE_URL: ${{ inputs.media_base_url }}
+        run: |
+          set -euo pipefail
+          .umda/bin/python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+          import yaml
+
+          ENV_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
+
+          def expand_env(s: str) -> str:
+            def repl(match):
+              name = match.group(1)
+              default = match.group(2)
+              value = os.getenv(name)
+              if value:
+                return value
+              if default is not None:
+                return default
+              raise RuntimeError(f"Missing env var for ci.umda.yml: {name}")
+            return ENV_RE.sub(repl, s)
+
+          def expand_obj(obj):
+            if isinstance(obj, dict):
+              return {k: expand_obj(v) for k, v in obj.items()}
+            if isinstance(obj, list):
+              return [expand_obj(v) for v in obj]
+            if isinstance(obj, str):
+              return expand_env(obj)
+            return obj
+
+          ws = Path(os.environ["GITHUB_WORKSPACE"])
+          docs = ws / "stormbpmn_project" / "stormbpmn_new_doc"
+          vuepress = ws / "stormbpmn_project" / "stormbpmn_vuepress_hope"
+
+          # In CI there is no /root/stormbpmn_project/src_storage.
+          # Rewrite local PSD routes to public source URLs so UMDA can render.
+          media_vars_path = docs / "vars" / "media.yml"
+          if media_vars_path.exists():
+            with media_vars_path.open("r", encoding="utf-8") as f:
+              media_cfg = yaml.safe_load(f) or {}
+
+            media_section = media_cfg.get("media", {})
+            changed = False
+            for section_name, section in media_section.items():
+              if isinstance(section, dict):
+                for key, value in list(section.items()):
+                  if isinstance(value, str) and value.startswith("/root/stormbpmn_project/src_storage/"):
+                    section[key] = "https://storage.yandexcloud.net/stormbpmn-psd-src/" + Path(value).name
+                    changed = True
+
+            if changed:
+              with media_vars_path.open("w", encoding="utf-8") as f:
+                yaml.safe_dump(media_cfg, f, allow_unicode=False, sort_keys=False)
+              print(f"Normalized media vars for CI: {media_vars_path}")
+
+          src = docs / "umda.yml"
+          dst = docs / "umda.yml"
+
+          with src.open("r", encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+
+          cfg = expand_obj(cfg)
+
+          # ponytail: S3 секция больше не используется — медиа едет в бандл
+          cfg.get("config", {}).pop("S3", None)
+          cfg.get("config", {}).pop("s3", None)
+
+          cfg["config"]["doc_input"] = str(docs)
+
+          base_path = os.environ["BASE_PATH"]
+          media_base_url = os.environ["MEDIA_BASE_URL"].rstrip("/")
+          media_storage_output = str(vuepress / "src" / ".vuepress" / "public" / "media")
+
+          vp = cfg["adapers"]["vuepress_hope"]
+          vp["doc_output"] = str(ws / "output" / "vuepress_hope")
+          vp["site_dir"] = str(ws / "site" / "vuepress")
+          vp["base"] = base_path
+          vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
+          vp["nav"] = str(docs / "nav.yaml")
+          vp["vars"] = str(docs / "vars.yaml")
+          vp["media"]["media_storage_output"] = media_storage_output
+          vp["media"]["media_base_url"] = media_base_url
+
+          mk = cfg["adapers"].get("mkdocs")
+          if mk:
+              mk["doc_output"] = str(ws / "output" / "mkdocs")
+              mk["site_dir"] = str(ws / "site" / "mkdocs")
+              if mk.get("media"):
+                  mk["media"]["media_storage_output"] = media_storage_output
+                  mk["media"]["media_base_url"] = media_base_url
+
+          with dst.open("w", encoding="utf-8") as f:
+            yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
+
+          print(f"Prepared {dst} (base={base_path}, media_base_url={media_base_url})")
+          PY
+
+      - name: Build docs with UMDA + VuePress
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        env:
+          UMDA_YML: ${{ github.workspace }}/stormbpmn_project/stormbpmn_new_doc/umda.yml
+          DEBUG: vuepress:bundler-vite/build
+        run: |
+          set -euo pipefail
+          source .umda/bin/activate
+          bash vuepress_hope_build.sh
+
+          if [[ -z "$(find "$GITHUB_WORKSPACE/site/vuepress" -type f -print -quit)" ]]; then
+            echo "Build failed: site directory is empty"
+            exit 1
+          fi
+
+      - name: Pack site bundle (zip)
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE/site/vuepress"
+          zip -rq "$GITHUB_WORKSPACE/stormbpmn-doc.zip" .
+
+      - name: Upload site bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ github.workspace }}/stormbpmn-doc.zip
+          retention-days: 7
+          if-no-files-found: error

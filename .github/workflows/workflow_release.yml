@@ -1,0 +1,60 @@
+name: Weekly Documentation Release
+
+'on':
+  schedule:
+    # Понедельник 03:00 UTC = 06:00 МСК
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    uses: ./.github/workflows/workflow_build.yml
+    with:
+      # Сборка из main as-is (pr_number пустой); релизная дока подаётся по root
+      base_path: '/'
+      # /media — adapter.vuepress_hope конвертит /media/... в <img src="/media/...">,
+      # Vite пропускает как есть; на сервере юзера резолвится по root
+      media_base_url: '/media'
+      artifact_name: release-bundle
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Download site bundle artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-bundle
+          path: ${{ github.workspace }}
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="v$(date -u +%Y%m%d)"
+          # ponytail: --clobber для идемпотентности — если тег за день уже есть,
+          # перезаписываем ассет (ручной перезапуск не падает)
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, uploading zip with --clobber"
+            gh release upload "$TAG" stormbpmn-doc.zip --clobber
+          else
+            gh release create "$TAG" stormbpmn-doc.zip \
+              --title "Documentation build $TAG" \
+              --notes "Автоматическая сборка документации за $(date -u +%Y-%m-%d).
+
+          Распакуйте zip за web-сервер (root) — содержимое готово к раздаче.
+
+          URL архива: https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}/stormbpmn-doc.zip"
+          fi
+          echo "Release published: $TAG"
