@@ -1,3 +1,5 @@
+<h3 id="bp_reg">Реестр бизнес-процессов</h3>
+
 <h4 id="bp_tree">{{ team.bp_reg.bp_tree }}</h4>
 
 ℹ️🔽 "Что такое {{ team.bp_reg.bp_tree }}?"

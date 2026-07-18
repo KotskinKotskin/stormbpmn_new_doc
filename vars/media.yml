@@ -18,6 +18,10 @@ media:
     status: media/screenshots/app/status
     git: media/screenshots/git
     doc: media/screenshots/doc
+    confluence: media/screenshots/confluence
+    assignees: media/screenshots/assignees
+    directories: media/screenshots/directories
+    map: media/screenshots/map
      
 
   psd:
@@ -26,7 +30,7 @@ media:
     proc_versioning: proc_versioning
     folder_creating: folder_creating
     access_groups_managment: access_groups_managment
-    save_as_version: save_as_version
+    save_as_version: save_as_version                                     # media.screenshots.diagram
     ai_create_diagramm: ai_create_diagramm
     ai_create_next_step_diagramm: ai_create_next_step_diagramm
     ai_create_description: ai_create_description
@@ -48,7 +52,7 @@ media:
     reglament_export: reglament_export
     work_with_arc_elements: work_with_arc_elements
     create_arc_el: create_arc_el
-    share_proc: share_proc
+    diagram_share: share                                   # media.screenshots.diagram
     navigate_to_org_str: navigate_to_org_str
     extra: extra
     scheme: scheme
@@ -76,9 +80,16 @@ media:
     work_with_space: work_with_space                       # media.screenshots.diagram
     diagram_num_elements: num_elements                     # media.screenshots.diagram
     diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
+    diagram_roles: roles                                   # media.screenshots.diagram
+    registry_add_options: add_options                      # media.screenshots.registry
     status_create: status_create                           # media.screenshots.status
     status_edit: status_edit                               # media.screenshots.status
     registry_status_example: status_example                # media.screenshots.registry
+    folder_move_diagram: move_diagram                      # media.screenshots.folder
+    # ========== media.screenshots.confluence =============== #
+    conf_embded_diagram: embded_diagram
+    # ========== media.screenshots.profile ===================#
+    profile_plan: plan
 
 
 

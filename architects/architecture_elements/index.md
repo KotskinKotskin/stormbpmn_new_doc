@@ -94,7 +94,7 @@ tags:
 1. На верхней панели кликнете по кнопке <i class = "pi pi-share-alt"></i> **Поделиться**.
 1. В  открывшемся модальном окне **Поделиться моделью** укажите e-mail аккаунта получателя или включите **Доступ по ссылке** и скопируйте ссылку:
 
-    ![share_process]({{ media.screenshots.diagram }}/{{ media.actions.share_proc }}/share_process.png)
+    ![share_process]({{ media.screenshots.diagram }}/{{ media.actions.diagram_share }}/share_model.png)
 
 1. В аккаунте-получателе откройте переданную диаграмму по полученной ссылке.
 1. Создайте копию диаграммы одним из способов:
