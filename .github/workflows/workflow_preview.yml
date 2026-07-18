@@ -162,6 +162,58 @@ jobs:
           set -euo pipefail
           npm install
 
+      - name: Patch VuePress bundler render-error logging
+        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("node_modules/@vuepress/bundler-vite/dist/index.js")
+          src = p.read_text(encoding="utf-8")
+
+          old = (
+              "      await renderPage({\n"
+              "        app,\n"
+              "        page,\n"
+              "        vueApp,\n"
+              "        vueRouter,\n"
+              "        renderToString,\n"
+              "        ssrTemplate,\n"
+              "        output: clientOutput.output,\n"
+              "        outputEntryChunk: clientEntryChunk,\n"
+              "        outputCssAsset: clientCssAsset\n"
+              "      });\n"
+          )
+          new = (
+              "      try {\n"
+              "        await renderPage({\n"
+              "          app,\n"
+              "          page,\n"
+              "          vueApp,\n"
+              "          vueRouter,\n"
+              "          renderToString,\n"
+              "          ssrTemplate,\n"
+              "          output: clientOutput.output,\n"
+              "          outputEntryChunk: clientEntryChunk,\n"
+              "          outputCssAsset: clientCssAsset\n"
+              "        });\n"
+              "      } catch (renderErr) {\n"
+              "        console.error(`\\n[render-error] Failed to render page:\\n  route:  ${page.path}\\n  source: ${page.filePathRelative || page.filePath || '(unknown)'}\\n`);\n"
+              "        throw renderErr;\n"
+              "      }\n"
+          )
+
+          if new in src:
+              print("bundler-vite render-error patch already applied")
+          elif old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("bundler-vite render-error patch applied")
+          else:
+              raise SystemExit("Expected renderPage block not found in bundler-vite/dist/index.js")
+          PY
+
       - name: VuePress lifecheck
         working-directory: stormbpmn_project/stormbpmn_vuepress_hope
         shell: bash
@@ -396,6 +448,7 @@ jobs:
         shell: bash
         env:
           UMDA_YML: ${{ github.workspace }}/stormbpmn_project/stormbpmn_new_doc/umda.yml
+          DEBUG: vuepress:bundler-vite/build
         run: |
           set -euo pipefail
           source .umda/bin/activate
