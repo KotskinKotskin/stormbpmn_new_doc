@@ -379,9 +379,12 @@ jobs:
 
           repo_full = os.environ["GITHUB_REPOSITORY"]  # owner/repo
           repo_name = repo_full.split("/", 1)[1]
+          owner_lc = repo_full.split("/", 1)[0].lower()
           preview_id = os.environ["PREVIEW_ID"]
-          # media_base_url без trailing slash: ссылки формируются как {base}/media/foo.webp
-          media_base_url = f"/{repo_name}/{preview_id}".rstrip("/")
+          # ponytail: полный https URL с /media в конце — Vite/Rollup пропускает
+          # http(s) ссылки как есть; img_replacer отдаёт rel_path без media/ префикса
+          # (он уже здесь), psd_replacer — тоже без media/ префикса
+          media_base_url = f"https://{owner_lc}.github.io/{repo_name}/{preview_id}/media".rstrip("/")
           media_storage_output = str(vuepress / "src" / ".vuepress" / "public" / "media")
 
           vp = cfg["adapers"]["vuepress_hope"]
