@@ -17,11 +17,11 @@
 
     4. Установите курсор в нужную строку документа, кликните по {{ universal.plus }} слева от курсора и выберите последний пункт выпадающего списка <i class="fa-solid fa-ellipsis"></i> **View more**:
 
-        ![confluence_view_more]({{ media.screenshots.confluence }}/{{ media.screenshots.conf_embded_diagram}}/confluence_view_more.png)
+        ![confluence_view_more]({{ media.screenshots.confluence }}/{{ media.actions.conf_embded_diagram}}/confluence_view_more.png)
     
     5. Введите в поиск «iframe» и выберите блок **Iframe**:
 
-        ![confluence_iframe_block]({{ media.screenshots.confluence }}/{{ media.screenshots.conf_embded_diagram}}/confluence_iframe_block.png)
+        ![confluence_iframe_block]({{ media.screenshots.confluence }}/{{ media.actions.conf_embded_diagram}}/confluence_iframe_block.png)
     
     6. В открывшемся окне настроек блока **Iframe** введите в поля справа следующие значения:
 
