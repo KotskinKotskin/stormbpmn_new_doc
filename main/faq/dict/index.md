@@ -23,7 +23,7 @@
 
     Созданный справочник автоматически будет отражён в разделе {{ team.bp_reg.dict }}:
 
-    ![dict_list]({{ diagram.screenshots.directories }}/dict_list.png)
+    ![dict_list]({{ media.screenshots.directories }}/dict_list.png)
 
 ℹ️🔽 "Использование справочника как параметра процесса"
 

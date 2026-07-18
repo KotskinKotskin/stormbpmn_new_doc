@@ -4,7 +4,7 @@
 
     {{ bp_reg.map }} — визуальное представление архитектуры бизнес-процессов ({{ bp_reg.tree }}) в виде иерархической диаграммы. Например:
     
-    ![bp_reg_map_def](./img/map/bp_reg_map_def.png)
+    ![bp_reg_map_def]({{ media.screenshots.map }}/bp_reg_map_def.png)
 
     **Карта** отражает:
     - Иерархию бизнес-процессов.
