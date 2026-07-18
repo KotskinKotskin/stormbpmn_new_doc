@@ -174,33 +174,6 @@ jobs:
               raise SystemExit("Expected renderPage block not found in bundler-vite/dist/index.js")
           PY
 
-      - name: Patch VuePress adapter media link
-        working-directory: stormbpmn_project/stormbpmn_vuepress_hope
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          # ponytail: md_handler уже формирует корректный media URL (media_base_url + /media/...).
-          # Adapter повторно добавлял media_base_url → двойное /media/media/... для release.
-          # Для preview было no-op (regex не матчит https-ссылки), для release — ломало пути.
-          # Патч: replacement оставляет ссылку как есть.
-          from pathlib import Path
-
-          p = Path("../umda/adapters/vuepress_hope/main.py")
-          src = p.read_text(encoding="utf-8")
-
-          old = "lambda m: f'![{m.group(1)}]({self.media_base_url}{m.group(2)})'"
-          new = "lambda m: f'![{m.group(1)}]({m.group(2)})'"
-
-          if new in src:
-              print("adapter media link patch already applied")
-          elif old in src:
-              p.write_text(src.replace(old, new, 1), encoding="utf-8")
-              print("adapter media link patch applied")
-          else:
-              raise SystemExit("Expected adapter media link lambda not found")
-          PY
-
       - name: VuePress lifecheck
         working-directory: stormbpmn_project/stormbpmn_vuepress_hope
         shell: bash
@@ -236,6 +209,33 @@ jobs:
               print("UMDA regex patched")
           else:
               raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
+          PY
+
+      - name: Patch VuePress adapter media link
+        working-directory: stormbpmn_project/umda
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          # ponytail: md_handler уже формирует корректный media URL (media_base_url + /media/...).
+          # Adapter повторно добавлял media_base_url → двойное /media/media/... для release.
+          # Для preview было no-op (regex не матчит https-ссылки), для release — ломало пути.
+          # Патч: replacement оставляет ссылку как есть.
+          from pathlib import Path
+
+          p = Path("adapters/vuepress_hope/main.py")
+          src = p.read_text(encoding="utf-8")
+
+          old = "lambda m: f'![{m.group(1)}]({self.media_base_url}{m.group(2)})'"
+          new = "lambda m: f'![{m.group(1)}]({m.group(2)})'"
+
+          if new in src:
+              print("adapter media link patch already applied")
+          elif old in src:
+              p.write_text(src.replace(old, new, 1), encoding="utf-8")
+              print("adapter media link patch applied")
+          else:
+              raise SystemExit("Expected adapter media link lambda not found")
           PY
 
       - name: Install UMDA dependencies
