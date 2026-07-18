@@ -2,7 +2,7 @@ name: VuePress Preview (PR)
 
 'on':
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -13,15 +13,19 @@ name: VuePress Preview (PR)
         type: string
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
 
+concurrency:
+  group: preview-pr-${{ github.event.pull_request.number || github.event.issue.number || inputs.pr_number }}
+  cancel-in-progress: true
+
 jobs:
-  preview:
+  build:
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'pull_request' ||
+      (github.event_name == 'pull_request' && github.event.action != 'closed') ||
       (github.event.issue.pull_request && startsWith(github.event.comment.body, '/vuepress build dev'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
@@ -32,10 +36,6 @@ jobs:
       S3_REGION: ${{ secrets.S3_REGION }}
       S3_BUCKET_PROD_DOC: ${{ secrets.S3_BUCKET_PROD_DOC }}
       S3_BUCKET_PROD_IMG: ${{ secrets.S3_BUCKET_PROD_IMG }}
-      SERVER_IP: ${{ secrets.SERVER_IP }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
-      SSH_USER: ${{ secrets.SSH_USER }}
-      REMOTE_BASE_PATH: /var/www/html/stormbpmn
 
     steps:
       - name: Validate comment author (issue_comment)
@@ -125,7 +125,6 @@ jobs:
           req=(
             AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
             S3_ENDPOINT S3_REGION S3_BUCKET_PROD_DOC S3_BUCKET_PROD_IMG
-            SERVER_IP SSH_KEY
           )
           for key in "${req[@]}"; do
             [[ -n "${!key:-}" ]] || { echo "Required secret/env is missing: $key"; exit 1; }
@@ -357,17 +356,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          NOW="$(date +'%Y%m%d-%H%M%S')"
-          SHA_SHORT="${GITHUB_SHA::7}"
-          PREVIEW_ID="vp-${NOW}-pr${{ steps.pr.outputs.number }}-${SHA_SHORT}"
-          SSH_USER_SAFE="${SSH_USER:-root}"
-          REMOTE_DIR="${REMOTE_BASE_PATH%/}/${PREVIEW_ID}"
-          URL="https://${SERVER_IP}/${PREVIEW_ID}/"
+          # ponytail: stable per-PR id → повторные сборки перезаписывают ту же папку в gh-pages
+          PREVIEW_ID="pr-${{ steps.pr.outputs.number }}"
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER_LC="${OWNER,,}"
+          PREVIEW_URL="https://${OWNER_LC}.github.io/${REPO_NAME}/${PREVIEW_ID}/"
 
           echo "preview_id=${PREVIEW_ID}" >> "$GITHUB_OUTPUT"
-          echo "remote_dir=${REMOTE_DIR}" >> "$GITHUB_OUTPUT"
-          echo "preview_url=${URL}" >> "$GITHUB_OUTPUT"
-          echo "ssh_user=${SSH_USER_SAFE}" >> "$GITHUB_OUTPUT"
+          echo "preview_url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
 
       - name: Prepare CI umda.yml
         working-directory: stormbpmn_project/umda
@@ -434,16 +431,20 @@ jobs:
           dst = docs / "umda.yml"
 
           with src.open("r", encoding="utf-8") as f:
-              cfg = yaml.safe_load(f)
+            cfg = yaml.safe_load(f)
 
           cfg = expand_obj(cfg)
 
           cfg["config"]["doc_input"] = str(docs)
 
+          repo_full = os.environ["GITHUB_REPOSITORY"]  # owner/repo
+          repo_name = repo_full.split("/", 1)[1]
+          preview_id = os.environ["PREVIEW_ID"]
+
           vp = cfg["adapers"]["vuepress_hope"]
           vp["doc_output"] = str(ws / "output" / "vuepress_hope")
           vp["site_dir"] = str(ws / "site" / "vuepress")
-          vp["base"] = f"/{os.environ['PREVIEW_ID']}/"
+          vp["base"] = f"/{repo_name}/{preview_id}/"
           vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
           vp["nav"] = str(docs / "nav.yaml")
           vp["vars"] = str(docs / "vars.yaml")
@@ -454,7 +455,7 @@ jobs:
               mk["site_dir"] = str(ws / "site" / "mkdocs")
 
           with dst.open("w", encoding="utf-8") as f:
-              yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
+            yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
 
           print(f"Prepared {dst}")
           PY
@@ -475,60 +476,86 @@ jobs:
             exit 1
           fi
 
-      - name: Pack site bundle (zip)
+      - name: Deploy to gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
         shell: bash
         run: |
           set -euo pipefail
-          cd "$GITHUB_WORKSPACE/site/vuepress"
-          zip -r "$GITHUB_WORKSPACE/${{ steps.preview_meta.outputs.preview_id }}.zip" .
+          PR_DIR="pr-${PR_NUMBER}"
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          WORK_DIR="$GITHUB_WORKSPACE/gh-pages-deploy"
 
-      - name: Deploy preview via SCP
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          cat > ~/.ssh/config <<'CFG'
-          Host *
-            StrictHostKeyChecking no
-            UserKnownHostsFile /dev/null
-          CFG
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          REMOTE_ZIP="/tmp/${{ steps.preview_meta.outputs.preview_id }}.zip"
-          LOCAL_ZIP="$GITHUB_WORKSPACE/${{ steps.preview_meta.outputs.preview_id }}.zip"
+          # ponytail: retry-цикл лечит гонку push между разными PR, пишущими в одну ветку gh-pages
+          for attempt in 1 2 3; do
+            echo "=== Attempt $attempt ==="
+            rm -rf "$WORK_DIR"
 
-          ssh -i ~/.ssh/id_ed25519 "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}" \
-            "mkdir -p '${{ steps.preview_meta.outputs.remote_dir }}'"
+            if git ls-remote --exit-code --heads "$REPO_URL" gh-pages >/dev/null 2>&1; then
+              git clone --quiet --branch gh-pages "$REPO_URL" "$WORK_DIR"
+            else
+              echo "gh-pages branch does not exist, creating orphan branch"
+              mkdir -p "$WORK_DIR"
+              git -C "$WORK_DIR" init --quiet -b gh-pages
+              git -C "$WORK_DIR" remote add origin "$REPO_URL"
+            fi
 
-          scp -i ~/.ssh/id_ed25519 "$LOCAL_ZIP" \
-            "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}:${REMOTE_ZIP}"
+            rm -rf "$WORK_DIR/$PR_DIR"
+            mkdir -p "$WORK_DIR/$PR_DIR"
+            cp -a "$GITHUB_WORKSPACE/site/vuepress/." "$WORK_DIR/$PR_DIR/"
 
-          ssh -i ~/.ssh/id_ed25519 "${{ steps.preview_meta.outputs.ssh_user }}@${SERVER_IP}" \
-            "set -e; \
-             if command -v unzip >/dev/null 2>&1; then \
-               unzip -oq '${REMOTE_ZIP}' -d '${{ steps.preview_meta.outputs.remote_dir }}'; \
-             else \
-               echo 'ERROR: unzip is not installed on remote host'; \
-               exit 1; \
-             fi; \
-             rm -f '${REMOTE_ZIP}'"
+            git -C "$WORK_DIR" add -A
+            if git -C "$WORK_DIR" diff --cached --quiet; then
+              echo "No changes to commit"
+              exit 0
+            fi
+            git -C "$WORK_DIR" commit --quiet -m "Deploy preview for PR #${PR_NUMBER}"
+
+            if git -C "$WORK_DIR" push --quiet origin gh-pages 2>&1; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push failed on attempt $attempt, will retry..."
+          done
+
+          echo "ERROR: Failed to push after 3 attempts"
+          exit 1
 
       - name: Comment PR with preview URL
         if: github.event_name == 'issue_comment' || github.event_name == 'pull_request'
         uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.preview_meta.outputs.preview_url }}
         with:
           script: |
+            const prNumber = context.issue.number;
+            let prTitle = '';
+            try {
+              const pr = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+              });
+              prTitle = pr.data.title || '';
+            } catch (e) {
+              core.warning(`Could not fetch PR title: ${e.message}`);
+            }
+            // Экранируем [ и ] в тексте анкора
+            const escaped = prTitle.replace(/[\[\]]/g, '\\$&');
             const body = [
-              '✅ Preview успешно собран и опубликован.',
+              '✅ Preview успешно собран и опубликован в GitHub Pages.',
               '',
-              `Preview URL: ${{ steps.preview_meta.outputs.preview_url }}`
+              `Preview: [${escaped} (#${prNumber})](${process.env.PREVIEW_URL})`
             ].join('\n');
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: prNumber,
               body
             });
 
@@ -543,4 +570,79 @@ jobs:
               repo: context.repo.repo,
               comment_id: context.payload.comment.id,
               content: '+1'
+            });
+
+  cleanup:
+    if: >-
+      github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Resolve PR number
+        id: pr
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          [[ -n "$PR_NUMBER" ]] || { echo "PR number is empty"; exit 1; }
+          echo "number=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: Remove preview from gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_DIR="pr-${PR_NUMBER}"
+          REPO_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          WORK_DIR="$GITHUB_WORKSPACE/gh-pages-cleanup"
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # ponytail: если ветки gh-pages или папки PR нет — нечего удалять, тихо выходим
+          if ! git ls-remote --exit-code --heads "$REPO_URL" gh-pages >/dev/null 2>&1; then
+            echo "gh-pages branch does not exist, nothing to clean"
+            exit 0
+          fi
+
+          for attempt in 1 2 3; do
+            echo "=== Attempt $attempt ==="
+            rm -rf "$WORK_DIR"
+            git clone --quiet --branch gh-pages "$REPO_URL" "$WORK_DIR"
+
+            if [[ ! -d "$WORK_DIR/$PR_DIR" ]]; then
+              echo "Preview directory $PR_DIR does not exist, nothing to clean"
+              exit 0
+            fi
+
+            git -C "$WORK_DIR" rm -rq "$PR_DIR"
+            git -C "$WORK_DIR" commit --quiet -m "Remove preview for PR #${PR_NUMBER}"
+
+            if git -C "$WORK_DIR" push --quiet origin gh-pages 2>&1; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push failed on attempt $attempt, will retry..."
+          done
+
+          echo "ERROR: Failed to push after 3 attempts"
+          exit 1
+
+      - name: Comment cleanup
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        with:
+          script: |
+            const { PR_NUMBER } = process.env;
+            const body = `🗑 Preview для PR #${PR_NUMBER} удалён из GitHub Pages.`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: parseInt(PR_NUMBER, 10),
+              body
             });
