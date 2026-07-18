@@ -29,13 +29,6 @@ jobs:
       (github.event.issue.pull_request && startsWith(github.event.comment.body, '/vuepress build dev'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-      S3_REGION: ${{ secrets.S3_REGION }}
-      S3_BUCKET_PROD_DOC: ${{ secrets.S3_BUCKET_PROD_DOC }}
-      S3_BUCKET_PROD_IMG: ${{ secrets.S3_BUCKET_PROD_IMG }}
 
     steps:
       - name: Validate comment author (issue_comment)
@@ -117,18 +110,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Check required secrets
-        shell: bash
-        run: |
-          set -euo pipefail
-          req=(
-            AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
-            S3_ENDPOINT S3_REGION S3_BUCKET_PROD_DOC S3_BUCKET_PROD_IMG
-          )
-          for key in "${req[@]}"; do
-            [[ -n "${!key:-}" ]] || { echo "Required secret/env is missing: $key"; exit 1; }
-          done
 
       - name: Create working directories
         shell: bash
@@ -266,51 +247,6 @@ jobs:
               raise SystemExit("Expected _PSD_LINK_RE pattern not found in md_handler.py")
           PY
 
-      - name: Patch UMDA S3 media upload
-        working-directory: stormbpmn_project/umda
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path("main.py")
-          src = p.read_text(encoding="utf-8")
-
-          marker = '_upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, "media_storage_output")'
-          if marker in src:
-              print("UMDA S3 media upload patch already applied")
-              raise SystemExit(0)
-
-          old = (
-              "    try:\n"
-              "        md_handle.run()\n"
-              "    finally:\n"
-              "        psd_handler.terminate()\n"
-              "        if temp_media_root and temp_media_root.exists():\n"
-              "            shutil.rmtree(temp_media_root, ignore_errors=True)\n"
-          )
-
-          new = (
-              "    try:\n"
-              "        md_handle.run()\n"
-              "    finally:\n"
-              "        psd_handler.terminate()\n"
-              "\n"
-              "    if use_s3 and temp_media_root and temp_media_root.exists():\n"
-              "        _upload_dir_to_s3(temp_media_root, media_out, yml_handler.config.s3, \"media_storage_output\")\n"
-              "\n"
-              "    if temp_media_root and temp_media_root.exists():\n"
-              "        shutil.rmtree(temp_media_root, ignore_errors=True)\n"
-          )
-
-          if old in src:
-              p.write_text(src.replace(old, new, 1), encoding="utf-8")
-              print("UMDA S3 media upload patched")
-          else:
-              raise SystemExit("Expected media cleanup block not found in main.py")
-          PY
-
       - name: Install UMDA dependencies
         working-directory: stormbpmn_project/umda
         shell: bash
@@ -435,11 +371,18 @@ jobs:
 
           cfg = expand_obj(cfg)
 
+          # ponytail: S3 секция больше не используется — медиа едет в бандл gh-pages
+          cfg.get("config", {}).pop("S3", None)
+          cfg.get("config", {}).pop("s3", None)
+
           cfg["config"]["doc_input"] = str(docs)
 
           repo_full = os.environ["GITHUB_REPOSITORY"]  # owner/repo
           repo_name = repo_full.split("/", 1)[1]
           preview_id = os.environ["PREVIEW_ID"]
+          # media_base_url без trailing slash: ссылки формируются как {base}/media/foo.webp
+          media_base_url = f"/{repo_name}/{preview_id}".rstrip("/")
+          media_storage_output = str(vuepress / "src" / ".vuepress" / "public" / "media")
 
           vp = cfg["adapers"]["vuepress_hope"]
           vp["doc_output"] = str(ws / "output" / "vuepress_hope")
@@ -448,11 +391,16 @@ jobs:
           vp["vuepress_path"] = str(vuepress / "src" / ".vuepress")
           vp["nav"] = str(docs / "nav.yaml")
           vp["vars"] = str(docs / "vars.yaml")
+          vp["media"]["media_storage_output"] = media_storage_output
+          vp["media"]["media_base_url"] = media_base_url
 
           mk = cfg["adapers"].get("mkdocs")
           if mk:
               mk["doc_output"] = str(ws / "output" / "mkdocs")
               mk["site_dir"] = str(ws / "site" / "mkdocs")
+              if mk.get("media"):
+                  mk["media"]["media_storage_output"] = media_storage_output
+                  mk["media"]["media_base_url"] = media_base_url
 
           with dst.open("w", encoding="utf-8") as f:
             yaml.safe_dump(cfg, f, allow_unicode=False, sort_keys=False)
