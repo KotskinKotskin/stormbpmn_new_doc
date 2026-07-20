@@ -8,7 +8,7 @@ version: 2
 # Работа со слоями видимости в редакторе диаграмм (Overlay)
 **Overlay** (оверлей) — это дополнительный слой информации, который накладывается на диаграмму. На диаграмме оверлеи выполнены в приглушенных цветах с эффектом прозрачности — это сделано для того, чтобы не мешать основным элементам диаграммы:
 
-![Default;Crops=["Canvas"]]({{ media.screenshots.diagram }})
+![Default;Crops=["Canvas"]]({{ media.psd.diagram }})
 
 Однако, когда диаграмма сложная, большое количество дополнительной информации может перегружать визуальное восприятие и мешать фокусироваться на главном — поэтому видимостью оверлеев можно управлять. Кликните по кнопке {{ process_editor.upper_toolbar.buttons.overlays }} и из появившегося меню выберите оверлеи, отображение которых хотите включить или выключить:
 
@@ -22,13 +22,13 @@ version: 2
 - <span class = "pi pi-arrow-right"></span> **Связи (входящие)** — на диаграмме отображаются входящие связи выбранного элемента.
 - <span class = "pi pi-arrow-left"></span> **Связи (исходящие)** — на диаграмме отображаются исходящие связи выбранного элемента.
 
-![Overlays;Frames=["Overlays_options","Overlay_button"]]({{ media.screenshots.diagram }})
+![Overlays;Frames=["Overlays_options","Overlay_button"]]({{ media.psd.diagram }})
 
 Если вы хотите отключить видимость всех оверлеев, деактивируйте чек-бокс {{ process_editor.upper_toolbar.sections.overlays.overlays_show }}. Отдельно можно свернуть или развернуть оверлеи <span class = "pi pi-database"></span> **Системы** и <span class = "pi pi-file"></span> **Документы** с помощью чекбокса {{ process_editor.upper_toolbar.sections.overlays.overlays_hide }}.
 
 Также на диаграмме можно отображать ошибки работы с элементами диаграммы. Для этого нужно переключить тумблер справа от кнопки {{ process_editor.upper_toolbar.buttons.overlays }} с **Оверлеи** на **Ошибки**:
 
-![Errors;Frames=["Error_switcher","Error_layer"]]({{ media.screenshots.diagram }}) 
+![Errors;Frames=["Error_switcher","Error_layer"]]({{ media.psd.diagram }}) 
 
 ## Определение видимости оверлеев по умолчанию
 
@@ -37,11 +37,11 @@ version: 2
 1. В главном меню {{ product_name }} кликните по профилю в правом верхнем углу.
 1. Из выпадающего списка выберите первый пункт с вашим email:
 
-    ![Account;Focuses=["Account"];Frames=["Account_btn","Account_email"]]({{ media.screenshots.diagram }})
+    ![Account;Focuses=["Account"];Frames=["Account_btn","Account_email"]]({{ media.psd.diagram }})
 
 1. Перейдите в раздел **Настройки** и выберите оверлеи, которые будут отображаться по умолчанию во всех диаграммах:
 
-    ![overlay_def_views](./img/overlay_def_views.png)
+    ![overlay_def_views]({{ media.screenshots.profile }}/{{ media.actions.overlay_def_views }}/overlay_def_views.png)
 
 1. Кликните по кнопке **Сохранить**, чтобы настройки видимости оверлеев применились.
 

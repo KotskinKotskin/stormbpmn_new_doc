@@ -1,3 +1,95 @@
 media:
   screenshots:
+    main: media/screenshots/app/main
+    folder: media/screenshots/app/folder
+    access_groups: media/screenshots/app/access-group
+    diagram: media/screenshots/app/diagram
+    all_models: media/screenshots/app/all_models
+    profile: media/screenshots/app/profile
+    team_settings: media/screenshots/app/team_settings
+    uml: media/screenshots/app/uml
+    app_settings: media/screenshots/app/app_settings
+    personal: media/screenshots/app/personal
+    assets: media/screenshots/app/assets
+    org_structure: media/screenshots/app/org_structure
+    employees: media/screenshots/app/employees
+    registry: media/screenshots/app/registry
+    custom_fields: media/screenshots/app/custom_fields
+    status: media/screenshots/app/status
+    git: media/screenshots/git
+    doc: media/screenshots/doc
+    confluence: media/screenshots/confluence
+    assignees: media/screenshots/assignees
+    directories: media/screenshots/directories
+    map: media/screenshots/map
+     
+
+  psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
+  actions:
+    proc_versioning: proc_versioning
+    folder_creating: folder_creating
+    access_groups_managment: access_groups_managment
+    save_as_version: save_as_version                                     # media.screenshots.diagram
+    ai_create_diagramm: ai_create_diagramm
+    ai_create_next_step_diagramm: ai_create_next_step_diagramm
+    ai_create_description: ai_create_description
+    ai_create_plantuml: ai_create_plantuml
+    proc_to_approve: proc_to_approve
+    reference: reference
+    overlay_def_views: overlay_def_views
+    edit_process_overview: edit_process_overview
+    check_diagram_settings: check_diagram_settings
+    make_public: make_public
+    create_uml: create_uml
+    uml_create_and_work: create_and_work
+    upload_doc_template: upload_doc_template
+    download_reglament: download_reglament
+    token_sim_attach_action: token_sim_attach_action
+    add_comment: add_comment
+    approve: approve
+    navigate_to_all_models: navigate_to_all_models
+    reglament_export: reglament_export
+    work_with_arc_elements: work_with_arc_elements
+    create_arc_el: create_arc_el
+    diagram_share: share                                   # media.screenshots.diagram
+    navigate_to_org_str: navigate_to_org_str
+    extra: extra
+    scheme: scheme
+    add_group: add_group
+    org_structure_create: create
+    add_staff_to_node: add_staff_to_node
+    employees_add_staff: add_staff
+    add_role_to_node: add_role_to_node
+    work_with_bp_tree: work_with_bp_tree                   # media.screenshots.registry
+    work_with_bp_table: work_with_bp_table                 # media.screenshots.registry
+    subproc_collapsed: subproc_collapsed                   # media.screenshots.diagram
+    create_subprocess_collapse: create_subprocess_collapse # media.screenshots.diagram
+    tokken_simulate: tokken_simulate                       # media.screenshots.diagram
+    upload_bpmn: upload_bpmn
+    git_commitment: commitment                             # media.screenshots.git
+    doc_doc_structure: doc_structure
+    acc_change_password: change_password                   # media.screenshots.profile
+    work_with_xlsx: work_with_xlsx                         # media.screenshots.registry
+    cf_create: create                                      # media.screenshots.custom_fields
+    diagram_change_color: change_color                     # media.screenshots.diagram
+    diagram_add_notice_to_element: add_notice_to_element   # media.screenshots.diagram
+    create_default_stream: create_default_stream           # media.screenshots.diagram
+    diagram_subprocess: subprocess                         # media.screenshots.diagram
+    add_role_to_task: add_role_to_task                     # media.screenshots.diagram
+    work_with_space: work_with_space                       # media.screenshots.diagram
+    diagram_num_elements: num_elements                     # media.screenshots.diagram
+    diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
+    diagram_roles: roles                                   # media.screenshots.diagram
+    registry_add_options: add_options                      # media.screenshots.registry
+    status_create: status_create                           # media.screenshots.status
+    status_edit: status_edit                               # media.screenshots.status
+    registry_status_example: status_example                # media.screenshots.registry
+    folder_move_diagram: move_diagram                      # media.screenshots.folder
+    # ========== media.screenshots.confluence =============== #
+    conf_embded_diagram: embded_diagram
+    # ========== media.screenshots.profile ===================#
+    profile_plan: plan
+
+
+

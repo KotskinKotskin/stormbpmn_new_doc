@@ -12,19 +12,19 @@ tags:
 
 - Письмо на электронную почту:
 
-    ![approval_letter](../../all/approval_request/img/approval_letter.png)
+    ![approval_letter]({{media.screenshots.diagram}}/{{media.actions.proc_to_approve}}/approval_letter.png)
 
     При переходе по ссылке вы попадёте в проект, в котором вас попросили быть согласующим.
 
 - Уведомление в меню {{ process_editor.upper_toolbar.sections.messages }}:
 
-    ![message_bell](./img/message_bell.png)
+    ![message_bell]({{ media.screenshots.personal }}/{{ media.actions.approve }}/message_bell.png)
     
     Кликнув по сообщению с запросом на согласование — вы будете перенаправлены на проект, в котором вас попросили быть согласующим. 
 
 - Процесс согласования в секции {{ left_main_menu.personal.approve.inbox }} раздела {{ left_main_menu.personal.approve.section_name }}, меню {{ left_main_menu.personal.section_name }} левой панели управления:
 
-    ![approve_inbox](./img/approve_inbox.png)
+    ![approve_inbox]({{ media.screenshots.personal }}/{{ media.actions.approve }}/approve_inbox.png)
 
     Кликнув по названию процесса — вы будете перенаправлены на проект, в котором вас попросили быть согласующим.
 
@@ -34,13 +34,13 @@ tags:
 
 - Комментарии к элементам диаграммы прямо на схеме процесса:
 
-    ![add_comment_to_element](./img/add_comment_to_element.png)
+    ![add_comment_to_element]({{ media.screenshots.diagram }}/{{ media.actions.add_comment }}/add_comment_to_element.png)
 
     Кликните по элементу схемы, к которому хотите оставить комментарий и нажмите на {{ universal.plus }} справа и вверху от выбранного элемента, чтобы оставить комментарий.
 
 - Комментарии к процессу:
 
-    ![add_comment_to_project](./img/add_comment_to_project.png)
+    ![add_comment_to_project]({{ media.screenshots.diagram }}/{{ media.actions.add_comment }}/add_comment_to_project.png)
 
     Оставьте свой комментарий или резолюцию по ревью и нажмите кнопку {{ approval_editor.buttons.approve }} для согласования процесса или нажмите на кнопку {{ approval_editor.buttons.deny }} для отклонения согласования. 
 

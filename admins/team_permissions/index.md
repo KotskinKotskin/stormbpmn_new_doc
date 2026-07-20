@@ -3,13 +3,14 @@ title: Управление правами групп и участников
 description: Руководство по управлению группами пользователей, настройке прав доступа и распределению привилегий в команде
 tags:
     - Cовместная работа над процессами - работа в команде
+media.actions.access_groups_managment: access_groups_managment
 ---
 
 # Управление правами групп и участников
 
 В {{ product_name }} есть система управления правами групп. Каждый пользователь в команде относится хотя бы к одной группе. Группа — это механизм управления доступом к проектам и функциям системы. Администратор команды {{ product_name }} может управлять составом групп и их правами через меню {{ team.icon }} {{ universal.right_arrow }} {{ team.team_settings.icon }} {{ universal.right_arrow }} {{ team.team_settings.groups }}:
 
-![groups](./img/groups.png)
+![groups](/{{ media.screenshots.access_groups }}/{{ media.actions.access_groups_managment }}/groups.png)
 
 По умолчанию раздел {{ team.team_settings.groups }} содержит три системные группы, которые нельзя удалить:
 
@@ -47,7 +48,7 @@ tags:
 
 Администратор команды может включать или выключать любую привилегию в любой группе, включая группу **Администраторы**. Для изменения привилегии достаточно просто кликнуть по нужной привилегии и её статус изменится на противоположный:
 
-![](./img/toggle_permission.png)
+![](/{{ media.screenshots.access_groups }}/{{ media.actions.access_groups_managment }}/toggle_permission.png)
 
 ## Гранулирование прав участников
 
@@ -57,15 +58,15 @@ tags:
 
 1. Кликните по кнопке  {{ universal.plus }} **Создать группу** в правом верхнем углу экрана раздела {{ team.team_settings.groups }}, введите название новой группы и сразу добавьте существующих пользователей, если надо:
 
-    ![create_new_group](./img/create_new_group.png)
+    ![create_new_group](/{{ media.screenshots.access_groups }}/{{ media.actions.access_groups_managment }}/create_new_group.png)
 
 2. По умолчанию новая группа создаётся с запретом на все действия. Включите только те привилегии, которые считаете нужными для группы:
 
-    ![setup_group_permissions](./img/setup_group_permissions.png)
+    ![setup_group_permissions](/{{ media.screenshots.access_groups }}/{{ media.actions.access_groups_managment }}/setup_group_permissions.png)
 
 3. (Опциональный шаг) Добавьте в новую группу участников, если приглашение на вступление в группу им было выслано после создания группы. Кликните по кнопке {{ universal.plus }} **Добавить участника** и выберите из выпадающего списка нужного вам участника:
 
-    ![add_user_to_new_groupp](./img/add_user_to_new_groupp.png)
+    ![add_user_to_new_groupp](/{{ media.screenshots.access_groups }}/{{ media.actions.access_groups_managment }}/add_user_to_new_groupp.png)
 
 ⚠️ "Суммаризация прав"
     Если на один и тот же объект привилегии выданы противоположные права в разных группах — больший вес имеет право {{ team.groups.allow }}. Например, если на создание папок в двух группах действует запрет, а в третьей создание разрешено — финальное право будет {{ team.groups.allow }}.  

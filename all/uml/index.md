@@ -12,17 +12,17 @@ tags:
 
 1. В главном меню {{ product_name }} кликните по кнопке {{ universal.plus }} на верхней панели управления справа от кнопки {{ main.head_panel.models }} и выберите {{ main.uml }} из выпадающего списка:
 
-    ![](./img/choose_plantuml_diagramm.png)
+    ![]({{ media.screenshots.main }}/{{ media.actions.create_uml }}/choose_plantuml_diagramm.png)
 
 1. Выберите наиболее удобный для вас вариант создания UML-диаграммы:
 
-    ![](./img/uml_create_step_02.png)
+    ![]({{ media.screenshots.main }}/{{ media.actions.create_uml }}/uml_create_step_02.png)
 
     Вне зависимости от выбора способа создания UML-диаграммы — будет открыто окно редактора UML-диаграмм и будет создана диаграмма под названием **Черновик** в разделе {{ section_team.layouts.all_models }}.
 
 1. По умолчанию при загрузке редактора UML-диаграмм автоматически выбирается стартовый шаблон {{ uml.templates.class }}:
 
-    ![](./img/uml_create_step_03.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_create_step_03.png)
 
     Шаблон можно сменить, кликнув на кнопку {{ uml.templates.icon }} и выбрав один из следующих шаблонов:
 
@@ -34,11 +34,11 @@ tags:
 
 1. После внесения изменений в UML-диаграмму её можно сохранить, кликнув на кнопку {{ uml.save }} на верхней панели инструментов:
 
-    ![](./img/uml_save_diagramm.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_save_diagramm.png)
 
 1. Измените название диаграммы (по желанию), добавьте теги и укажите папку, куда будет сохранена диаграмма (опционально, по умолчанию диаграмма будет сохранена в раздел {{ section_team.layouts.all_models }}):
 
-    ![](./img/uml_save_diagramm_step_02.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_save_diagramm_step_02.png)
 
 1. Нажмите кнопку **Сохранить как версию**.
 
@@ -46,11 +46,11 @@ tags:
 
 По умолчанию окно предпросмотра UML-диаграммы горизонтальное и находится снизу. Это не всегда удобно, особенно когда диаграмма большая. Окно предпросмотра можно сделать вертикальным и расположить его справа от редактора кода UML-диаграммы. Для этого кликните по кнопке {{ uml.preview_change_position }} на верхней панели управления:
 
-![](./img/uml_change_preview_window_position.png)
+![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_change_preview_window_position.png)
 
 Также диаграмму можно приближать и отдалять с помощью сочетания зажатой клавиши `Ctrl` + колёсика мышки или жестов на тачпаде (обычно это два пальца, движущихся вверх или вниз). Вернуться быстро к дефолтному размеру диаграммы можно с помощью кнопки {{ uml.skip_zoom }}:
 
-![](./img/skip_zoom.png)
+![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/skip_zoom.png)
 
 ## Совместная работа над диаграммой
 
@@ -58,15 +58,15 @@ tags:
 
 - **Отправка приглашения людям с доступом** — укажите e-mail адреса людей, у которых есть доступы к командному {{ product_name }}, задайте уровень прав (просмотр или редактирование диаграммы) и нажмите кнопку **Предоставить доступ**:
 
-    ![](./img/share/uml_share_step_01.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_share_step_01.png)
 
 - **Сделать диаграмму публичной** — создать публичную ссылку, чтобы любой человек в интернете смог посмотреть процесс по ссылке и подать прошение на участие в совместной разработке. Скопируйте ссылку кликом по кнопке {{ uml.copy_link }} и завершите процесс публикации ссылки в интернете нажатием на кнопку **Предоставить доступ**:
 
-    ![](./img/share/uml_share_step_02.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_share_step_02.png)
 
 Также для более эффективной совместной работы или просто для фиксации важных идей можно воспользоваться комментариями. Секция {{ uml.comments }} находится в правой боковой панели:
 
-![](./img/uml_comments.png)
+![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_comments.png)
 
 ## Выгрузить диаграмму как изображение
 
@@ -74,11 +74,11 @@ UML-диаграмму можно выгрузить как изображени
 
 1. Кликните по {{ universal.extra }} на верхней панели управления и из выпадающего списка выберите {{ universal.download }}:
 
-    ![](./img/download_as_image/uml_download_as_image_step_01.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_download_as_image_step_01.png)
 
 1. Выберите нужный вам формат для выгрузки диаграммы как изображения:
 
-    ![](./img/download_as_image/uml_download_as_image_step_02.png)
+    ![]({{ media.screenshots.uml }}/{{ media.actions.uml_create_and_work }}/uml_download_as_image_step_02.png)
 
     - svg-формат отлично подходит для презентаций, отчётов и других промо-материалов и интернет-публикаций, так как он легко масштабируется без потери качества.
     - png-формат хорошо подойдёт для публикаций или отчётов небольших размеров, так как png — это растровый формат рисунка и он теряет качество при масштабировании.

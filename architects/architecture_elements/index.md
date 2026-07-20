@@ -1,7 +1,11 @@
 ---
 title: Работа с элементами архитектуры
-plan: '- Team<br>- Business<br>'
+description: ""
+tags:
+    - Элементы архитектуры
 ---
+
+➡️ (_templates/warnings/perm_plan_role.md)
 
 # Работа с элементами архитектуры
 
@@ -35,11 +39,11 @@ plan: '- Team<br>- Business<br>'
 1. Перейдите в редактор диаграмм.
 1. Выбирете задачу, к которой хотите привязать ЭА и в правом боковом меню выбирете раздел {{ process_editor.right_toolbar.buttons.archetecture }}:
 
-    ![create_element_from_process_editor](./img/create_element_from_process_editor.png)
+    ![create_element_from_process_editor]({{ media.screenshots.diagram }}/{{ media.actions.create_arc_el }}/create_element_from_process_editor.png)
 
 1. Кликнете на кнопку {{ universal.plus }} **Создать элемент архитектуры**:
 
-    ![create_element_from_process_editor_button_plus](./img/create_element_from_process_editor_button_plus.png)
+    ![create_element_from_process_editor_button_plus]({{ media.screenshots.diagram }}/{{ media.actions.create_arc_el }}/create_element_from_process_editor_button_plus.png)
 
 1. В открывшемся модальном окне **Создание элемента архитектуры** выполните следующие действия:
 
@@ -55,7 +59,7 @@ plan: '- Team<br>- Business<br>'
 
 1. Перейдите в раздел {{ section_team.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} и кликнете на кнопку {{ universal.plus }} **Создать**:
 
-![create_element_from_elements_section](./img/create_element_from_elements_section.png)
+![create_element_from_elements_section]({{ media.screenshots.assets }}/{{ media.actions.work_with_arc_elements }}/create_element_from_elements_section.png)
 
 1. В открывшемся модальном окне **Создание элемента архитектуры** выполните следующие действия:
 
@@ -71,7 +75,7 @@ plan: '- Team<br>- Business<br>'
 
 Раздел {{ section_team.layouts.architecture}} {{ universal.right_arrow }} {{ architecture.elements }} содержит удобную таблицу со всеми ЭА с удобной и понятной навигацией по типам ЭА:
 
-![arcitechture_element_table_list](./img/arcitechture_element_table_list.png)
+![arcitechture_element_table_list]({{ media.screenshots.assets }}/{{ media.actions.work_with_arc_elements }}/arcitechture_element_table_list.png)
 
 Каждый ЭА имеет свой ID, название, тип и набор действий, которые можно совершить над ним, к их числу отноятся:
 
@@ -79,7 +83,7 @@ plan: '- Team<br>- Business<br>'
 - <i class = "pi pi-pen-to-square"></i> Редактирование свойств ЭА.
 - <i class = "pi pi-trash"></i> Удаление ЭА.
 
-![arc_elemets_actions](./img/arc_elemets_actions.png)
+![arc_elemets_actions]({{ media.screenshots.assets }}/{{ media.actions.work_with_arc_elements }}/arc_elemets_actions.png)
 
 ## Передача диаграмм с ЭА в другую команду
 Если нужно передать диаграмму с элементами архитектуры в другую команду, создайте ее дубликат в другом аккаунте.
@@ -90,7 +94,7 @@ plan: '- Team<br>- Business<br>'
 1. На верхней панели кликнете по кнопке <i class = "pi pi-share-alt"></i> **Поделиться**.
 1. В  открывшемся модальном окне **Поделиться моделью** укажите e-mail аккаунта получателя или включите **Доступ по ссылке** и скопируйте ссылку:
 
-    ![share_process](./img/share_process.png)
+    ![share_process]({{ media.screenshots.diagram }}/{{ media.actions.diagram_share }}/share_model.png)
 
 1. В аккаунте-получателе откройте переданную диаграмму по полученной ссылке.
 1. Создайте копию диаграммы одним из способов:

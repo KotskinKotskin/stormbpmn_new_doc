@@ -152,24 +152,24 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 После того как шаблон будет подготовлен, его нужно загрузить через раздел {{ setup_app.icon }} {{ universal.right_arrow }} {{ setup_app.reglaments_templates }}:
 
-![](./img/upload_doc_template_step_01.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_01.png)
 
 1. Кликните по кнопке **Загрузить свой шаблон** в правом верхнем углу.
 1. Задайте имя шаблона:
 
-    ![](./img/upload_doc_template_step_02.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_02.png)
 
 1. Выберите тип шаблона — **Для процесса**:
 
-    ![](./img/upload_doc_template_step_03.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_03.png)
 
 1. Загрузите шаблон и нажмите кнопку **Сохранить шаблон**:
 
-    ![](./img/upload_doc_template_step_04.png)
+    ![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_04.png)
 
 После загрузки шаблона, он будет показан в списке загруженных шаблонов:
 
-![](./img/upload_doc_template_step_05.png)
+![]({{ media.screenshots.app_settings }}/{{ media.actions.upload_doc_template }}/upload_doc_template_step_05.png)
 
 ### Выгрузка регламента по шаблону
 
@@ -177,13 +177,13 @@ title: 'Регламент бизнес-процесса: создание ша�
 
 1. Перейдите в раздел {{ team.icon }} {{ universal.right_arrow }} {{ bs_models.bs_m }} {{ bs_models.models_list }}:
 
-    ![navigate_to_all_processes](../../../approvals/reglaments/img/navigate_to_all_processes.png)
+    ![navigate_to_all_processes]({{ media.screenshots.all_models }}/{{ media.actions.navigate_to_all_models }}/navigate_to_all_processes.png)
 1. Выберите нужную вам модель процесса.
 1. Кликните по {{ universal.extra }} в верхней панели инструментов и из выпадающего списка выберите пункт {{ universal.download }} **Скачать**:
 
-    ![reglament_export_step_01](../../../approvals/reglaments/img/reglament_export_step_01.png)
+    ![reglament_export_step_01]({{ media.screenshots.diagram }}/{{ media.actions.reglament_export }}/reglament_export_step_01.png)
 1. Выберите шаблон регламента для скачивания из выпадающего списка и нажмите кнопку **Скачать регламент**:
 
-    ![reglament_export_step_02](../../../approvals/reglaments/img/reglament_export_step_02.png)
+    ![reglament_export_step_02]({{ media.screenshots.diagram }}/{{ media.actions.reglament_export }}/reglament_export_step_02.png)
 
 Откройте выгруженный регламент удобным для вас приложением, работающим с DOCX и проверьте, что все теги отработали верно и разметка не съехала. Если какой-то тег не сработал — проверьте его название и синтаксис. 

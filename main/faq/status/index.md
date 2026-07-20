@@ -4,19 +4,19 @@
 
     {{ bp_reg.status }} — это объекты и показатели управления жизненным циклом карточки процесса. Они отражают информацию о текущем состоянии процесса:
 
-    ![status_example](./img/status_example.png)
+    ![status_example]({{ media.screenshots.registry }}/{{ media.actions.registry_status_example }}/status_example.png)
 
 ℹ️🔽 "Создание статуса бизнес-процесса"
 
     Статусы бизнес-процессов создаются в разделе {{ bp_reg.status }}. Для создания статуса бизнес-процесса достаточно кликнуть по кнопке {{ universal.plus }} **Создать статус**, задать название статуса и, по желанию, присвоить статусу цвет:
 
-    ![status_create](./img/status_create.png)
+    ![status_create]({{ media.screenshots.status }}/{{ media.actions.status_create }}/status_create.png)
 
 ℹ️🔽 "Редактирование и удаление статуса бизнес-процесса"
 
     Справа от названия статуса в разделе {{ bp_reg.status }} есть кнопки {{ bp_tree.edit }} и {{ universal.delete }} **Удалить**:
 
-    ![status_edit_del](./img/status_edit_del.png)
+    ![status_edit_del]({{ media.screenshots.status }}/{{ media.actions.status_edit }}/status_edit_del.png)
 
     С помощью {{ bp_tree.edit }} можно изменить название статуса. Новое название автоматически применится ко всем карточкам бизнес-процессов, где используется данный статус.
 
@@ -28,10 +28,10 @@
     
     1. Выберите нужный вам бизнес-процесс и нажмите кнопку {{ bp_tree.edit }}:
 
-        ![status_edit_step-01](./img/status_edit_step-01.png)
+        ![status_edit_step-01]({{ media.screenshots.status }}/{{ media.actions.status_edit }}/status_edit_step-01.png)
 
     1. В открывшемся модальном окне **Редактирование бизнес-процесса** кликните по выпадающему списку **Статус** и выберите нужный вам статус бизнес-процесса:
 
-        ![status_edit_step-02](./img/status_edit_step-02.png)
+        ![status_edit_step-02]({{ media.screenshots.status }}/{{ media.actions.status_edit }}/status_edit_step-02.png)
 
     1. Кликните по кнопке **Сохранить процесс** для завершения процесса редактирования карточки бизнес-процесса.

@@ -14,21 +14,21 @@ title: Согласование регламентов
 
 1. Перейдите в раздел {{ team.icon }} {{ universal.right_arrow }} {{ bs_models.bs_m }} {{ bs_models.models_list }}:
 
-    ![navigate_to_all_processes](./img/navigate_to_all_processes.png)
+    ![navigate_to_all_processes]({{ media.screenshots.all_models }}/{{ media.actions.navigate_to_all_models }}/navigate_to_all_processes.png)
 
 1. Выберите нужную вам модель процесса.
 
 1. Кликните по {{ universal.extra }} в верхней панели инструментов и из выпадающего списка выберите пункт {{ universal.download }} **Скачать**:
 
-    ![reglament_export_step_01](./img/reglament_export_step_01.png)
+    ![reglament_export_step_01]({{ media.screenshots.diagram }}/{{ media.actions.reglament_export }}/reglament_export_step_01.png)
 
 1. Выберите шаблон регламента для скачивания из выпадающего списка и нажмите кнопку **Скачать регламент**:
 
-    ![reglament_export_step_02](./img/reglament_export_step_02.png)
+    ![reglament_export_step_02]({{ media.screenshots.diagram }}/{{ media.actions.reglament_export }}/reglament_export_step_02.png)
 
     Если подготовленного шаблона нет, можно скачать регламент с базовым шаблоном:
 
-    ![reglament_export_alternative_step](./img/reglament_export_alternative_step.png)
+    ![reglament_export_alternative_step]({{ media.screenshots.diagram }}/{{ media.actions.reglament_export }}/reglament_export_alternative_step.png)
 
 1. Откройте сохранённый шаблон в Microsoft Office или с помощью Google Docs. Согласуйте его с помощью средств электронной подписи или классическим путём. 
 
