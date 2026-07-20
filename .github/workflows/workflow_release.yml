@@ -39,6 +39,9 @@ jobs:
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          # ponytail: gh CLI нужен repo context; без checkout'а репо нет,
+          # поэтому задаём явно через env — git не дёргается
+          GH_REPO: ${{ github.repository }}
         shell: bash
         run: |
           set -euo pipefail
