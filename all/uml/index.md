@@ -10,7 +10,7 @@ tags:
 
 ## Создание UML-диаграммы с нуля
 
-1. В главном меню {{ product_name }} кликните по кнопке {{ universal.plus }} на верхней панели управления справа от кнопки {{ main.head_panel.models }} и выберите {{ main.uml }} из выпадающего списка:
+1. В главном меню {{ product_name }} кликните по кнопке {{ universal.plus }} на верхней панели управления справа от кнопки {{ main.head_panel.models }} и выберите {{ main.plantuml }} из выпадающего списка:
 
     ![]({{ media.screenshots.main }}/{{ media.actions.create_uml }}/choose_plantuml_diagramm.png)
 

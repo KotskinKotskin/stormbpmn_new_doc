@@ -93,7 +93,7 @@ main:
   plantuml: '<i class="pi pi-code"></i> **PlantUML**'
 
 uml:
-  histoty: '<i class="pi pi-history"></i> **История**'
+  history: '<i class="pi pi-history"></i> **История**'
   del_history: '<i class="pi pi-trash"></i> **Очистить историю**'
   templates:
     icon: '<i class="pi pi-plus"></i> **Создать по шаблону**'
