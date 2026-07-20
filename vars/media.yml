@@ -19,9 +19,9 @@ media:
     git: media/screenshots/git
     doc: media/screenshots/doc
     confluence: media/screenshots/confluence
-    assignees: media/screenshots/assignees
-    directories: media/screenshots/directories
-    map: media/screenshots/map
+    assignees: media/screenshots/app/assignees
+    directories: media/screenshots/app/directories
+    map: media/screenshots/app/map
      
 
   psd:
