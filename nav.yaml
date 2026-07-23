@@ -41,6 +41,9 @@
   - Отправка процесса на согласование: all/approval_request/index.md
   - Работа с оверлеями: all/overlays/index.md
   - Работа с рейтингом качества процесса: all/overview/index.md
+  - Создание и настройка опросов: all/surveys/index.md
+  - Прохождение опросов: all/survey_response/index.md
+  - Анализ результатов опросов: all/survey_results/index.md
   - Горячие клавиши: all/hotkeys/index.md
   - Управление видимостью диаграммы: all/status/index.md
   - 'Регламенты: общие сведения': all/reglaments/main_info/index.md

@@ -22,15 +22,16 @@ media:
     assignees: media/screenshots/app/assignees
     directories: media/screenshots/app/directories
     map: media/screenshots/app/map
-     
-
+    surveys: media/screenshots/app/surveys
+    survey_results: media/screenshots/app/survey_results
+    survey_response: media/screenshots/app/survey_response
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
     proc_versioning: proc_versioning
     folder_creating: folder_creating
     access_groups_managment: access_groups_managment
-    save_as_version: save_as_version                                     # media.screenshots.diagram
+    save_as_version: save_as_version
     ai_create_diagramm: ai_create_diagramm
     ai_create_next_step_diagramm: ai_create_next_step_diagramm
     ai_create_description: ai_create_description
@@ -52,7 +53,7 @@ media:
     reglament_export: reglament_export
     work_with_arc_elements: work_with_arc_elements
     create_arc_el: create_arc_el
-    diagram_share: share                                   # media.screenshots.diagram
+    diagram_share: share
     navigate_to_org_str: navigate_to_org_str
     extra: extra
     scheme: scheme
@@ -61,35 +62,30 @@ media:
     add_staff_to_node: add_staff_to_node
     employees_add_staff: add_staff
     add_role_to_node: add_role_to_node
-    work_with_bp_tree: work_with_bp_tree                   # media.screenshots.registry
-    work_with_bp_table: work_with_bp_table                 # media.screenshots.registry
-    subproc_collapsed: subproc_collapsed                   # media.screenshots.diagram
-    create_subprocess_collapse: create_subprocess_collapse # media.screenshots.diagram
-    tokken_simulate: tokken_simulate                       # media.screenshots.diagram
+    work_with_bp_tree: work_with_bp_tree
+    work_with_bp_table: work_with_bp_table
+    subproc_collapsed: subproc_collapsed
+    create_subprocess_collapse: create_subprocess_collapse
+    tokken_simulate: tokken_simulate
     upload_bpmn: upload_bpmn
-    git_commitment: commitment                             # media.screenshots.git
+    git_commitment: commitment
     doc_doc_structure: doc_structure
-    acc_change_password: change_password                   # media.screenshots.profile
-    work_with_xlsx: work_with_xlsx                         # media.screenshots.registry
-    cf_create: create                                      # media.screenshots.custom_fields
-    diagram_change_color: change_color                     # media.screenshots.diagram
-    diagram_add_notice_to_element: add_notice_to_element   # media.screenshots.diagram
-    create_default_stream: create_default_stream           # media.screenshots.diagram
-    diagram_subprocess: subprocess                         # media.screenshots.diagram
-    add_role_to_task: add_role_to_task                     # media.screenshots.diagram
-    work_with_space: work_with_space                       # media.screenshots.diagram
-    diagram_num_elements: num_elements                     # media.screenshots.diagram
-    diagram_fix_error_44: fix_error_44                     # media.screenshots.diagram
-    diagram_roles: roles                                   # media.screenshots.diagram
-    registry_add_options: add_option                         # media.screenshots.registry
-    status_create: status_create                           # media.screenshots.status
-    status_edit: status_edit                               # media.screenshots.status
-    registry_status_example: status_example                # media.screenshots.registry
-    folder_move_diagram: move_diagram                      # media.screenshots.folder
-    # ========== media.screenshots.confluence =============== #
+    acc_change_password: change_password
+    work_with_xlsx: work_with_xlsx
+    cf_create: create
+    diagram_change_color: change_color
+    diagram_add_notice_to_element: add_notice_to_element
+    create_default_stream: create_default_stream
+    diagram_subprocess: subprocess
+    add_role_to_task: add_role_to_task
+    work_with_space: work_with_space
+    diagram_num_elements: num_elements
+    diagram_fix_error_44: fix_error_44
+    diagram_roles: roles
+    registry_add_options: add_option
+    status_create: status_create
+    status_edit: status_edit
+    registry_status_example: status_example
+    folder_move_diagram: move_diagram
     conf_embded_diagram: embded_diagram
-    # ========== media.screenshots.profile ===================#
     profile_plan: plan
-
-
-
