@@ -1,5 +1,8 @@
 media:
   screenshots:
+    survey_response: media/screenshots/app/survey_response
+    survey_results: media/screenshots/app/survey_results
+    surveys: media/screenshots/app/surveys
     main: media/screenshots/app/main
     folder: media/screenshots/app/folder
     access_groups: media/screenshots/app/access-group
