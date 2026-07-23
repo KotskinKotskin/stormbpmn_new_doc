@@ -1,5 +1,7 @@
 media:
   screenshots:
+    survey_results: media/screenshots/app/survey_results
+    surveys: media/screenshots/app/surveys
     main: media/screenshots/app/main
     folder: media/screenshots/app/folder
     access_groups: media/screenshots/app/access-group
@@ -27,6 +29,8 @@ media:
   psd:
     diagram: /root/stormbpmn_project/src_storage/diagram.psd
   actions:
+    survey_results: survey_results
+    create_survey: create_survey
     proc_versioning: proc_versioning
     folder_creating: folder_creating
     access_groups_managment: access_groups_managment
