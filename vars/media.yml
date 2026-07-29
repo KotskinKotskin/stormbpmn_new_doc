@@ -16,12 +16,13 @@ media:
     registry: media/screenshots/app/registry
     custom_fields: media/screenshots/app/custom_fields
     status: media/screenshots/app/status
-    git: media/screenshots/git
-    doc: media/screenshots/doc
+    git: media/screenshots/git                                     # Git screenshots
+    doc: media/screenshots/doc                                     # Documentation screenshots
     confluence: media/screenshots/confluence
     assignees: media/screenshots/app/assignees
     directories: media/screenshots/app/directories
     map: media/screenshots/app/map
+    devtools: media/screenshots/app/devtools                      # Devtools screenshots
      
 
   psd:
@@ -86,10 +87,17 @@ media:
     status_edit: status_edit                               # media.screenshots.status
     registry_status_example: status_example                # media.screenshots.registry
     folder_move_diagram: move_diagram                      # media.screenshots.folder
-    # ========== media.screenshots.confluence =============== #
+
+    # ========== media.screenshots.confluence ================ #
     conf_embded_diagram: embded_diagram
-    # ========== media.screenshots.profile ===================#
+
+    # ========== media.screenshots.profile =================== #
     profile_plan: plan
 
+    # ========== media.screenshots.doc ======================= #
 
+    doc_edit: edit
+
+
+    # ========= media.screenshots.devtools ================== # 
 
