@@ -10,7 +10,11 @@
     - BPMN не для оптимизации процессов: main/extra_content/videos/optimise/index.md
   - О документации: 
     - main/about_doc/index.md
-    - Коммит в документацию: main/about_doc/commitment/index.md
+    - Структура документации: main/about_doc/structure/index.md
+    - Написание статей в документацию: main/about_doc/commitment/index.md
+    - Правка материалов документации: main/about_doc/edit/index.md
+    - Работа с переменными: main/about_doc/var/index.md
+    
 Начинающим пользователям: 
   - beginners/index.md
   - Свёрнутый подпроцесс: beginners/subprocesses/index.md
