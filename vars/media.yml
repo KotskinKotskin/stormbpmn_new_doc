@@ -22,7 +22,7 @@ media:
     assignees: media/screenshots/app/assignees
     directories: media/screenshots/app/directories
     map: media/screenshots/app/map
-    devtools: media/screenshots/app/devtools                      # Devtools screenshots
+    devtools: media/screenshots/devtools                      # Devtools screenshots
      
 
   psd:
